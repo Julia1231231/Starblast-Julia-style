@@ -1,0 +1,289 @@
+.inputwrapper {
+    position: relative;
+    display: inline-block;
+}
+
+.inputwrapper img {
+    position: absolute;
+    left: 0;
+    top: 5px;
+    cursor: pointer;
+}
+
+.inputwrapper .colorwrapper {
+    display: block;
+}
+
+.inputwrapper .colorchosen {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    margin-right: 5px;
+    background: linear-gradient(135deg, rgb(224, 82, 110) 0%, rgb(173, 31, 59) 100%);
+}
+
+.inputwrapper input[type="text"] {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    width: 250px;
+    color: rgba(255, 204, 214, 0.9);
+    text-shadow: rgb(245, 163, 180) 0px 0px 7px;
+}
+
+.inputwrapper input[type="text"]:focus {
+    outline: none;
+    border-color: #4CAF50;
+    box-shadow: 0 0 5px rgba(76, 175, 80, 0.5);
+}
+
+.inputwrapper input[type="text"]:hover {
+    border-color: #333;
+}
+
+#play #game_modes {
+    border-bottom-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+}
+
+#player button,
+#respawn_actions button,
+.donate-btn {
+    background: radial-gradient(ellipse at center, hsla(310deg, 50%, 0%, 1) 0, hsl(310deg 100% 70% / 50%) 150%);
+    box-shadow: 0 0 6px hsl(310deg 100% 80% / 1);
+    text-shadow: 0 0 7px hsla(310deg 100% 80% / 1);
+    color: hsl(310deg 100% 90% / 80%);
+    border-radius: 15px;
+}
+
+.playbtn i {
+    color: hsl(310deg 60% 80% / 50%);
+    text-shadow: 0 0 7px hsl(310deg 100% 80%);
+}
+
+.playbtn i:hover {
+    text-shadow: 0 0 27px hsl(310deg 100% 80%);
+}
+
+.changelog-new,
+.extrabutton {
+    background: linear-gradient(-45deg, hsl(310deg 50% 10% / 50%) 0, hsl(310deg 50% 50% / 15%) 100%);
+    border-radius: 15px;
+    box-shadow: 0 0 6px hsl(310deg 100% 80%);
+}
+
+.changelog-new h2 {
+    border-bottom: solid 5px hsl(310deg 60% 60% / 20%);
+}
+
+#overlay {
+    box-shadow: 0 0 6px hsla(310, 80%, 80%, 1);
+    text-shadow: 0 0 2px hsla(310, 80%, 80%, .3);
+    color: hsla(310, 90%, 90%, .8);
+}
+
+a {
+    color: hsl(310, 50%, 80%);
+}
+
+a:visited {
+    color: hsl(310, 50%, 60%);
+}
+
+.community a {
+    color: hsla(310, 90%, 90%, .8);
+}
+
+.social i,
+.mobile-social i,
+.mobile-tools i,
+.stats i {
+    background: radial-gradient(ellipse at center, hsla(310, 50%, 0%, 1) 0, hsla(310, 100%, 70%, .5) 150%);
+    box-shadow: 0 0 6px hsla(310, 100%, 80%, 1);
+    text-shadow: 0 0 7px hsla(310, 100%, 80%, 1);
+    color: hsla(310, 100%, 90%, .8);
+    border-radius: 10px;
+}
+
+.social i:hover,
+.mobile-social i:hover,
+.mobile-tools i:hover,
+.stats i:hover {
+    border: 0 solid hsl(310, 90%, 70%);
+    background: radial-gradient(ellipse at center, hsla(310, 50%, 0%, 1) 0, hsla(310, 70%, 70%, .5) 100%);
+    box-shadow: 0 0 6px hsla(310, 100%, 80%, 1);
+    text-shadow: 0 0 7px hsla(310, 100%, 80%, 1);
+    color: hsla(310, 100%, 90%, .8);
+}
+
+.sbg-facebook:hover .sbg-diamond,
+.sbg-twitter:hover .sbg-diamond {
+    color: hsl(310, 90%, 70%);
+}
+
+.followtools a.big {
+    text-shadow: 0 0 7px hsla(310, 100%, 80%, 1);
+}
+
+.followtools a,
+.followtools a:visited {
+    background: radial-gradient(ellipse at center, hsla(310, 50%, 0%, 1) 0, hsla(310, 100%, 80%, .5) 150%);
+    box-shadow: 0 0 6px hsla(310, 100%, 80%, 1);
+    color: hsla(310, 100%, 90%, .9);
+    border-radius: 15px;
+}
+
+.followtools a:hover {
+    background: hsla(310, 50%, 50%, .8);
+}
+
+.modal {
+    box-shadow: 0 0 6px hsla(310, 100%, 80%, 1);
+    text-shadow: 0 0 6px hsla(310, 100%, 60%, .75);
+    background: linear-gradient(135deg, hsla(310, 30%, 10%, 1) 0, hsla(310, 30%, 30%, 1) 150%);
+}
+
+.modal .modalbody .range {
+    background: hsl(310, 60%, 15%);
+    border: 1px solid hsl(310, 60%, 10%);
+}
+
+.modal .modalbody select,
+.modal .modalbody input[type=text],
+.modal .modalbody input.number {
+    background: hsl(310, 60%, 15%);
+    border: 1px solid hsl(310, 60%, 10%);
+}
+
+.modal .header {
+    background: hsla(310, 70%, 70%, .1);
+    border-bottom: 5px solid hsla(310, 50%, 70%, .5);
+}
+
+.modal .modecp {
+    position: relative;
+}
+
+.modal::-webkit-scrollbar-thumb {
+    background-color: hsla(310, 50%, 70%, .5);
+}
+
+.stats input,
+.ecpinput {
+    background: linear-gradient(to top, hsla(310, 70%, 70%, .5) 0, hsla(310, 50%, 0%, 1) 20%, hsla(310, 50%, 0%, 1) 60%, hsla(310, 20%, 40%, .5) 100%);
+    box-shadow: 0 0 6px hsla(310, 80%, 80%, 1);
+    color: hsla(310, 90%, 90%, .8);
+    text-shadow: 0 0 7px hsla(310, 80%, 80%, 1);
+    border-radius: 10px;
+}
+
+#player button:hover,
+#respawn_actions button:hover,
+.donate-btn:hover,
+.ecpbtn:hover {
+    background: radial-gradient(ellipse at center, hsla(310, 50%, 0%, 1) 0, hsla(310, 100%, 70%, .5) 100%);
+    box-shadow: 0 0 8px hsla(310, 100%, 90%, 1);
+}
+
+.frozenbg,
+.frozenbg:visited {
+    background: radial-gradient(ellipse at center, hsla(310, 50%, 0%, 1) 20%, hsla(310, 50%, 60%, .5) 150%);
+    box-shadow: 0 0 6px hsla(310, 100%, 80%, 1);
+    text-shadow: 0 0 7px hsla(310, 100%, 80%, 1);
+    color: hsla(310, 100%, 90%, .8);
+    border-radius: 15px;
+}
+
+.modal .modalbody .gmodes span.selected {
+    box-shadow: 0 0 6px hsla(310, 100%, 80%, 1);
+}
+
+.modal .modalbody .gmodes span {
+    border: 2px solid hsl(310, 60%, 10%);
+}
+
+#ranks .rankings th.orating {
+    border: 1px dashed hsl(310, 50%, 50%);
+}
+
+#ranks .rankings td:nth-child(3) {
+    border-left: 1px dashed hsl(310, 50%, 50%);
+}
+
+#ranks .rankings td:nth-child(5) {
+    border-right: 1px dashed hsl(310, 50%, 50%);
+}
+
+a.full-changelog,
+a.full-changelog:visited {
+    border-top: 1px solid hsla(310, 60%, 60%, .2);
+    background: rgba(200, 240, 255, .02);
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+}
+
+.slider {
+    background-color: hsl(310, 50%, 10%);
+    border-radius: 15px;
+}
+
+.slider:before {
+    transition: .5s;
+    background-color: rgb(255, 0, 0);
+    border-radius: 15px;
+}
+
+input:checked+.slider {
+    background-color: hsl(310, 50%, 10%);
+}
+
+input:checked+.slider:before {
+    background-color: rgb(0, 255, 0);
+}
+
+.blue {
+    color: hsl(310, 50%, 70%);
+}
+
+.followtools a.gold,
+.followtools a.gold:visited,
+#donate_mobile {
+    text-shadow: 0 0 7px hsla(20, 100%, 80%, 1);
+    background: radial-gradient(ellipse at center, hsla(20, 50%, 0%, 1) 0, hsla(20, 100%, 80%, .5) 150%);
+    box-shadow: 0 0 6px hsla(20, 100%, 80%, 1);
+    color: hsla(20, 100%, 90%, .9);
+}
+
+.stats {
+    border-radius: 10px;
+    border: 2px solid hsl(310, 50%, 70%);
+    box-shadow: 0 0 15px hsl(310, 50%, 70%);
+    background: hsla(310, 50%, 10%, .5);
+}
+
+.statinfo {
+    border-bottom: 1px solid hsl(310, 50%, 55%);
+}
+
+#goinfo {
+    color: hsl(310, 50%, 70%);
+}
+
+.gameloaderwrapper {
+    border-radius: 10px;
+    border: 2px solid hsla(310, 100%, 70%, .8);
+    box-shadow: 0 0 10px hsla(310, 100%, 80%, 1);
+}
+
+.loaderprogress {
+    border-radius: 10px;
+    background: hsl(310, 90%, 70%);
+    background: linear-gradient(to right, hsla(310, 30%, 30%, .7) 0, hsla(310, 90%, 80%, .8) 100%);
+}
+
+.textprogress {
+    text-shadow: 0 0 10px hsla(310, 100%, 80%, 1);
+    color: hsla(310, 100%, 90%, .9);
+}
