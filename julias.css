@@ -41,12 +41,6 @@
     text-shadow: rgb(245, 163, 180) 0px 0px 7px;
 }
 
-.inputwrapper input[type="text"]:focus {
-    outline: none;
-    border-color: #4CAF50;
-    box-shadow: 0 0 5px rgba(76, 175, 80, 0.5);
-}
-
 .inputwrapper input[type="text"]:hover {
     border-color: #333;
 }
@@ -155,6 +149,7 @@ a:visited {
 }
 
 .modal .modalbody .range {
+    width: 35%;
     padding: 0 150px 0 10px;
     background: hsl(310, 60%, 15%);
     border: 1px solid hsl(310, 60%, 10%);
@@ -370,4 +365,14 @@ input[type=range]::-moz-range-track {
 .modal .modalbody input[type=text],
 .modal .modalbody input.number {
     width: 291px;
+}
+
+.title {
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.title .author {
+    display: block;
+    white-space: normal;
 }
