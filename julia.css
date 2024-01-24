@@ -1,8 +1,47 @@
 .inputwrapper {
-    background: linear-gradient(to top, hsl(310deg 100% 70% / 50%) 0, hsla(310deg, 50%, 0%, 1) 20%, hsla(310deg, 50%, 0%, 1) 60%, hsl(310deg 20% 40% / 50%) 100%);
-    box-shadow: 0 0 6px hsl(310deg 80% 80%);
-    text-shadow: 0 0 7px hsl(310deg 80% 80%);
-    border-radius: 15px;
+    position: relative;
+    display: inline-block;
+}
+
+.inputwrapper img {
+    position: absolute;
+    left: 0;
+    top: 5px;
+    cursor: pointer;
+}
+
+.inputwrapper .colorwrapper {
+    display: block;
+}
+
+.inputwrapper .colorchosen {
+    display: inline-block;
+    border-radius: 10px;
+    margin-right: 5px;
+}
+
+#colors span {
+    border-radius: 10px;
+}
+
+.inputwrapper input[type="text"] {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    width: 250px;
+    color: rgba(255, 204, 214, 0.9);
+    text-shadow: rgb(245, 163, 180) 0px 0px 7px;
+}
+
+.inputwrapper input[type="text"]:focus {
+    outline: none;
+    border-color: #4CAF50;
+    box-shadow: 0 0 5px rgba(76, 175, 80, 0.5);
+}
+
+.inputwrapper input[type="text"]:hover {
+    border-color: #333;
 }
 
 #play #game_modes {
