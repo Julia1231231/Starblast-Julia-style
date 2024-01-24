@@ -1,6 +1,13 @@
 .inputwrapper {
-    position: relative;
     display: inline-block;
+    background: linear-gradient(to top, hsla(310, 70%, 70%, .5) 0, hsla(31, 50%, 0%, 1) 20%, hsla(310, 50%, 0%, 1) 60%, hsla(310, 20%, 40%, .5) 100%);
+    box-shadow: 0 0 6px hsla(310, 80%, 80%, 1);
+    text-shadow: 0 0 7px hsla(310, 80%, 80%, 1);
+    border-radius: 4px;
+    height: 43px;
+    margin-top: 10px;
+    position: relative;
+    max-width: 100%;
 }
 
 .inputwrapper img {
@@ -141,12 +148,14 @@ a:visited {
 }
 
 .modal {
+    width: 900px !important;
     box-shadow: 0 0 6px hsla(310, 100%, 80%, 1);
     text-shadow: 0 0 6px hsla(310, 100%, 60%, .75);
     background: linear-gradient(135deg, hsla(310, 30%, 10%, 1) 0, hsla(310, 30%, 30%, 1) 150%);
 }
 
 .modal .modalbody .range {
+    padding: 0 150px 0 10px;
     background: hsl(310, 60%, 15%);
     border: 1px solid hsl(310, 60%, 10%);
 }
@@ -287,4 +296,78 @@ input:checked+.slider:before {
 .textprogress {
     text-shadow: 0 0 10px hsla(310, 100%, 80%, 1);
     color: hsla(310, 100%, 90%, .9);
+}
+
+input[type=range] {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 8px;
+    background: transparent;
+    outline: none;
+    margin: 10px 0;
+}
+
+input[type=range]::-webkit-slider-thumb {
+    border: none;
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #ff69b4;
+    /* розовый цвет */
+    cursor: pointer;
+    transition: background 0.3s ease-in-out;
+    box-shadow: 0 0 6px hsl(310, 50%, 70%);
+}
+
+input[type=range]::-webkit-slider-thumb:hover {
+    background: #ff3385;
+    /* измененный цвет при наведении */
+}
+
+input[type=range]::-webkit-slider-runnable-track {
+    width: 100%;
+    height: 8px;
+    cursor: pointer;
+    background: #d3d3d3 !important;
+    border: none;
+    border-radius: 5px;
+}
+
+input[type=range]:focus {
+    outline: none;
+}
+
+
+/* Добавление стилей для Firefox */
+
+input[type=range]::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    border: none;
+    border-radius: 50%;
+    background: #ff69b4;
+    cursor: pointer;
+    transition: background 0.3s ease-in-out;
+    box-shadow: 0 0 6px hsl(310, 50%, 70%);
+}
+
+input[type=range]::-moz-range-thumb:hover {
+    background: #ff3385;
+}
+
+input[type=range]::-moz-range-track {
+    width: 100%;
+    height: 8px;
+    cursor: pointer;
+    background: #d3d3d3;
+    border-radius: 5px;
+    border: none;
+}
+
+.modal .modalbody select,
+.modal .modalbody input[type=text],
+.modal .modalbody input.number {
+    width: 291px;
 }
