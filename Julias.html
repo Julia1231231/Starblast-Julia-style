@@ -11477,6 +11477,9 @@
                         case "diamond":
                             this.buildDiamondMaterial();
                             break;
+                        case "pink":
+                            this.buildPinkMaterial();
+                            break;
                         case "black":
                             this.buildBlackMaterial();
                             break;
@@ -11590,7 +11593,19 @@
                         emissive: lIIIl.hsvToRgbHex(this.hue, .5, 1),
                         emissiveMap: OOOO0
                     })
-                }, t.prototype.buildBlackMaterial = function() {
+                },t.prototype.buildPinkMaterial = function() {
+                    return this.material = new THREE.MeshPhongMaterial({
+                        map: l00O1,
+                        bumpMap: l00O1,
+                        specularMap: l00O1,
+                        specular: 6316128,
+                        shininess: 50,
+                        bumpScale: .1,
+                        color: 0x000000, // Base color (black)
+                        emissive: 0xFFB6C1, // Emissive color (pink)
+                        emissiveMap: OOOO0
+                    });
+                },t.prototype.buildBlackMaterial = function() {
                     return this.material = new THREE.MeshPhongMaterial({
                         map: l00O1,
                         bumpMap: l00O1,
@@ -17840,18 +17855,6 @@
                     case "srcchamp":
                         this.icon = "https://starblast.io/ecp/srcchamp.png";
                         break;
-                    case "xtra":
-                        this.icon = "https://i.ibb.co/Yf6MjDJ/X.png";
-                        break;
-                    case "probo7":
-                        this.icon = "https://media.discordapp.net/attachments/1158080353479688203/1179146486710284328/image.png";
-                        break;
-                    case "spzxwa":
-                        this.icon = "https://media.discordapp.net/attachments/1102545943938740234/1179144826080473198/image.png";
-                        break;
-                    case "log":
-                        this.icon = "https://media.discordapp.net/attachments/1158080353479688203/1179911758043938826/static.png";
-                        break;
                 }
                 if (u = Math.round(i / 2.2), null != this.icon && this.icon.startsWith("http")) {
                     if (this.icon = this.icon.replace("http:", "https:"), null == this.icon_src && (this.icon_src = new Image, this.icon_src.crossOrigin = "Anonymous", this.icon_src.src = this.icon, this.icon_src.onload = function(t) {
@@ -18052,10 +18055,6 @@
                     medic: "Medic",
                     blank: "Blank",
                     srcchamp: "SRC Champ",
-                    xtra: "Xtra",
-                    probo7: "Probo7",
-                    log: "ʟᴏɢ",
-                    spzxwa: "Spzxwa"
                 },
                 finish: {
                     zinc: "Zinc",
@@ -18064,6 +18063,7 @@
                     titanium: "Titanium",
                     green: "Green",
                     diamond: "Diamond",
+                    pink: "Pink",
                     black: "Black",
                     goldorange: "Gold Orange",
                     blue: "Blue",
