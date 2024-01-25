@@ -9373,6 +9373,9 @@
                             case "diamond":
                                 this.buildDiamondMaterial();
                                 break;
+                            case "pink":
+                                this.buildPinkMaterial();
+                                break;
                             case "black":
                                 this.buildBlackMaterial();
                                 break;
@@ -9396,18 +9399,6 @@
                         return null == t && (t = 10), this.material = new THREE.MeshLambertMaterial({
                             map: l00O1,
                             color: 16777215,
-                            emissive: lIIIl.hsvToRgbHex(this.hue, .5, 1),
-                            emissiveMap: OOOO0
-                        })
-                    }, t.prototype.buildX27Material = function() {
-                        return this.material = new THREE.MeshPhongMaterial({
-                            map: l00O1,
-                            bumpMap: l00O1,
-                            specularMap: l00O1,
-                            specular: 4243711,
-                            shininess: 30,
-                            bumpScale: .1,
-                            color: 5275808,
                             emissive: lIIIl.hsvToRgbHex(this.hue, .5, 1),
                             emissiveMap: OOOO0
                         })
@@ -9507,6 +9498,18 @@
                             emissive: lIIIl.hsvToRgbHex(this.hue, .5, 1),
                             emissiveMap: OOOO0
                         })
+                    },t.prototype.buildPinkMaterial = function() {
+                        return this.material = new THREE.MeshPhongMaterial({
+                            map: l00O1,
+                            bumpMap: l00O1,
+                            specularMap: l00O1,
+                            specular: 6316128,
+                            shininess: 50,
+                            bumpScale: .1,
+                            color: 0000000, // Base color (black)
+                            emissive: lIIIl.hsvToRgbHex(320, .5, 1),
+                            emissiveMap: OOOO0
+                        });
                     }, t.prototype.buildBlackMaterial = function() {
                         return this.material = new THREE.MeshPhongMaterial({
                             map: l00O1,
@@ -11602,7 +11605,7 @@
                         shininess: 50,
                         bumpScale: .1,
                         color: 0000000, // Base color (black)
-                        emissive: lIIIl.hsvToRgbHex(320, 0.5, 1),
+                        emissive: lIIIl.hsvToRgbHex(320, .5, 1),
                         emissiveMap: OOOO0
                     });
                 },t.prototype.buildBlackMaterial = function() {
