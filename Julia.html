@@ -4768,7 +4768,7 @@
                             };
                             0 === this.II1lO.mode.vocabulary.length && (this.open_button.visible = !1, this.open_button.enabled = !1)
                         }
-                        for (u = 1, I = this.buttons, l = a = 0, r = I.length; a < r; l = ++a) s = I[l], d = l % 5, c = Math.floor(l / 5), this.add(s, [(d + 1) * u / 6 + .01, .25 * c + .01, u / 6 - .02, .23]);
+                        for (u = 1, I = this.buttons, l = a = 0, r = I.length; a < r; l = ++a) s = I[l], d = l % 4, c = Math.floor(l / 4), this.add(s, [(d + 1) * u / 5 + .01, .25 * c + .01, u / 5 - .02, .23]);
                         this.shown = !1, this.close_time = 0, this.phrase = ""
                     }
                     return extend(i, e), i.prototype.gamepadChat = function(t, e) {
@@ -4806,7 +4806,7 @@
                     }, i.prototype.toggleChat = function() {
                         return this.shown ? this.hide() : (this.l01ll(), this.close_time = Date.now() + 6e3)
                     }, i.prototype.typed = function(t) {
-                        if (this.shown || this.l01ll(), this.close_time = Date.now() + 6e3, this.phrase += t, this.II1lO.IOl0I.say(this.phrase), this.phrase.length >= 4 && this.hide(), Math.random() < .01) return this.II1lO.sendGAEvent("chat_evt", t)
+                        if (this.shown || this.l01ll(), this.close_time = Date.now() + 6e3, this.phrase += t, this.II1lO.IOl0I.say(this.phrase), this.phrase.length >= 5 && this.hide(), Math.random() < .01) return this.II1lO.sendGAEvent("chat_evt", t)
                     }, i.prototype.l01ll = function() {
                         var t, e, i, s, l;
                         if (!this.shown) {
