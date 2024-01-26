@@ -460,3 +460,12 @@ input[type=range]::-moz-range-track {
     display: block;
     white-space: normal;
 }
+
+.social {
+    z-index: 0;
+}
+
+#content {
+    z-index: 1;
+    position: relative;
+}
