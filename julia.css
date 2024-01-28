@@ -494,7 +494,7 @@ nav.menu ul li:after {
 }
 
 nav.menu ul li:after {
-    transform: rotate(90deg);
+    transform: rotate(180deg);
 }
 
 .gamemodes {
