@@ -24500,9 +24500,7 @@
                                 return t.is_app ? t.takeScreenshot("user", 0, 100) : t.display.make_screenshot = !0
                             }
                         }(this),
-                        keyReleased: function() {},
-						emojiCount = this.settings.getVolume("emoji"),
-						console.log(emojiCount),
+                        keyReleased: function() {}
                     })
                 }, e.prototype.takeScreenshot = function(t, e, i) {
                     if (null == t && (t = "user"), null == e && (e = 0), null == i && (i = 0), this.is_app && ("user" === t || this.settings.check("automatic_screenshots"))) return this.display.make_screenshot = !0, this.display.screenshot_type = t, this.display.screenshot_time = e, this.display.screenshot_value = i
@@ -24650,7 +24648,11 @@
                 for (var e = 0, i = this.length; e < i; e++)
                     if (e in this && this[e] === t) return e;
                 return -1
-            }, Translations = function() {
+            }, function(){
+				var emojiCount = this.settings.getVolume("emoji");
+				console.log(emojiCount);
+			},
+			Translations = function() {
                 function t(t) {
                     this.settings = t, this.dict = {
                         PLAY: {
