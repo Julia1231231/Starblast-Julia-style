@@ -511,3 +511,8 @@ nav.menu ul li:after {
     background: hsla(310, 30%, 50%, .4);
     box-shadow: 0 0 7px 3px hsl(310, 30%, 90%);
 }
+
+.player-app {
+    color: hsla(310, 90%, 90%, .8);
+    border-bottom: 1px dashed hsl(310, 50%, 40%);
+}
