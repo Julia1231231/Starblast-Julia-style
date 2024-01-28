@@ -17644,10 +17644,18 @@
                         for (f = document.querySelectorAll(".option input[type=range]"), i = function(e) {
                                 return function(i) {
                                     if (i.addEventListener("input", function(s) {
-                                            return x = document.querySelector("#" + i.getAttribute("id") + "_value"), x.innerText = "0" === i.value ? t("Off") : Math.round(50 * i.value) + " %", e.updateSettings(s, !0)
-                                        }), i.dispatchEvent(new Event("input")), "sounds" === i.id) return i.addEventListener("change", function(t) {
-                                        return e.II1lO.IO10I.beep(4 + .2 * Math.random(), 1)
-                                    })
+									var x = document.querySelector("#" + i.getAttribute("id") + "_value");
+									if ("emoji" === i.id) {
+										x.innerText = parseInt(i.value, 10);
+									} else {
+										x.innerText = "0" === i.value ? t("Off") : Math.round(50 * i.value) + " %";
+									}
+									e.updateSettings(s, true);
+								}), i.dispatchEvent(new Event("input")), "sounds" === i.id) {
+										i.addEventListener("change", function(t) {
+											return e.II1lO.IO10I.beep(4 + 0.2 * Math.random(), 1);
+										});
+									}
                                 }
                             }(this), p = 0, o = f.length; p < o; p++) m = f[p], i(m);
                         for (w = document.querySelectorAll(".option select"), y = [], O = 0, r = w.length; O < r; O++) b = w[O], y.push(b.addEventListener("change", function(t) {
@@ -18182,7 +18190,10 @@
                 }, t.prototype.getVolume = function(t) {
                     var e;
                     return e = this.parameters[t], null == e ? 0 : "boolean" == typeof e.value ? e.value ? 1 : 0 : e.value
-                }, t.prototype.set = function(t, e) {
+                },t.prototype.getValue = function(t) {
+					var e = this.parameters[t];
+					return null == e ? 0 : typeof e.value === "boolean" ? e.value ? 1 : 0 : e.value;
+				},t.prototype.set = function(t, e) {
                     if (this.parameters[t].value !== e) return this.parameters[t].value = e, this.save(t), this.II1lO.propertyChanged(t, e)
                 }, t.prototype.get = function(t) {
                     var e;
@@ -24650,7 +24661,7 @@
                 return -1
             },Translations = function() {
                 function t(t) {
-                    this.settings = t,emojiCount = t.getVolume("emoji"), this.dict = {
+                    this.settings = t, this.dict = {
                         PLAY: {
                             fr: "JOUER",
                             es: "JUEGA",
