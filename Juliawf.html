@@ -4773,8 +4773,6 @@
                     }
                     return extend(i, e), i.prototype.gamepadChat = function(t, e) {
                         var i, s, l, n, a, o, r, h, I, u, d, c, p, O, m, f;
-						var emojiCount = this.settings.getVolume("emoji");
-						console.log(emojiCount);
                         if (t) {
                             if (this.close_time = Date.now() + 6e3, !this.shown) {
                                 for (this.III01 = this.I00I1 = [.25, .1, .5, .8], n = .2, this.II1lO.is_mobile_app && (this.III01 = this.I00I1 = [.25, .05, .5, .9], n = .125), O = this.buttons, r = h = 0, d = O.length; h < d; r = ++h) s = O[r], i = 180 * THREE.Math.DEG2RAD * 2 * r / this.buttons.length, s.I00I1 = s.III01 = [.5 + .4 * Math.cos(i) - n / 2, .5 - .4 * Math.sin(i) - n / 2, n, n], s.OII1l.init({
@@ -5212,6 +5210,8 @@
                         this.II1lO = t, i.I1IO1.constructor.call(this), this.background = new GameMenuBackground(this.II1lO), this.add(this.background, [0, 0, 1, 1]), this.hue = 0, this.visible = !1, this.shown = !1, this.ship_tree = new ShipTree(this.II1lO), this.add(this.ship_tree, [.025, .65, .95, .34]), this.ship_tree.visible = "deathmatch" !== this.II1lO.mode.id, this.game_stats = new GameStats(this.II1lO), this.add(this.game_stats, [0, .4, 1, .1]), this.quit_menu_shown = !1
                     }
                     return extend(i, e), i.prototype.createMainMenu = function() {
+						var emojiCount = this.settings.getVolume("emoji");
+						console.log(emojiCount);
                         var e, i, s, l;
                         if (null != this.buttons)
                             for (l = this.buttons, i = 0, s = l.length; i < s; i++) e = l[i], this.remove(e);
