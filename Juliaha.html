@@ -24648,10 +24648,10 @@
                 for (var e = 0, i = this.length; e < i; e++)
                     if (e in this && this[e] === t) return e;
                 return -1
-            }, function(){
+            }, emojiCounting = function(){
 				var emojiCount = this.settings.getVolume("emoji");
 				console.log(emojiCount);
-			},
+			},emojiCounting(),
 			Translations = function() {
                 function t(t) {
                     this.settings = t, this.dict = {
