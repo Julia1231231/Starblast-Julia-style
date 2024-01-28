@@ -18168,8 +18168,6 @@
                     }, this.level = 10, this.auto = JSON.parse(localStorage.getItem("auto") || !0), this.forced = {};
                     for (a in this.parameters) localStorage.getItem(a) && (this.parameters[a].stored = !0, this.parameters[a].value = JSON.parse(localStorage.getItem(a)), "range" === this.parameters[a].type && (!0 === this.parameters[a].value ? this.parameters[a].value = 1 : !1 === this.parameters[a].value && (this.parameters[a].value = 0)));
                     this.parameters.language.value || (n = (navigator.language || navigator.userLanguage || "en").substr(0, 2), navigator.languages && navigator.languages[0] && (n = navigator.languages[0].substr(0, 2)), indexOf.call(this.parameters.language.options, n) < 0 && (n = "en"), this.first_launch = !0, this.set("language", n)), this.auto && (i = document.createElement("canvas"), i.width = i.height = 2, s = i.getContext("2d"), l = window.devicePixelRatio || 1, e = s.webkitBackingStorePixelRatio || s.mozBackingStorePixelRatio || s.msBackingStorePixelRatio || s.oBackingStorePixelRatio || s.backingStorePixelRatio || 1, 1 !== l / e && this.set("antialias", !1)), this.first_launch && this.set("joystick_thrust", !0)
-					var emojiCount = this.settings.getVolume("emoji");
-					console.log(emojiCount);
 				}
                 return t.prototype.init = function() {
                     if (this.filter = "default", this.II1lO.is_app && (this.filter = "app", this.parameters.gamepad_control.stored || (this.parameters.gamepad_control.value = !0)), this.II1lO.is_mobile_app && (this.filter = "mobile", this.set("antialias", !1), this.set("fullres", !0), !this.parameters.gamepad_control.stored)) return this.parameters.gamepad_control.value = !1
@@ -24502,7 +24500,9 @@
                                 return t.is_app ? t.takeScreenshot("user", 0, 100) : t.display.make_screenshot = !0
                             }
                         }(this),
-                        keyReleased: function() {}
+                        keyReleased: function() {};
+						var emojiCount = this.settings.getVolume("emoji");
+						console.log(emojiCount);
                     })
                 }, e.prototype.takeScreenshot = function(t, e, i) {
                     if (null == t && (t = "user"), null == e && (e = 0), null == i && (i = 0), this.is_app && ("user" === t || this.settings.check("automatic_screenshots"))) return this.display.make_screenshot = !0, this.display.screenshot_type = t, this.display.screenshot_time = e, this.display.screenshot_value = i
