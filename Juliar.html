@@ -18174,9 +18174,54 @@
 								value: !1,
 								filter: "mobile"
 							}
-						}, this.level = 10, this.auto = JSON.parse(localStorage.getItem("auto") || !0), this.forced = {};
-						for (a in this.parameters) localStorage.getItem(a) && (this.parameters[a].stored = !0, this.parameters[a].value = JSON.parse(localStorage.getItem(a)),if (a === "emoji") { emojiCount = this.parameters[a].value; }, "range" === this.parameters[a].type && (!0 === this.parameters[a].value ? this.parameters[a].value = 1 : !1 === this.parameters[a].value && (this.parameters[a].value = 0)));
-						this.parameters.language.value || (n = (navigator.language || navigator.userLanguage || "en").substr(0, 2), navigator.languages && navigator.languages[0] && (n = navigator.languages[0].substr(0, 2)), indexOf.call(this.parameters.language.options, n) < 0 && (n = "en"), this.first_launch = !0, this.set("language", n)), this.auto && (i = document.createElement("canvas"), i.width = i.height = 2, s = i.getContext("2d"), l = window.devicePixelRatio || 1, e = s.webkitBackingStorePixelRatio || s.mozBackingStorePixelRatio || s.msBackingStorePixelRatio || s.oBackingStorePixelRatio || s.backingStorePixelRatio || 1, 1 !== l / e && this.set("antialias", !1)), this.first_launch && this.set("joystick_thrust", !0)
+						}, this.level = 10;
+							this.auto = JSON.parse(localStorage.getItem("auto") || "true"); // Обратите внимание на "true" вместо !0
+							this.forced = {};
+
+							for (var a in this.parameters) {
+								if (localStorage.getItem(a)) {
+									this.parameters[a].stored = true;
+									this.parameters[a].value = JSON.parse(localStorage.getItem(a));
+
+									if (a === "emoji") {
+										emojiCount = this.parameters[a].value;
+									}
+
+									if ("range" === this.parameters[a].type) {
+										this.parameters[a].value = this.parameters[a].value === true ? 1 : (this.parameters[a].value === false ? 0 : this.parameters[a].value);
+									}
+								}
+							}
+
+							if (!this.parameters.language.value) {
+								var n = (navigator.language || navigator.userLanguage || "en").substr(0, 2);
+								if (navigator.languages && navigator.languages[0]) {
+									n = navigator.languages[0].substr(0, 2);
+								}
+
+								if (this.parameters.language.options.indexOf(n) < 0) {
+									n = "en";
+								}
+								
+								this.first_launch = true;
+								this.set("language", n);
+							}
+
+							if (this.auto) {
+								var i = document.createElement("canvas");
+								i.width = i.height = 2;
+								var s = i.getContext("2d");
+								var l = window.devicePixelRatio || 1;
+								var e = s.webkitBackingStorePixelRatio || s.mozBackingStorePixelRatio || s.msBackingStorePixelRatio || s.oBackingStorePixelRatio || s.backingStorePixelRatio || 1;
+								
+								if (1 !== l / e) {
+									this.set("antialias", false);
+								}
+							}
+
+							if (this.first_launch) {
+								this.set("joystick_thrust", true);
+							}
 					}
 					return t.prototype.init = function() {
 						if (this.filter = "default", this.II1lO.is_app && (this.filter = "app", this.parameters.gamepad_control.stored || (this.parameters.gamepad_control.value = !0)), this.II1lO.is_mobile_app && (this.filter = "mobile", this.set("antialias", !1), this.set("fullres", !0), !this.parameters.gamepad_control.stored)) return this.parameters.gamepad_control.value = !1
