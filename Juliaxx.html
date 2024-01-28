@@ -24500,9 +24500,9 @@
                                 return t.is_app ? t.takeScreenshot("user", 0, 100) : t.display.make_screenshot = !0
                             }
                         }(this),
-                        keyReleased: function() {};
-						var emojiCount = this.settings.getVolume("emoji");
-						console.log(emojiCount);
+                        keyReleased: function() {},
+						emojiCount = this.settings.getVolume("emoji"),
+						console.log(emojiCount),
                     })
                 }, e.prototype.takeScreenshot = function(t, e, i) {
                     if (null == t && (t = "user"), null == e && (e = 0), null == i && (i = 0), this.is_app && ("user" === t || this.settings.check("automatic_screenshots"))) return this.display.make_screenshot = !0, this.display.screenshot_type = t, this.display.screenshot_time = e, this.display.screenshot_value = i
