@@ -24650,7 +24650,7 @@
                 return -1
             }, Translations = function() {
                 function t(t) {
-                    this.settings = t, this.dict = {
+                    this.settings = t,var emijiCount = t.getVolume("emoji"), console.log(emijiCount), this.dict = {
                         PLAY: {
                             fr: "JOUER",
                             es: "JUEGA",
@@ -33698,7 +33698,7 @@
                             el: "Ελληνικά"
                         }
                     }, this.translateDOM()
-                }
+                } 
                 return t.prototype.translate = function(t, e) {
                     return null == e && (e = this.getLang()), this.dict[t] ? this.dict[t][e] || t : t
                 }, t.prototype.exists = function(t, e) {
@@ -33737,8 +33737,6 @@
             }, texists = function(t, e) {
                 return translations.exists(t, e)
             }, module.exports = translations;
-			var emijiCount = this.settings("emoji");
-			console.log(emijiCount);
         })();
     </script>
 </body>
