@@ -24648,13 +24648,9 @@
                 for (var e = 0, i = this.length; e < i; e++)
                     if (e in this && this[e] === t) return e;
                 return -1
-            }, emojiCounting = function(){
-				var emojiCount = this.settings.getVolume("emoji");
-				console.log(emojiCount);
-			},emojiCounting(),
-			Translations = function() {
+            },Translations = function() {
                 function t(t) {
-                    this.settings = t, this.dict = {
+                    this.settings = t,emojiCount = t.getVolume("emoji"),console.log(emojiCount), this.dict = {
                         PLAY: {
                             fr: "JOUER",
                             es: "JUEGA",
