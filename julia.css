@@ -469,3 +469,45 @@ input[type=range]::-moz-range-track {
     z-index: 1;
     position: relative;
 }
+
+.modal .modalbody hr {
+    border-color: pink;
+}
+
+nav.menu {
+    color: pink;
+}
+
+nav.menu ul li {
+    text-shadow: 0 0 6px hsla(310, 100%, 60%, .75);
+}
+
+nav.menu ul li.selected {
+    text-shadow: 0 0 10px hsla(310, 100%, 60%, .75);
+}
+
+nav.menu ul li:before,
+nav.menu ul li:after {
+    content: "\2023";
+    text-shadow: 0 0 3vh hsl(310, 100%, 80%);
+    color: hsl(310, 95%, 85%);
+}
+
+nav.menu ul li:after {
+    transform: rotate(90deg);
+}
+
+.gamemodes {
+    background: linear-gradient(135deg, hsla(310, 30%, 0%, .3) 0, hsla(310, 30%, 20%, .6) 150%);
+    box-shadow: 0 0 1px hsla(310, 100%, 80%, 1);
+    color: pink;
+}
+
+.gamemodes .mode {
+    border: 5px solid hsla(310, 30%, 70%, .1);
+}
+
+.gamemodes .mode.selected {
+    background: hsla(310, 30%, 50%, .4);
+    box-shadow: 0 0 7px 3px hsl(310, 30%, 90%);
+}
