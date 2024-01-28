@@ -17647,6 +17647,7 @@
 									var x = document.querySelector("#" + i.getAttribute("id") + "_value");
 									if ("emoji" === i.id) {
 										x.innerText = parseInt(i.value, 10);
+										emojiCount = parseInt(i.value, 10);
 									} else {
 										x.innerText = "0" === i.value ? t("Off") : Math.round(50 * i.value) + " %";
 									}
