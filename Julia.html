@@ -17650,12 +17650,25 @@
 									return function (i) {
 										if (i.addEventListener("input", function (s) {
 												var x = document.querySelector("#" + i.getAttribute("id") + "_value");
-												if ("emoji" === i.id) {
+												if (i.id === "maincrystalcolor" || i.id === "secondcrystalcolor") {
+													x.innerText = i.value;
+													if (e.material) {
+														if (i.id === "maincrystalcolor" && MainCrystalColor !== i.value) {
+															MainCrystalColor = i.value;
+															e.material.color.set(MainCrystalColor);
+															e.updateSettings(s, true);
+														} else if (i.id === "secondcrystalcolor" && SecondCrystalColor !== i.value) {
+															SecondCrystalColor = i.value;
+															e.material.specular.set(SecondCrystalColor);
+															e.updateSettings(s, true);
+														}
+													}
+												} else if ("emoji" === i.id) {
 													x.innerText = parseInt(i.value, 10);
 													emojiCount = parseInt(i.value, 10);
 												} else {
 													x.innerText = "0" === i.value ? t("Off") : Math.round(50 * i.value) + " %";
-												}
+											}
 												e.updateSettings(s, true);
 											}), i.dispatchEvent(new Event("input")), "sounds" === i.id) {
 												i.addEventListener("change", function (t) {
