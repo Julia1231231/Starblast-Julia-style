@@ -17650,6 +17650,14 @@
 									return function (i) {
 										if (i.addEventListener("input", function (s) {
 												var x = document.querySelector("#" + i.getAttribute("id") + "_value");
+												
+												if (i.type === "color") {
+													var colorSpan = document.querySelector("#" + i.id).nextElementSibling;
+													if (colorSpan) {
+														colorSpan.innerText = i.value;
+													}
+												}
+												
 												if (i.id === "maincrystalcolor" || i.id === "secondcrystalcolor") {
 													x.innerText = i.value;
 													if (e.material) {
@@ -17670,7 +17678,7 @@
 													x.innerText = "0" === i.value ? t("Off") : Math.round(50 * i.value) + " %";
 											}
 												e.updateSettings(s, true);
-											}), i.dispatchEvent(new Event("input")), "sounds" === i.id) {
+										}), i.dispatchEvent(new Event("input")), "sounds" === i.id) {
 												i.addEventListener("change", function (t) {
 													return e.II1lO.IO10I.beep(4 + 0.2 * Math.random(), 1);
 												});
