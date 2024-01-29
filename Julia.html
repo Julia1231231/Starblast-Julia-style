@@ -17697,11 +17697,12 @@
 												}
 											});
 										}
-									}, i.dispatchEvent(new Event("input")), "sounds" === i.id) {
-												i.addEventListener("change", function (t) {
-													return e.II1lO.IO10I.beep(4 + 0.2 * Math.random(), 1);
-												});
-											}
+									}, i.dispatchEvent(new Event("input"));
+										if ("sounds" === i.id) {
+											i.addEventListener("change", function (t) {
+												return e.II1lO.IO10I.beep(4 + 0.2 * Math.random(), 1);
+											});
+										}
 									}
 								}(this), p = 0, o = f.length; p < o; p++) m = f[p], i(m);
 							for (w = document.querySelectorAll(".option select, .option input[type=color]"), y = [], O = 0, r = w.length; O < r; O++) b = w[O], y.push(b.addEventListener("change", function (t) {
