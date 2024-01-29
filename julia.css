@@ -516,3 +516,8 @@ nav.menu ul li:after {
     color: hsla(310, 90%, 90%, .8);
     border-bottom: 1px dashed hsl(310, 50%, 40%);
 }
+
+.flexs-between {
+    display: flex;
+    justify-content: space-between;
+}
