@@ -17624,43 +17624,48 @@
 									}
 								}(this), i = 0, s = r.length; i < s; i++) o = r[i], e(o);
 							return this.showModal("myaccount")
-						}, e.prototype.buildSettings = function() {
+						}, e.prototype.buildSettings = function () {
 							var e, i, s, l, n, a, o, r, h, I, u, d, c, p, O, m, f, g, y, v, b, w, x;
 							document.querySelector(".modal .modaltitle").innerHTML = t("SETTINGS"), e = "", h = document.querySelector(".modal .modalbody");
 							for (s in this.II1lO.settings.parameters)
 								if (!this.II1lO.settings.isHidden(s))
 									if (c = this.II1lO.settings.parameters[s], "range" !== c.type)
-										if ("select" !== c.type) e += '<div class="option">' + t(c.name) + '<label class="switch"><input type="checkbox" ' + (c.value ? 'checked="checked"' : "") + ' id="' + s + '""><div class="slider"></div></label></div>';
+										if ("select" !== c.type)
+											if ("color" === c.type) {
+												e += '<div class="option">' + t(c.name) + '<input type="color" id="' + s + '" value="' + c.value + '"></div>';
+											} else {
+												e += '<div class="option">' + t(c.name) + '<label class="switch"><input type="checkbox" ' + (c.value ? 'checked="checked"' : "") + ' id="' + s + '"><div class="slider"></div></label></div>';
+											}
 										else {
 											for (e += '<div class="option">' + t(c.name) + '<select id="' + s + '">', "language" === s && c.options.sort(), g = c.options, l = 0, n = g.length; l < n; l++) u = g[l], "language" === s ? (x = t(u, u) + " - " + t(u, "en"), v = "style='font-size:.8em'") : (x = t(u), v = ""), e += "<option " + v + ' value="' + u + '" ' + (c.value === u ? 'selected="selected"' : "") + ">" + x + "</option>";
 											e += "</select></div>"
 										}
-							else e += '<div class="option">' + t(c.name) + '<div class="range">\n  <input id=\'' + s + "' type=\"range\" min='" + c.min + "' max='" + c.max + "' value='" + c.value + "' step='" + c.l10II + "'>\n<span id='" + s + "_value'>" + c.value + "</span>\n  </div>\n</div>";
-							for (h.innerHTML = e, d = document.querySelectorAll(".option input[type=checkbox]"), I = 0, a = d.length; I < a; I++) u = d[I], u.addEventListener("click", function(t) {
-								return function(e) {
+									else e += '<div class="option">' + t(c.name) + '<div class="range">\n  <input id=\'' + s + "' type=\"range\" min='" + c.min + "' max='" + c.max + "' value='" + c.value + "' step='" + c.l10II + "'>\n<span id='" + s + "_value'>" + c.value + "</span>\n  </div>\n</div>";
+							for (h.innerHTML = e, d = document.querySelectorAll(".option input[type=checkbox]"), I = 0, a = d.length; I < a; I++) u = d[I], u.addEventListener("click", function (t) {
+								return function (e) {
 									return t.updateSettings(e)
 								}
 							}(this));
-							for (f = document.querySelectorAll(".option input[type=range]"), i = function(e) {
-									return function(i) {
-										if (i.addEventListener("input", function(s) {
-										var x = document.querySelector("#" + i.getAttribute("id") + "_value");
-										if ("emoji" === i.id) {
-											x.innerText = parseInt(i.value, 10);
-											emojiCount = parseInt(i.value, 10);
-										} else {
-											x.innerText = "0" === i.value ? t("Off") : Math.round(50 * i.value) + " %";
-										}
-										e.updateSettings(s, true);
-									}), i.dispatchEvent(new Event("input")), "sounds" === i.id) {
-											i.addEventListener("change", function(t) {
-												return e.II1lO.IO10I.beep(4 + 0.2 * Math.random(), 1);
-											});
-										}
+							for (f = document.querySelectorAll(".option input[type=range]"), i = function (e) {
+									return function (i) {
+										if (i.addEventListener("input", function (s) {
+												var x = document.querySelector("#" + i.getAttribute("id") + "_value");
+												if ("emoji" === i.id) {
+													x.innerText = parseInt(i.value, 10);
+													emojiCount = parseInt(i.value, 10);
+												} else {
+													x.innerText = "0" === i.value ? t("Off") : Math.round(50 * i.value) + " %";
+												}
+												e.updateSettings(s, true);
+											}), i.dispatchEvent(new Event("input")), "sounds" === i.id) {
+												i.addEventListener("change", function (t) {
+													return e.II1lO.IO10I.beep(4 + 0.2 * Math.random(), 1);
+												});
+											}
 									}
 								}(this), p = 0, o = f.length; p < o; p++) m = f[p], i(m);
-							for (w = document.querySelectorAll(".option select"), y = [], O = 0, r = w.length; O < r; O++) b = w[O], y.push(b.addEventListener("change", function(t) {
-								return function(e) {
+							for (w = document.querySelectorAll(".option select, .option input[type=color]"), y = [], O = 0, r = w.length; O < r; O++) b = w[O], y.push(b.addEventListener("change", function (t) {
+								return function (e) {
 									return t.updateSettings(e, !0)
 								}
 							}(this)));
@@ -18158,7 +18163,7 @@
 								filter: "default,app,mobile"
 							},
 							maincrystalcolor: {
-								name: "Main crysta lcolor",
+								name: "Main crystal color",
 								value: "#FF0000",
 								skipauto: true,
 								type: "color",
