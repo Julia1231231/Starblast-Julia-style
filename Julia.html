@@ -9455,9 +9455,9 @@
 							var e, i;
 							for (this.II1lO = t, this.I110l = new THREE.Group, this.I110l.position.set(0, 0, -1), this.crystals_by_id = [], this.I1I00 = [], this.models = [], e = i = 1; i <= 10; e = i += 1) this.models.push(this.createModel(e));
 							this.material = new THREE.MeshPhongMaterial({
-								color: 16711680,
+								color: MainCrystalColor,
 								opacity: .7,
-								specular: 16744576,
+								specular: SecondCrystalColor,
 								shininess: 30,
 								transparent: !0,
 								side: THREE.DoubleSide,
@@ -18205,6 +18205,15 @@
 									if (a === "emoji") {
 										emojiCount = this.parameters[a].value;
 									}
+									
+									if (a === "maincrystalcolor") {
+										MainCrystalColor = parseInt(this.parameters[a].value.replace(/^#/, ''), 16);
+									}
+
+									if (a === "secondcrystalcolor") {
+										SecondCrystalColor = parseInt(this.parameters[a].value.replace(/^#/, ''), 16);
+									}
+
 
 									if ("range" === this.parameters[a].type) {
 										this.parameters[a].value = this.parameters[a].value === true ? 1 : (this.parameters[a].value === false ? 0 : this.parameters[a].value);
