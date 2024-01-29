@@ -17648,61 +17648,41 @@
 							}(this));
 							for (f = document.querySelectorAll(".option input[type=range]"), i = function (e) {
 									return function (i) {
-										if (i.addEventListener) {
-											i.addEventListener("input", function (s) {
-												var x = document.querySelector("#" + i.id + "_value");
-
+										if (i.addEventListener("input", function (s) {
+												var x = document.querySelector("#" + i.getAttribute("id") + "_value");
+												
 												if (i.type === "color") {
-													var colorSpan = document.querySelector("#" + i.id + "_value");
+													var colorSpan = document.querySelector("#" + i.id).nextElementSibling;
 													if (colorSpan) {
 														colorSpan.innerText = i.value;
-
-														if (i.id === "maincrystalcolor" || i.id === "secondcrystalcolor") {
-															if (e.material) {
-																var colorProperty = i.id === "maincrystalcolor" ? "color" : "specular";
-																var currentColor = i.id === "maincrystalcolor" ? MainCrystalColor : SecondCrystalColor;
-
-																if (currentColor !== i.value) {
-																	MainCrystalColor = i.id === "maincrystalcolor" ? i.value : MainCrystalColor;
-																	SecondCrystalColor = i.id === "secondcrystalcolor" ? i.value : SecondCrystalColor;
-
-																	e.material[colorProperty].set(i.value);
-																	e.updateSettings(s, true);
-																}
-															}
 														}
-													}
-												} else {
-													if (i.id === "maincrystalcolor" || i.id === "secondcrystalcolor") {
-														x.innerText = i.value;
-														if (e.material) {
-															var colorProperty = i.id === "maincrystalcolor" ? "color" : "specular";
-															var currentColor = i.id === "maincrystalcolor" ? MainCrystalColor : SecondCrystalColor;
-
-															if (currentColor !== i.value) {
-																MainCrystalColor = i.id === "maincrystalcolor" ? i.value : MainCrystalColor;
-																SecondCrystalColor = i.id === "secondcrystalcolor" ? i.value : SecondCrystalColor;
-
-																e.material[colorProperty].set(i.value);
-																e.updateSettings(s, true);
-															}
-														}
-													} else if ("emoji" === i.id) {
-														x.innerText = parseInt(i.value, 10);
-														emojiCount = parseInt(i.value, 10);
-													} else {
-														x.innerText = "0" === i.value ? t("Off") : Math.round(50 * i.value) + " %";
-													}
-													e.updateSettings(s, true);
 												}
-											});
-										}
-									}), i.dispatchEvent(new Event("input"));
-										if ("sounds" === i.id) {
-											i.addEventListener("change", function (t) {
-												return e.II1lO.IO10I.beep(4 + 0.2 * Math.random(), 1);
-											});
-										}
+												
+												if (i.id === "maincrystalcolor" || i.id === "secondcrystalcolor") {
+													x.innerText = i.value;
+													if (e.material) {
+														if (i.id === "maincrystalcolor" && MainCrystalColor !== i.value) {
+															MainCrystalColor = i.value;
+															e.material.color.set(MainCrystalColor);
+															e.updateSettings(s, true);
+														} else if (i.id === "secondcrystalcolor" && SecondCrystalColor !== i.value) {
+															SecondCrystalColor = i.value;
+															e.material.specular.set(SecondCrystalColor);
+															e.updateSettings(s, true);
+														}
+													}
+												} else if ("emoji" === i.id) {
+													x.innerText = parseInt(i.value, 10);
+													emojiCount = parseInt(i.value, 10);
+												} else {
+													x.innerText = "0" === i.value ? t("Off") : Math.round(50 * i.value) + " %";
+											}
+												e.updateSettings(s, true);
+										}), i.dispatchEvent(new Event("input")), "sounds" === i.id) {
+												i.addEventListener("change", function (t) {
+													return e.II1lO.IO10I.beep(4 + 0.2 * Math.random(), 1);
+												});
+											}
 									}
 								}(this), p = 0, o = f.length; p < o; p++) m = f[p], i(m);
 							for (w = document.querySelectorAll(".option select, .option input[type=color]"), y = [], O = 0, r = w.length; O < r; O++) b = w[O], y.push(b.addEventListener("change", function (t) {
