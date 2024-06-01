@@ -17804,7 +17804,7 @@
                 if (!this.lIl0I.settings.isHidden(s))
                     if (p = this.lIl0I.settings.parameters[s], "range" !== p.type)
                         if ("select" !== p.type) {
-							if ("color" === c.type) {						
+							if ("color" === p.type) {						
 								e += '<div class="option flexs-between">' + t(p.name) + '<div><input type="color" style="padding: 0; background: transparent; border: none;" id="' + s + '" value="' + p.value + '"><span class="color_value">' + p.value + '</span></div></div>';
 							} else { 
 								e += '<div class="option">' + t(p.name) + '<label class="switch"><input type="checkbox" ' + (p.value ? 'checked="checked"' : "") + ' id="' + s + '""><div class="slider"></div></label></div>'; 
