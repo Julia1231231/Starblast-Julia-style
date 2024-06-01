@@ -4768,7 +4768,7 @@
                     };
                     0 === this.lIl0I.mode.vocabulary.length && (this.open_button.visible = !1, this.open_button.enabled = !1)
                 }
-                for (d = 1, u = this.buttons, l = a = 0, r = u.length; a < r; l = ++a) s = u[l], c = l % 4, p = Math.floor(l / 5), this.add(s, [(c + 1) * d / 5 + .01, .25 * p + .01, d / 5 - .02, .23]);
+                for (d = 1, u = this.buttons, l = a = 0, r = u.length; a < r; l = ++a) s = u[l], c = l % 4, p = Math.floor(l / 4), this.add(s, [(c + 1) * d / 5 + .01, .25 * p + .01, d / 5 - .02, .23]);
                 this.shown = !1, this.close_time = 0, this.phrase = ""
             }
             return extend(i, e), i.prototype.gamepadChat = function(t, e) {
@@ -4798,7 +4798,7 @@
                     })) : (s.lII00.set(), s.setSelected(!0), this.gamepad_selected = s)
                 } else this.shown && this.hide()
             }, i.prototype.gamepadChatClick = function() {
-                if (null != this.gamepad_selddddddddddddddddddddddddddddddddected) return this.gamepad_selected.lIll1()
+                if (null != this.gamepad_selected) return this.gamepad_selected.lIll1()
             }, i.prototype.updateHue = function(t) {
                 var e, i, s, l;
                 for (l = this.buttons, i = 0, s = l.length; i < s; i++) e = l[i], e.setHue(t);
@@ -4806,7 +4806,12 @@
             }, i.prototype.toggleChat = function() {
                 return this.shown ? this.hide() : (this.l01II(), this.close_time = Date.now() + 6e3)
             }, i.prototype.typed = function(t) {
-                if (this.shown || this.l01II(), this.close_time = Date.now() + 6e3, this.phrase += t, this.lIl0I.O1O1I.say(this.phrase), this.phrase.length >= emojiCount && this.hide(), Math.random() < .01) return this.lIl0I.sendGAEvent("chat_evt", t)
+				if (this.shown || this.l01II(), this.close_time = Date.now() + 6e3, this.phrase += t, this.lIl0I.O1O1I.say(this.phrase), this.phrase.length >= emojiCount) {
+					this.hide();
+				}
+				if (Math.random() < .01) {
+					this.lIl0I.sendGAEvent("chat_evt", t);
+				}
             }, i.prototype.l01II = function() {
                 var t, e, i, s, l;
                 if (!this.shown) {
