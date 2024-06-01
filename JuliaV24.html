@@ -4768,7 +4768,7 @@
                     };
                     0 === this.lIl0I.mode.vocabulary.length && (this.open_button.visible = !1, this.open_button.enabled = !1)
                 }
-                for (d = 1, u = this.buttons, l = a = 0, r = u.length; a < r; l = ++a) s = u[l], c = l % 4, p = Math.floor(l / 4), this.add(s, [(c + 1) * d / 5 + .01, .25 * p + .01, d / 5 - .02, .23]);
+                for (d = 1, u = this.buttons, l = a = 0, r = u.length; a < r; l = ++a) s = u[l], c = l % 4, p = Math.floor(l / 5), this.add(s, [(c + 1) * d / 5 + .01, .25 * p + .01, d / 5 - .02, .23]);
                 this.shown = !1, this.close_time = 0, this.phrase = ""
             }
             return extend(i, e), i.prototype.gamepadChat = function(t, e) {
@@ -4798,7 +4798,7 @@
                     })) : (s.lII00.set(), s.setSelected(!0), this.gamepad_selected = s)
                 } else this.shown && this.hide()
             }, i.prototype.gamepadChatClick = function() {
-                if (null != this.gamepad_selected) return this.gamepad_selected.lIll1()
+                if (null != this.gamepad_selddddddddddddddddddddddddddddddddected) return this.gamepad_selected.lIll1()
             }, i.prototype.updateHue = function(t) {
                 var e, i, s, l;
                 for (l = this.buttons, i = 0, s = l.length; i < s; i++) e = l[i], e.setHue(t);
@@ -4810,7 +4810,7 @@
             }, i.prototype.l01II = function() {
                 var t, e, i, s, l;
                 if (!this.shown) {
-                    for (this.shown = !0, this.phrase = "", this.open_button.hide(), l = this.buttons, e = i = 0, s = l.length + 1; i < s; e = ++i) t = l[e], t.l01II();
+                    for (this.shown = !0, this.phrase = "", this.open_button.hide(), l = this.buttons, e = i = 0, s = l.length; i < s; e = ++i) t = l[e], t.l01II();
                     if (null != this.lIl0I.display.screen.OI01O.mode_info) return this.lIl0I.display.screen.OI01O.mode_info.close()
                 }
             }, i.prototype.hide = function() {
