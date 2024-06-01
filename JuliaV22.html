@@ -4758,7 +4758,7 @@
                             return t.toggleChat()
                         }
                     }(this)), this.add(this.open_button, [0, .8, .2, .2]), this.lIl0I.vocabulary = {}, null != this.lIl0I.mode) {
-                    for (h = this.lIl0I.mode.vocabulary, n = 0, o = h.length; n < o; n++) l = h[n], this.buttons.push(new ChatButton(this.lIl0I, t(l.text), l.icon, l.key, function(t) {
+                    for (h = this.lIl0I.mode.vocabulary, n = 0, o = Math.min(emojiCount, h.length); n < o; n++) l = h[n], this.buttons.push(new ChatButton(this.lIl0I, t(l.text), l.icon, l.key, function(t) {
                         return function(e) {
                             return t.typed(e)
                         }
@@ -4768,7 +4768,7 @@
                     };
                     0 === this.lIl0I.mode.vocabulary.length && (this.open_button.visible = !1, this.open_button.enabled = !1)
                 }
-                for (d = 1, u = this.buttons, l = a = 0, r = u.length; a < r; l = ++a) s = u[l], c = l % 5, p = Math.floor(l / 4), this.add(s, [(c + 1) * d / 5 + .01, .25 * p + .01, d / 5 - .02, .23]);
+                for (d = 1, u = this.buttons, l = a = 0, r = u.length; a < r; l = ++a) s = u[l], c = l % 4, p = Math.floor(l / 4), this.add(s, [(c + 1) * d / 5 + .01, .25 * p + .01, d / 5 - .02, .23]);
                 this.shown = !1, this.close_time = 0, this.phrase = ""
             }
             return extend(i, e), i.prototype.gamepadChat = function(t, e) {
