@@ -25115,16 +25115,10 @@
                         }
                     }(this), 1e3), this.key_listeners = [], this.paused = !1, void 0 !== saveAs && null !== saveAs) return this.addKeyListener("Z".charCodeAt(0), {
                     keyPressed: function(t) {
-						return function() {
-							if (t && typeof t.is_app !== 'undefined') {
-								return t.is_app ? t.takeScreenshot("user", 0, 100) : t.display.make_screenshot = !0;
-							} else {
-								console.error("Error: 't' is undefined or 'is_app' property is missing.");
-								return false; // Or handle the error appropriately
-							}
-						}
-					}
-					(this),
+                        return function() {
+                            return t.is_app ? t.takeScreenshot("user", 0, 100) : t.display.make_screenshot = !0
+                        }
+                    }(this),
                     keyReleased: function() {}
                 })
             }, e.prototype.takeScreenshot = function(t, e, i) {
