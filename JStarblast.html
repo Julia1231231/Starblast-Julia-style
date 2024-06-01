@@ -13418,6 +13418,26 @@
                 text: "Hmm",
                 icon: "K",
                 key: "Q"
+            }, {
+                text: "Love",
+                icon: "\u2764\uFE0F",
+                key: "J"
+            }, {
+                text: "Skill Issue",
+                icon: "x",
+                key: "V"
+            }, {
+                text: "Discord",
+                icon: "{",
+                key: "D"
+            }, {
+                text: "You",
+                icon: "N",
+                key: "I"
+            }, {
+                text: "Me",
+                icon: "O",
+                key: "E"
             }], this.tips_test = "Destroy asteroids", this.tips = [t("Destroy asteroids"), t("Collect gems to upgrade your ship"), t("Fight and don't die!")]
         }
         return extend(i, e), i.prototype.lI11I = function(t) {
@@ -13538,6 +13558,14 @@
                 text: "Sorry",
                 icon: "¡",
                 key: "S"
+            }, {
+                text: "Love",
+                icon: "\u2764\uFE0F",
+                key: "J"
+            }, {
+                text: "Skill Issue",
+                icon: "x",
+                key: "I"
             }], this.teams = [], this.teamboards = [], this.max_enter_time = 2700, this.max_enter_players = 60, this.infinite_base_lives = !1, this.tips_test = "Win the game by destroying the enemy bases", this.tips = [t("Collect gems to upgrade your ship"), t("Donate gems to your base to upgrade it and access higher tier ships"), t("Win the game by destroying the enemy bases")]
         }
         return extend(i, e), i.prototype.getWeaponStoreName = function() {
@@ -13775,6 +13803,14 @@
                 text: "Hmm",
                 icon: "K",
                 key: "Q"
+            }, {
+                text: "Love",
+                icon: "\u2764\uFE0F",
+                key: "J"
+            }, {
+                text: "Skill Issue",
+                icon: "x",
+                key: "I"
             }], this.tips_test = "Fight and don't die!", this.tips = [t("Fight and don't die!"), t("Collect gems to upgrade your ship")], this.future_tips = [t("Destroy aliens and l01Ol"), t("Collect gems and weapons"), t("Fight the bosses and don't die!")], this.restricted_weapons_store = !0, this.show_highscore = !1, this.infinite_base_lives = !1, this.radar_zoom = 1, this.soundtrack = "crystals.mp3", this.ecponly = !1, this.custom_game_allowed = !0, this.gameover = !1, this.count_alien_kills = !0
         }
         return extend(i, e), i.prototype.lI11I = function(t) {
@@ -14029,7 +14065,15 @@
         return i.prototype = e.prototype, t.prototype = new i, t.IIIlO = e.prototype, t
     }, hasProp = {}.hasOwnProperty, this.DeathMatchMode = function(e) {
         function i(e, s, l) {
-            this.lIl0I = e, null == s && (s = "deathmatch"), null == l && (l = "Deathmatch"), i.IIIlO.constructor.call(this, s, l), this.vocabulary = [], this.radar_zoom = 1, this.max_enter_time = 3600, this.max_enter_players = 10, this.soundtrack = "argon.mp3", this.respawn_delay = 1e3, this.IOIll = !1, this.pro = !1, this.anonymous_ships = !0, this.radar_shows_leader = !1, this.show_weaponsbar = !1, this.tips_test = "Kill any ship for %d point", this.tips = [t("Kill any ship for %d point").replace("%d", 1), t("Kill your target for %d points").replace("%d", 2), t("Score %d points to win the round").replace("%d", 12)]
+            this.lIl0I = e, null == s && (s = "deathmatch"), null == l && (l = "Deathmatch"), i.IIIlO.constructor.call(this, s, l), this.vocabulary = [{
+                        text: "Love",
+                        icon: "\u2764\uFE0F",
+                        key: "J"
+                    }, {
+                        text: "Skill Issue",
+                        icon: "x",
+                        key: "I"
+                    }], this.radar_zoom = 1, this.max_enter_time = 3600, this.max_enter_players = 10, this.soundtrack = "argon.mp3", this.respawn_delay = 1e3, this.IOIll = !1, this.pro = !1, this.anonymous_ships = !0, this.radar_shows_leader = !1, this.show_weaponsbar = !1, this.tips_test = "Kill any ship for %d point", this.tips = [t("Kill any ship for %d point").replace("%d", 1), t("Kill your target for %d points").replace("%d", 2), t("Score %d points to win the round").replace("%d", 12)]
         }
         return extend(i, e), i.prototype.lI11I = function(t) {
             return this.game_info = t, this.lIl0I.startGame(t), this.lIl0I.display.screen.OI01O.hide(), this.lIl0I.OIO01.O1001.O1O00.x = 0, this.lIl0I.OIO01.O1001.O1O00.y = -40, this.next_round_page = new NextRoundPage(this.lIl0I, this), this.next_round_page.visible = !1, this.lIl0I.display.screen.OI01O.add(this.next_round_page, [0, 0, 1, 1]), this.lIl0I.O1O1I.enter()
@@ -14525,7 +14569,15 @@
         return i.prototype = e.prototype, t.prototype = new i, t.IIIlO = e.prototype, t
     }, hasProp = {}.hasOwnProperty, this.BattleRoyaleMode = function(e) {
         function i(e, s, l) {
-            this.lIl0I = e, null == s && (s = "battleroyale"), null == l && (l = "Battle Royale"), i.IIIlO.constructor.call(this, s, l), this.vocabulary = [], this.radar_zoom = 2, this.high_def_radar = !0, this.max_enter_time = 120, this.max_enter_players = 30, this.soundtrack = "crystals.mp3", this.respawn_delay = 1e3, this.IOIll = !1, this.anonymous_ships = !1, this.radar_shows_leader = !1, this.show_weaponsbar = !0, this.restricted_weapons_store = !0, this.lOO1O = BATTLE_SHIPS, this.IIl1l = BATTLE_SHIP_TYPES, this.lOO1O.add(lOO1O.ships_by_code[101]), this.IIl1l.add(IIl1l.types_by_code[101]), this.l0lII = 36e3, this.I11Il = 1.3, this.OO0Ol = .003, this.RADIATION_START = 7200, this.custom_game_allowed = !0, this.I1OOl = !1, this.tips_test = "Collect weapons and refills", this.tips = [t("Collect weapons and refills"), t("Kill other players"), t("Be the last player standing")], this.spawned = !1
+            this.lIl0I = e, null == s && (s = "battleroyale"), null == l && (l = "Battle Royale"), i.IIIlO.constructor.call(this, s, l), this.vocabulary = [{
+                        text: "Love",
+                        icon: "\u2764\uFE0F",
+                        key: "J"
+                    }, {
+                        text: "Skill Issue",
+                        icon: "x",
+                        key: "V"
+                    }], this.radar_zoom = 2, this.high_def_radar = !0, this.max_enter_time = 120, this.max_enter_players = 30, this.soundtrack = "crystals.mp3", this.respawn_delay = 1e3, this.IOIll = !1, this.anonymous_ships = !1, this.radar_shows_leader = !1, this.show_weaponsbar = !0, this.restricted_weapons_store = !0, this.lOO1O = BATTLE_SHIPS, this.IIl1l = BATTLE_SHIP_TYPES, this.lOO1O.add(lOO1O.ships_by_code[101]), this.IIl1l.add(IIl1l.types_by_code[101]), this.l0lII = 36e3, this.I11Il = 1.3, this.OO0Ol = .003, this.RADIATION_START = 7200, this.custom_game_allowed = !0, this.I1OOl = !1, this.tips_test = "Collect weapons and refills", this.tips = [t("Collect weapons and refills"), t("Kill other players"), t("Be the last player standing")], this.spawned = !1
         }
         return extend(i, e), i.prototype.lI11I = function(t) {
             return this.game_info = t, this.lIl0I.startGame(t), this.lIl0I.display.screen.OI01O.hide(), this.lIl0I.OIO01.O1001.O1O00.x = 0, this.lIl0I.OIO01.O1001.O1O00.y = -40, this.next_round_page = new BattleRoyalePage(this.lIl0I, this), this.next_round_page.visible = !1, this.lIl0I.display.screen.OI01O.add(this.next_round_page, [0, 0, 1, 1]), this.lIl0I.O1O1I.enter()
@@ -18489,7 +18541,14 @@
                     this.icon = "https://starblast.io/ecp/pmf.png";
                     break;
                 case "seasonal":
-                    this.icon = "https://starblast.io/ecp/seasonal.png"
+                    this.icon = "https://starblast.io/ecp/seasonal.png";
+                    break;
+                case "srcchamp":
+                    this.icon = "https://starblast.io/ecp/srcchamp.png";
+                    break;
+                case "lover":
+                    this.icon = "https://i.ibb.co/Xt52V8v/Lover.png";
+                    break;
             }
             if (d = Math.round(i / 2.2), null != this.icon && this.icon.startsWith("http")) {
                 if (this.icon = this.icon.replace("http:", "https:"), null == this.icon_src && (this.icon_src = new Image, this.icon_src.crossOrigin = "Anonymous", this.icon_src.src = this.icon, this.icon_src.onload = function(t) {
@@ -18689,13 +18748,20 @@
                 discord: "Discord",
                 medic: "Medic",
                 blank: "Blank",
-                seasonal: "Seasonal"
+                srcchamp: "SRC Champ",
+                lover: "Love",
             },
             finish: {
                 zinc: "Zinc",
                 alloy: "Alloy",
                 gold: "Gold",
                 titanium: "Titanium",
+                green: "Green",
+                diamond: "Diamond",
+                pink: "Pink",
+                black: "Black",
+                goldorange: "Gold Orange",
+                blue: "Blue",
                 carbon: "Carbon"
             },
             laser: {
@@ -30164,6 +30230,13 @@
                     ko: "도와죠",
                     fa: "کمک",
                     el: "Βοήθεια"
+                }, 
+				Love: {
+                    fr: "Amour",
+                    de: "Love",
+                    ru: "Любовь",
+                    ro: "Dragoste",
+                    ar: "حب",
                 },
                 Kill: {
                     fr: "Tuer",
