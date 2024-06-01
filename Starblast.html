@@ -9587,9 +9587,9 @@
                 var e, i;
                 for (this.lIl0I = t, this.lll10 = new THREE.Group, this.lll10.position.set(0, 0, -1), this.crystals_by_id = [], this.lIl1O = [], this.models = [], e = i = 1; i <= 10; e = i += 1) this.models.push(this.createModel(e));
                 this.material = new THREE.MeshPhongMaterial({
-                    color: 16711680,
+                    color: MainCrystalColor,
                     opacity: .7,
-                    specular: 16744576,
+                    specular: SecondCrystalColor,
                     shininess: 30,
                     transparent: !0,
                     side: THREE.DoubleSide,
@@ -9614,7 +9614,7 @@
                 return new CrystalModel
             }, t.prototype.getModelInstance = function(t) {
                 var e, i;
-                return i = t % this.models.length, e = this.lIl0I.settings.check("colorblind") ? 16752704 : 16711680, this.material.color.set(e), new THREE.Mesh(this.models[i].geometry, this.material)
+                return i = t % this.models.length, e = this.lIl0I.settings.check("colorblind") ? 16752704 : MainCrystalColor, this.material.color.set(e), new THREE.Mesh(this.models[i].geometry, this.material)
             }, t
         }(), this.Collectible = function() {
             function t(t, e, i, s, l, n, a, o) {
@@ -9901,11 +9901,32 @@
                     case "gold":
                         this.buildGoldMaterial();
                         break;
+                    case "green":
+                        this.buildGreenMaterial();
+                        break;
+                    case "diamond":
+                        this.buildDiamondMaterial();
+                        break;
+                    case "pink":
+                        this.buildPinkMaterial();
+                        break;
+                    case "black":
+                        this.buildBlackMaterial();
+                        break;
+                    case "goldorange":
+                        this.buildGoldOrangeMaterial();
+                        break;
+                    case "blue":
+                        this.buildBlueMaterial();
+                        break;
                     case "titanium":
                         this.buildTitaniumMaterial();
                         break;
                     case "carbon":
                         this.buildCarbonMaterial();
+                        break;
+					case "X27":
+                        this.buildX27Material();
                         break;
                     default:
                         this.buildDefaultMaterial()
@@ -9990,6 +10011,18 @@
                     emissive: l0O0O.hsvToRgbHex(this.hue, .5, 1),
                     emissiveMap: Il0OI
                 })
+            }, t.prototype.buildGreenMaterial = function() {
+                return this.material = new THREE.MeshPhongMaterial({
+                    map: OlOl1,
+                    bumpMap: OlOl1,
+                    specularMap: OlOl1,
+                    specular: 19836735,
+                    shininess: 15,
+                    bumpScale: .1,
+                    color: 0000000,
+                    emissive: l0O0O.hsvToRgbHex(this.hue, .5, 1),
+                    emissiveMap: Il0OI
+                })
             }, t.prototype.buildCopperMaterial = function() {
                 return this.material = new THREE.MeshPhongMaterial({
                     map: OlOl1,
@@ -9999,6 +10032,54 @@
                     shininess: 15,
                     bumpScale: .1,
                     color: 10514512,
+                    emissive: l0O0O.hsvToRgbHex(this.hue, .5, 1),
+                    emissiveMap: Il0OI
+                })
+            }, t.prototype.buildPinkMaterial = function() {
+                return this.material = new THREE.MeshPhongMaterial({
+                    map: OlOl1,
+                    bumpMap: OlOl1,
+                    specularMap: OlOl1,
+                    specular: 16758465,
+                    shininess: 50,
+                    bumpScale: .1,
+                    color: 16716947,
+                    emissive: l0O0O.hsvToRgbHex(this.hue, .5, 1),
+                    emissiveMap: Il0OI
+                });
+            }, t.prototype.buildBlackMaterial = function() {
+                return this.material = new THREE.MeshPhongMaterial({
+                    map: OlOl1,
+                    bumpMap: OlOl1,
+                    specularMap: OlOl1,
+                    specular: 00000000,
+                    shininess: 15,
+                    bumpScale: .1,
+                    color: 0000000,
+                    emissive: l0O0O.hsvToRgbHex(this.hue, .5, 1),
+                    emissiveMap: Il0OI
+                })
+            }, t.prototype.buildGoldOrangeMaterial = function() {
+                return this.material = new THREE.MeshPhongMaterial({
+                    map: OlOl1,
+                    bumpMap: OlOl1,
+                    specularMap: OlOl1,
+                    specular: 10506256,
+                    shininess: 15,
+                    bumpScale: .1,
+                    color: 0000000,
+                    emissive: l0O0O.hsvToRgbHex(this.hue, .5, 1),
+                    emissiveMap: Il0OI
+                })
+            }, t.prototype.buildBlueMaterial = function() {
+                return this.material = new THREE.MeshPhongMaterial({
+                    map: OlOl1,
+                    bumpMap: OlOl1,
+                    specularMap: OlOl1,
+                    specular: 2108159,
+                    shininess: 15,
+                    bumpScale: .1,
+                    color: 2108159,
                     emissive: l0O0O.hsvToRgbHex(this.hue, .5, 1),
                     emissiveMap: Il0OI
                 })
@@ -11944,17 +12025,32 @@
                     case "gold":
                         this.buildGoldMaterial();
                         break;
+                    case "green":
+                        this.buildGreenMaterial();
+                        break;
+                    case "diamond":
+                        this.buildDiamondMaterial();
+                        break;
+                    case "pink":
+                        this.buildPinkMaterial();
+                        break;
+                    case "black":
+                        this.buildBlackMaterial();
+                        break;
+                    case "goldorange":
+                        this.buildGoldOrangeMaterial();
+                        break;
+                    case "blue":
+                        this.buildBlueMaterial();
+                        break;
                     case "titanium":
                         this.buildTitaniumMaterial();
                         break;
                     case "carbon":
                         this.buildCarbonMaterial();
                         break;
-                    case "copper":
-                        this.buildCopperMaterial();
-                        break;
-                    case "diamond":
-                        this.buildDiamondMaterial();
+					case "X27":
+                        this.buildX27Material();
                         break;
                     default:
                         this.buildDefaultMaterial()
@@ -11964,6 +12060,18 @@
                 return null == t && (t = 10), this.material = new THREE.MeshLambertMaterial({
                     map: OlOl1,
                     color: 16777215,
+                    emissive: l0O0O.hsvToRgbHex(this.hue, .5, 1),
+                    emissiveMap: Il0OI
+                })
+            }, t.prototype.buildX27Material = function() {
+                return this.material = new THREE.MeshPhongMaterial({
+                    map: OlOl1,
+                    bumpMap: OlOl1,
+                    specularMap: OlOl1,
+                    specular: 4243711,
+                    shininess: 30,
+                    bumpScale: .1,
+                    color: 5275808,
                     emissive: l0O0O.hsvToRgbHex(this.hue, .5, 1),
                     emissiveMap: Il0OI
                 })
@@ -12027,6 +12135,18 @@
                     emissive: l0O0O.hsvToRgbHex(this.hue, .5, 1),
                     emissiveMap: Il0OI
                 })
+            }, t.prototype.buildGreenMaterial = function() {
+                return this.material = new THREE.MeshPhongMaterial({
+                    map: OlOl1,
+                    bumpMap: OlOl1,
+                    specularMap: OlOl1,
+                    specular: 19836735,
+                    shininess: 15,
+                    bumpScale: .1,
+                    color: 0000000,
+                    emissive: l0O0O.hsvToRgbHex(this.hue, .5, 1),
+                    emissiveMap: Il0OI
+                })
             }, t.prototype.buildCopperMaterial = function() {
                 return this.material = new THREE.MeshPhongMaterial({
                     map: OlOl1,
@@ -12036,6 +12156,54 @@
                     shininess: 15,
                     bumpScale: .1,
                     color: 10514512,
+                    emissive: l0O0O.hsvToRgbHex(this.hue, .5, 1),
+                    emissiveMap: Il0OI
+                })
+            }, t.prototype.buildPinkMaterial = function() {
+                return this.material = new THREE.MeshPhongMaterial({
+                    map: OlOl1,
+                    bumpMap: OlOl1,
+                    specularMap: OlOl1,
+                    specular: 16758465,
+                    shininess: 50,
+                    bumpScale: .1,
+                    color: 16716947,
+                    emissive: l0O0O.hsvToRgbHex(this.hue, .5, 1),
+                    emissiveMap: Il0OI
+                });
+            }, t.prototype.buildBlackMaterial = function() {
+                return this.material = new THREE.MeshPhongMaterial({
+                    map: OlOl1,
+                    bumpMap: OlOl1,
+                    specularMap: OlOl1,
+                    specular: 00000000,
+                    shininess: 15,
+                    bumpScale: .1,
+                    color: 0000000,
+                    emissive: l0O0O.hsvToRgbHex(this.hue, .5, 1),
+                    emissiveMap: Il0OI
+                })
+            }, t.prototype.buildGoldOrangeMaterial = function() {
+                return this.material = new THREE.MeshPhongMaterial({
+                    map: OlOl1,
+                    bumpMap: OlOl1,
+                    specularMap: OlOl1,
+                    specular: 10506256,
+                    shininess: 15,
+                    bumpScale: .1,
+                    color: 0000000,
+                    emissive: l0O0O.hsvToRgbHex(this.hue, .5, 1),
+                    emissiveMap: Il0OI
+                })
+            }, t.prototype.buildBlueMaterial = function() {
+                return this.material = new THREE.MeshPhongMaterial({
+                    map: OlOl1,
+                    bumpMap: OlOl1,
+                    specularMap: OlOl1,
+                    specular: 2108159,
+                    shininess: 15,
+                    bumpScale: .1,
+                    color: 2108159,
                     emissive: l0O0O.hsvToRgbHex(this.hue, .5, 1),
                     emissiveMap: Il0OI
                 })
@@ -17595,19 +17763,49 @@
                 }
             }(this));
             for (f = document.querySelectorAll(".option input[type=range]"), i = function(e) {
-                    return function(i) {
-                        if (i.addEventListener("input", function(s) {
-                                return x = document.querySelector("#" + i.getAttribute("id") + "_value"), x.innerText = "0" === i.value ? t("Off") : Math.round(50 * i.value) + " %", e.updateSettings(s, !0)
-                            }), i.dispatchEvent(new Event("input")), "sounds" === i.id) return i.addEventListener("change", function(t) {
-                            return e.lIl0I.ll0II.beep(4 + .2 * Math.random(), 1)
-                        })
-                    }
-                }(this), I = 0, o = f.length; I < o; I++) m = f[I], i(m);
-            for (w = document.querySelectorAll(".option select"), y = [], O = 0, r = w.length; O < r; O++) b = w[O], y.push(b.addEventListener("change", function(t) {
-                return function(e) {
-                    return t.updateSettings(e, !0)
-                }
-            }(this)));
+                                return function(i) {
+                                    if (i.addEventListener("input", function(s) {
+                                            var x = document.querySelector("#" + i.getAttribute("id") + "_value");
+
+                                            if (i.type === "color") {
+                                                var colorSpan = document.querySelector("#" + i.id).nextElementSibling;
+                                                if (colorSpan) {
+                                                    colorSpan.innerText = i.value;
+                                                }
+                                            }
+
+                                            if (i.id === "maincrystalcolor" || i.id === "secondcrystalcolor") {
+                                                x.innerText = i.value;
+                                                if (e.material) {
+                                                    if (i.id === "maincrystalcolor" && MainCrystalColor !== i.value) {
+                                                        MainCrystalColor = i.value;
+                                                        e.material.color.set(MainCrystalColor);
+                                                        e.updateSettings(s, true);
+                                                    } else if (i.id === "secondcrystalcolor" && SecondCrystalColor !== i.value) {
+                                                        SecondCrystalColor = i.value;
+                                                        e.material.specular.set(SecondCrystalColor);
+                                                        e.updateSettings(s, true);
+                                                    }
+                                                }
+                                            } else if ("emoji" === i.id) {
+                                                x.innerText = parseInt(i.value, 10);
+                                                emojiCount = parseInt(i.value, 10);
+                                            } else {
+                                                x.innerText = "0" === i.value ? t("Off") : Math.round(50 * i.value) + " %";
+                                            }
+                                            e.updateSettings(s, true);
+                                        }), i.dispatchEvent(new Event("input")), "sounds" === i.id) {
+                                        i.addEventListener("change", function(t) {
+                                            return e.IIO01.IO10I.beep(4 + 0.2 * Math.random(), 1);
+                                        });
+                                    }
+                                }
+                            }(this), p = 0, o = f.length; p < o; p++) m = f[p], i(m);
+                        for (w = document.querySelectorAll(".option select, .option input[type=color]"), y = [], O = 0, r = w.length; O < r; O++) b = w[O], y.push(b.addEventListener("change", function(t) {
+                            return function(e) {
+                                return t.updateSettings(e, !0)
+                            }
+                        }(this)));
             return y
         }, e.prototype.showSettings = function() {
             var t;
@@ -18089,6 +18287,30 @@
                     lI1O1: .02,
                     filter: "default,app,mobile"
                 },
+				emoji: {
+                    name: "Number of emotions",
+                    value: 4,
+                    skipauto: !0,
+                    type: "range",
+                    min: 1,
+                    max: 5,
+                    l10II: 1,
+                    filter: "default,app,mobile"
+                },
+				maincrystalcolor: {
+                    name: "Main crystal color",
+                    value: "#FF0000",
+                    skipauto: true,
+                    type: "color",
+                    filter: "default,app,mobile"
+                },
+                secondcrystalcolor: {
+                    name: "Second crystal color",
+                    value: "#FF8080",
+                    skipauto: true,
+                    type: "color",
+                    filter: "default,app,mobile"
+                },
                 language: {
                     name: "Language",
                     value: !1,
@@ -18106,34 +18328,90 @@
                     value: !1,
                     filter: "mobile"
                 }
-            }, this.level = 10, this.auto = JSON.parse(localStorage.getItem("auto") || !0), this.forced = {};
-            for (a in this.parameters) localStorage.getItem(a) && (this.parameters[a].stored = !0, this.parameters[a].value = JSON.parse(localStorage.getItem(a)), "range" === this.parameters[a].type && (!0 === this.parameters[a].value ? this.parameters[a].value = 1 : !1 === this.parameters[a].value && (this.parameters[a].value = 0)));
-            this.parameters.language.value || (n = (navigator.language || navigator.userLanguage || "en").substr(0, 2), navigator.languages && navigator.languages[0] && (n = navigator.languages[0].substr(0, 2)), indexOf.call(this.parameters.language.options, n) < 0 && (n = "en"), this.first_launch = !0, this.set("language", n)), this.auto && (i = document.createElement("canvas"), i.width = i.height = 2, s = i.getContext("2d"), l = window.devicePixelRatio || 1, e = s.webkitBackingStorePixelRatio || s.mozBackingStorePixelRatio || s.msBackingStorePixelRatio || s.oBackingStorePixelRatio || s.backingStorePixelRatio || 1, 1 !== l / e && this.set("antialias", !1)), this.first_launch && this.set("joystick_thrust", !0)
-        }
-        return t.prototype.init = function() {
-            if (this.filter = "default", this.lIl0I.is_app && (this.filter = "app", this.parameters.gamepad_control.stored || (this.parameters.gamepad_control.value = !0)), this.lIl0I.is_mobile_app && (this.filter = "mobile", this.set("antialias", !1), this.set("fullres", !0), !this.parameters.gamepad_control.stored)) return this.parameters.gamepad_control.value = !1
-        }, t.prototype.isHidden = function(t) {
-            var e;
-            return null != (e = this.parameters[t]) && (null != e.filter && e.filter.indexOf(this.filter) < 0)
-        }, t.prototype.remove = function(t) {
-            return delete this.parameters[t]
-        }, t.prototype.check = function(t) {
-            var e;
-            return null != (e = this.forced[t] || this.parameters[t]) && e.value
-        }, t.prototype.getVolume = function(t) {
-            var e;
-            return e = this.parameters[t], null == e ? 0 : "boolean" == typeof e.value ? e.value ? 1 : 0 : e.value
-        }, t.prototype.set = function(t, e) {
-            if (this.parameters[t].value !== e) return this.parameters[t].value = e, this.save(t), this.lIl0I.propertyChanged(t, e)
-        }, t.prototype.get = function(t) {
-            var e;
-            return null != (e = this.parameters[t]) && e.value
-        }, t.prototype.save = function(t) {
-            var e;
-            if (null == t && (t = null), null != t) return localStorage.setItem(t, JSON.stringify(this.parameters[t].value));
-            for (e in this.parameters) localStorage.setItem(e, JSON.stringify(this.parameters[e].value));
-            return localStorage.setItem("auto", JSON.stringify(this.auto))
-        }, t
+            },
+			this.auto = JSON.parse(localStorage.getItem("auto") || "true"); // Обратите внимание на "true" вместо !0
+            this.forced = {};
+            for (var a in this.parameters) {
+                        if (localStorage.getItem(a)) {
+                            this.parameters[a].stored = true;
+                            this.parameters[a].value = JSON.parse(localStorage.getItem(a));
+
+                            if (a === "emoji") {
+                                emojiCount = this.parameters[a].value;
+                            }
+
+                            if (a === "maincrystalcolor") {
+                                MainCrystalColor = parseInt(this.parameters[a].value.replace(/^#/, ''), 16);
+                            }
+
+                            if (a === "secondcrystalcolor") {
+                                SecondCrystalColor = parseInt(this.parameters[a].value.replace(/^#/, ''), 16);
+                            }
+
+
+                            if ("range" === this.parameters[a].type) {
+                                this.parameters[a].value = this.parameters[a].value === true ? 1 : (this.parameters[a].value === false ? 0 : this.parameters[a].value);
+                            }
+                        }
+                    }
+
+                    if (!this.parameters.language.value) {
+                        var n = (navigator.language || navigator.userLanguage || "en").substr(0, 2);
+                        if (navigator.languages && navigator.languages[0]) {
+                            n = navigator.languages[0].substr(0, 2);
+                        }
+
+                        if (this.parameters.language.options.indexOf(n) < 0) {
+                            n = "en";
+                        }
+
+                        this.first_launch = true;
+                        this.set("language", n);
+                    }
+
+                    if (this.auto) {
+                        var i = document.createElement("canvas");
+                        i.width = i.height = 2;
+                        var s = i.getContext("2d");
+                        var l = window.devicePixelRatio || 1;
+                        var e = s.webkitBackingStorePixelRatio || s.mozBackingStorePixelRatio || s.msBackingStorePixelRatio || s.oBackingStorePixelRatio || s.backingStorePixelRatio || 1;
+
+                        if (1 !== l / e) {
+                            this.set("antialias", false);
+                        }
+                    }
+
+                    if (this.first_launch) {
+                        this.set("joystick_thrust", true);
+                    }
+                }
+                return t.prototype.init = function() {
+                    if (this.filter = "default", this.IIO01.is_app && (this.filter = "app", this.parameters.gamepad_control.stored || (this.parameters.gamepad_control.value = !0)), this.IIO01.is_mobile_app && (this.filter = "mobile", this.set("antialias", !1), this.set("fullres", !0), !this.parameters.gamepad_control.stored)) return this.parameters.gamepad_control.value = !1
+                }, t.prototype.isHidden = function(t) {
+                    var e;
+                    return null != (e = this.parameters[t]) && (null != e.filter && e.filter.indexOf(this.filter) < 0)
+                }, t.prototype.remove = function(t) {
+                    return delete this.parameters[t]
+                }, t.prototype.check = function(t) {
+                    var e;
+                    return null != (e = this.forced[t] || this.parameters[t]) && e.value
+                }, t.prototype.getVolume = function(t) {
+                    var e;
+                    return e = this.parameters[t], null == e ? 0 : "boolean" == typeof e.value ? e.value ? 1 : 0 : e.value
+                }, t.prototype.getValue = function(t) {
+                    var e = this.parameters[t];
+                    return null == e ? 0 : typeof e.value === "boolean" ? e.value ? 1 : 0 : e.value;
+                }, t.prototype.set = function(t, e) {
+                    if (this.parameters[t].value !== e) return this.parameters[t].value = e, this.save(t), this.IIO01.propertyChanged(t, e)
+                }, t.prototype.get = function(t) {
+                    var e;
+                    return null != (e = this.parameters[t]) && e.value
+                }, t.prototype.save = function(t) {
+                    var e;
+                    if (null == t && (t = null), null != t) return localStorage.setItem(t, JSON.stringify(this.parameters[t].value));
+                    for (e in this.parameters) localStorage.setItem(e, JSON.stringify(this.parameters[e].value));
+                    return localStorage.setItem("auto", JSON.stringify(this.auto))
+                }, t
     }(), this.I0OOl = function() {
         function t(t, e) {
             this.size = null != t ? t : 128, this.custom = null != e ? e : {}, this.icon = this.custom.badge || "pirate", this.laser = this.custom.laser || "simple", this.finish = this.custom.finish || "gold", this.hue = this.custom.hue || 0, this.lOIOI()
