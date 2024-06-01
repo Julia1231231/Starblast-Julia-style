@@ -4758,7 +4758,7 @@
                             return t.toggleChat()
                         }
                     }(this)), this.add(this.open_button, [0, .8, .2, .2]), this.lIl0I.vocabulary = {}, null != this.lIl0I.mode) {
-                    for (h = this.lIl0I.mode.vocabulary, n = 0, o = Math.min(emojiCount, h.length); n < o; n++) l = h[n], this.buttons.push(new ChatButton(this.lIl0I, t(l.text), l.icon, l.key, function(t) {
+                    for (h = this.lIl0I.mode.vocabulary, n = 0, o = h.length; n < o; n++) l = h[n], this.buttons.push(new ChatButton(this.lIl0I, t(l.text), l.icon, l.key, function(t) {
                         return function(e) {
                             return t.typed(e)
                         }
@@ -4810,7 +4810,7 @@
             }, i.prototype.l01II = function() {
                 var t, e, i, s, l;
                 if (!this.shown) {
-                    for (this.shown = !0, this.phrase = "", this.open_button.hide(), l = this.buttons, e = i = 0, s = l.length; i < s; e = ++i) t = l[e], t.l01II();
+                    for (this.shown = !0, this.phrase = "", this.open_button.hide(), l = this.buttons, e = i = 0, s = l.length + 1; i < s; e = ++i) t = l[e], t.l01II();
                     if (null != this.lIl0I.display.screen.OI01O.mode_info) return this.lIl0I.display.screen.OI01O.mode_info.close()
                 }
             }, i.prototype.hide = function() {
