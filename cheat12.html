@@ -3863,7 +3863,7 @@
         }(OO1l1), this.IIIO1 = function() {
             function t(t) {
                 this.lIl0I = t, this.canvas = document.createElement("canvas"), this.canvas.width = 512, this.canvas.height = 512,
-                    (this.lIl0I.mode.radar_zoom > 2 || this.lIl0I.mode.high_def_radar) && (this.canvas.width = 1024, this.canvas.height = 1024), this.canvas2 = document.createElement("canvas"), this.canvas2.width = 512, this.canvas2.height = 512, this.lll10 = new THREE.Group, this.texture = new THREE.Texture(this.canvas), this.texture.minFilter = THREE.LinearFilter, this.texture.wrapS = this.texture.wrapT = THREE.RepeatWrapping, this.texture.repeat.set(1 / (this.lIl0I.mode.radar_zoom / 4), 1 / (this.lIl0I.mode.radar_zoom / 4)), this.texture2 = new THREE.Texture(this.canvas2), this.texture2.minFilter = THREE.LinearFilter, this.O001I = new THREE.PlaneGeometry(1, 1), this.material = new THREE.MeshBasicMaterial({
+                    (this.lIl0I.mode.radar_zoom > 2 || this.lIl0I.mode.high_def_radar) && (this.canvas.width = 1024, this.canvas.height = 1024), this.canvas2 = document.createElement("canvas"), this.canvas2.width = 512, this.canvas2.height = 512, this.lll10 = new THREE.Group, this.texture = new THREE.Texture(this.canvas), this.texture.minFilter = THREE.LinearFilter, this.texture.wrapS = this.texture.wrapT = THREE.RepeatWrapping, this.texture.repeat.set(1 / (this.lIl0I.mode.radar_zoom / 2), 1 / (this.lIl0I.mode.radar_zoom / 2)), this.texture2 = new THREE.Texture(this.canvas2), this.texture2.minFilter = THREE.LinearFilter, this.O001I = new THREE.PlaneGeometry(1, 1), this.material = new THREE.MeshBasicMaterial({
                         map: this.texture,
                         transparent: !0,
                         depthTest: !1,
@@ -3885,12 +3885,12 @@
                 var e, i, s, l, n, a, o, r, h, u;
                 for (i = this.canvas.getContext("2d"), i.save(), i.clearRect(0, 0, this.canvas.width, this.canvas.height), i.translate(this.canvas.width / 2, this.canvas.height / 2), i.scale(this.canvas.width / 2, this.canvas.height / 2), e = new OO1II(t, this.lIl0I.l011O, this.lIl0I.mode), u = {}, i.fillStyle = "hsla(" + this.hue + ",50%,50%,.4)", l = a = -this.lIl0I.l011O, r = this.lIl0I.l011O - 1; a <= r; l = a += 1)
                     for (n = o = -this.lIl0I.l011O, h = this.lIl0I.l011O - 1; o <= h; n = o += 1) e.get(l, n, u), u.on && (i.beginPath(), i.arc(u.x / this.lIl0I.l011O, -u.y / this.lIl0I.l011O, u.size / this.lIl0I.l011O, 0, 180 * THREE.Math.DEG2RAD * 2, !0), i.fill());
-                i.strokeStyle = "rgba(255, 0, 0, 0.5)";
+                i.strokeStyle = "rgba(255, 255, 255, 0.5)";
 				i.lineWidth = 0.01;
-				i.strokeRect(-1, -1, 2, 2); // левая граница
-				i.strokeRect(-1, -1, 2, 2); // верхняя граница
-				i.strokeRect(-1, 1, 2, 2); // правая граница
-				i.strokeRect(1, -1, 2, 2); // нижняя граница
+				i.strokeRect(-1, -1, 2, 2);
+				i.strokeRect(-1, -1, 2, 2);
+				i.strokeRect(-1, 1, 2, 2);
+				i.strokeRect(1, -1, 2, 2);
 				return s = i.createRadialGradient(0, 0, 0, 0, 0, .05), s.addColorStop(0, "rgba(255,255,255,1)"), s.addColorStop(.5, "hsla(" + this.hue + ",90%,80%,1)"), s.addColorStop(1, "hsla(" + this.hue + ",90%,80%,0)"), i.fillStyle = s, i.fillRect(-.05, -.05, .1, .1), this.lIl0I.mode.drawRadarInfo(i), i.restore(), this.texture.needsUpdate = !0
             }, t.prototype.Il000 = function(t, e) {
                 return this.data = t, this.hue = e, this.lIO1l(this.data.seed), this.update2(this.data, this.hue)
@@ -5514,6 +5514,12 @@
                         return this.shape2();
                     case 2:
                         return this.shape3();
+					case 4:
+						return this.shape5();
+					case 5: 
+						return this.shape6();
+					case 6: 
+						return this.shape7();
                     default:
                         return this.shape1()
                 }
@@ -18784,7 +18790,10 @@
                 0: "Single",
                 1: "Double",
                 2: "Lightning",
-                3: "Digital"
+                3: "Digital",
+				4: "5",
+				5: "6",
+				6: "7",
             }
         }, t
     }(), this.I10OI = function() {
