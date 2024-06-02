@@ -18407,6 +18407,13 @@
 			this.auto = JSON.parse(localStorage.getItem("auto") || "true"); // Обратите внимание на "true" вместо !0
             this.forced = {};
             for (var a in this.parameters) {
+						if (!localStorage.getItem("maincrystalcolor")) {
+							localStorage.setItem("maincrystalcolor", "\"#FF0000\"");
+						}
+
+						if (!localStorage.getItem("secondcrystalcolor")) {
+							localStorage.setItem("secondcrystalcolor", "\"#FF0000\"");
+						}
                         if (localStorage.getItem(a)) {
 							this.parameters[a].stored = true;
 							this.parameters[a].value = JSON.parse(localStorage.getItem(a));
