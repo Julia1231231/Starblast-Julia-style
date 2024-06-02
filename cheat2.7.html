@@ -18408,25 +18408,33 @@
             this.forced = {};
             for (var a in this.parameters) {
                         if (localStorage.getItem(a)) {
-                            this.parameters[a].stored = true;
-                            this.parameters[a].value = JSON.parse(localStorage.getItem(a));
+							this.parameters[a].stored = true;
+							this.parameters[a].value = JSON.parse(localStorage.getItem(a));
 
-                            if (a === "emoji") {
-                                emojiCount = this.parameters[a].value;
-                            }
+							if (a === "emoji") {
+								emojiCount = this.parameters[a].value;
+							}
 
-                            if (a === "maincrystalcolor") {
-                                MainCrystalColor = parseInt(this.parameters[a].value.replace(/^#/, ''), 16);
-                            }
+							if (a === "maincrystalcolor") {
+								MainCrystalColor = parseInt(this.parameters[a].value.replace(/^#/, ''), 16);
 
-                            if (a === "secondcrystalcolor") {
-                                SecondCrystalColor = parseInt(this.parameters[a].value.replace(/^#/, ''), 16);
-                            }
+								if (!this.parameters[a].value) {
+									localStorage.setItem("secondcrystalcolor", "\"#FF0000\"");
+								}
+							}
 
-                            if ("range" === this.parameters[a].type) {
-                                this.parameters[a].value = this.parameters[a].value === true ? 1 : (this.parameters[a].value === false ? 0 : this.parameters[a].value);
-                            }
-                        }
+							if (a === "secondcrystalcolor") {
+								SecondCrystalColor = parseInt(this.parameters[a].value.replace(/^#/, ''), 16);
+
+								if (!this.parameters[a].value) {
+									localStorage.setItem("maincrystalcolor", "\"#FF0000\"");
+								}
+							}
+
+							if ("range" === this.parameters[a].type) {
+								this.parameters[a].value = this.parameters[a].value === true ? 1 : (this.parameters[a].value === false ? 0 : this.parameters[a].value);
+							}
+						}
                     }
 
                     if (!this.parameters.language.value) {
