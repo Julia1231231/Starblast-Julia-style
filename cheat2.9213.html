@@ -3862,8 +3862,8 @@
             }, e
         }(OO1l1), this.IIIO1 = function() {
             function t(t) {
-                this.lIl0I = t, this.canvas = document.createElement("canvas"), this.canvas.width = 1024, this.canvas.height = 1024,
-                    (this.lIl0I.mode.radar_zoom > 2 || this.lIl0I.mode.high_def_radar) && (this.canvas.width = 1024, this.canvas.height = 1024), this.canvas2 = document.createElement("canvas"), this.canvas2.width = 512, this.canvas2.height = 512, this.lll10 = new THREE.Group, this.texture = new THREE.Texture(this.canvas), this.texture.minFilter = THREE.LinearFilter, this.texture.wrapS = this.texture.wrapT = THREE.RepeatWrapping, this.texture.repeat.set(1 / this.lIl0I.mode.radar_zoom, 1 / this.lIl0I.mode.radar_zoom ), this.texture2 = new THREE.Texture(this.canvas2), this.texture2.minFilter = THREE.LinearFilter, this.O001I = new THREE.PlaneGeometry(1, 1), this.material = new THREE.MeshBasicMaterial({
+                this.lIl0I = t, this.canvas = document.createElement("canvas"), this.canvas.width = 512, this.canvas.height = 512,
+                    (this.lIl0I.mode.radar_zoom > 2 || this.lIl0I.mode.high_def_radar) && (this.canvas.width = 1024, this.canvas.height = 1024), this.canvas2 = document.createElement("canvas"), this.canvas2.width = 512, this.canvas2.height = 512, this.lll10 = new THREE.Group, this.texture = new THREE.Texture(this.canvas), this.texture.minFilter = THREE.LinearFilter, this.texture.wrapS = this.texture.wrapT = THREE.RepeatWrapping, this.texture.repeat.set(2 / this.lIl0I.mode.radar_zoom, 2 / this.lIl0I.mode.radar_zoom ), this.texture2 = new THREE.Texture(this.canvas2), this.texture2.repeat.set(2 / this.lIl0I.mode.radar_zoom, 2 / this.lIl0I.mode.radar_zoom), this.texture2.minFilter = THREE.LinearFilter, this.O001I = new THREE.PlaneGeometry(1, 1), this.material = new THREE.MeshBasicMaterial({
                         map: this.texture,
                         transparent: !0,
                         depthTest: !1,
