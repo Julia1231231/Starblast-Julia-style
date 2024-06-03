@@ -4203,7 +4203,7 @@
                 this.lIl0I = t, this.welcome = null != e && e, this.antialiasing = this.lIl0I.settings.check("antialias"), this.IIl11 = new THREE.WebGLRenderer({
                     antialias: this.antialiasing,
                     transparent: !1
-                }), this.IIl11.setSize(1280, 720), this.IIl11.autoClear = !1, this.hideCursor(), this.lIl0I.is_app && this.welcome ? this.screen = new AppScreen(this.lIl0I, this.welcome) : this.screen = new lO0IO(this.lIl0I, this.welcome), this.screen.startControl(this.IIl11.domElement), this.OIOlO = this.lIl0I.settings.check("fullres") ? 1 : Math.sqrt(2), this.pixelated = !1, this.OOII0 = 1, this.fps_time = Date.now(), this.fps_count = 10, this.raming = 0, this.frame_count = 10, this.fadein_start = 0, window.addEventListener("resize", function(t) {
+                }), this.IIl11.setSize(1280, 720), this.IIl11.autoClear = !1, this.hideCursor(), this.lIl0I.is_app && this.welcome ? this.screen = new AppScreen(this.lIl0I, this.welcome) : this.screen = new lO0IO(this.lIl0I, this.welcome), this.screen.startControl(this.IIl11.domElement), this.OIOlO = this.lIl0I.settings.check("fullres") ? 1 : Math.sqrt(2), this.pixelated = !1, this.OOII0 = 1, this.fps_time = Date.now(), this.fps_count = 0, this.raming = 0, this.frame_count = 0, this.fadein_start = 0, window.addEventListener("resize", function(t) {
                     return function() {
                         return t.resize()
                     }
@@ -4252,34 +4252,35 @@
                     for (this.jobs.sort(function(t, e) {
                             return e.priority - t.priority
                         }), this.jobs.length, t = this.jobs.splice(0, 1)[0], t.l1llO(); this.jobs.length > 5;) t = this.jobs.splice(0, 1)[0], t.l1llO()
-            }, t.prototype.I10I0 = function() {
-                var t, e, i, s, l, n;
-                if (!this.killed) {
-                    if (requestAnimationFrame(function(t) {
-                            return function() {
-                                return t.I10I0()
-                            }
-                        }(this)), this.lIl0I.paused) {
-                        if (this.paused) return;
-                        this.paused = !0
-                    } else this.paused = !1;
-                    if (this.frame_count++, this.fixed || this.fixSize(), 0 === this.fadein_start && (this.fadein_start = Date.now()), this.fadein_start > 0 && (s = Math.max(0, Math.min(1, (Date.now() - this.fadein_start) / 2e3)), document.getElementById("canvaswrapper").style.opacity = s, 1 === s && (this.fadein_start = -1, document.getElementById("canvaswrapper").style.removeProperty("opacity"))), this.doJobs(), this.lIl0I.settings.check("antialias") !== this.antialiasing && (this.antialiasing = this.lIl0I.settings.check("antialias"), document.getElementById("canvaswrapper").removeChild(this.IIl11.domElement), this.IIl11 = new THREE.WebGLRenderer({
-                            antialias: this.antialiasing,
-                            transparent: !1
-                        }), this.IIl11.autoClear = !1, document.getElementById("canvaswrapper").appendChild(this.IIl11.domElement), this.cursor_shown ? this.showCursor() : this.hideCursor(), this.screen.startControl(this.IIl11.domElement), null != this.lIl0I.OIO01.control && this.lIl0I.OIO01.startControl(), this.resize()), this.lIl0I.settings.check("fullres") || 1 !== this.OIOlO ? this.lIl0I.settings.check("fullres") && 1 !== this.OIOlO && (this.OIOlO = 1, this.resize()) : (this.OIOlO = Math.sqrt(2), this.resize()), this.make_screenshot && this.lIl0I.is_app && this.screenshot_time < Date.now())
-                        for (this.make_screenshot = !1, this.screen.render(this.IIl11, !1), n = {
-                                type: this.screenshot_type,
-                                value: this.screenshot_value
-                            }, t = this.IIl11.domElement, l = document.createElement("canvas"), l.width = t.width, l.height = t.height, e = l.getContext("2d"), e.drawImage(t, 0, 0), n.image = l, "user" === n.type && this.showCapture(l), this.screen.renderScreen(this.IIl11), l = document.createElement("canvas"), l.width = t.width, l.height = t.height, e = l.getContext("2d"), e.drawImage(t, 0, 0), n.full_image = l, this.screenshots.push(n), this.screenshots.sort(function(t, e) {
-                                return t.value - e.value
-                            }); this.screenshots.length > 9;) this.screenshots.splice(0, 1);
-                    else this.screen.render(this.IIl11, !0);
-                    return this.lIl0I.lI1O1(), null != this.screen.OI01O.II0O1 && this.screen.OI01O.II0O1.IIlI0(this.lIl0I.OIO01.Ol000.status.x, this.lIl0I.OIO01.Ol000.status.y), this.fps_count++, this.fps_count >= 20 && Date.now() >= this.fps_time + 1e3 && (i = Date.now() - this.fps_time, this.fps = Math.round(this.fps_count / (.001 * i)), this.fps_count = 0, this.fps_time = Date.now(), this.fps < 45 ? this.raming++ : this.raming = 0, this.raming >= 8 && (this.raming = 0, this.lIl0I.settings.auto && (this.lIl0I.settings.set("antialias", !1), this.lIl0I.settings.set("galaxies", !1)))), this.make_screenshot && !this.lIl0I.is_app ? (this.make_screenshot = !1, t = this.IIl11.domElement, l = document.createElement("canvas"), l.width = t.width, l.height = t.height, e = l.getContext("2d"), e.drawImage(t, 0, 0), l.toBlob(function(t) {
-                        var e;
-                        return e = new Date, saveAs(t, "starblast-" + e.getTime() + ".png")
-                    }, "image/png", 1)) : void 0
-                }
-            }, t
+            }, t.prototype.maxFPS = 100,
+			t.prototype.I10I0 = function() {
+				var t, e, i, s, l, n;
+				if (!this.killed) {
+					if (requestAnimationFrame(function(t) {
+							return function() {
+								return t.I10I0()
+							}
+						}(this)), this.lIl0I.paused) {
+						if (this.paused) return;
+						this.paused = !0
+					} else this.paused = !1;
+					if (this.frame_count++, this.fixed || this.fixSize(), 0 === this.fadein_start && (this.fadein_start = Date.now()), this.fadein_start > 0 && (s = Math.max(0, Math.min(1, (Date.now() - this.fadein_start) / 2e3)), document.getElementById("canvaswrapper").style.opacity = s, 1 === s && (this.fadein_start = -1, document.getElementById("canvaswrapper").style.removeProperty("opacity"))), this.doJobs(), this.lIl0I.settings.check("antialias") !== this.antialiasing && (this.antialiasing = this.lIl0I.settings.check("antialias"), document.getElementById("canvaswrapper").removeChild(this.IIl11.domElement), this.IIl11 = new THREE.WebGLRenderer({
+								antialias: this.antialiasing,
+								transparent: !1
+							}), this.IIl11.autoClear = !1, document.getElementById("canvaswrapper").appendChild(this.IIl11.domElement), this.cursor_shown ? this.showCursor() : this.hideCursor(), this.screen.startControl(this.IIl11.domElement), null != this.lIl0I.OIO01.control && this.lIl0I.OIO01.startControl(), this.resize()), this.lIl0I.settings.check("fullres") || 1 !== this.OIOlO ? this.lIl0I.settings.check("fullres") && 1 !== this.OIOlO && (this.OIOlO = 1, this.resize()) : (this.OIOlO = Math.sqrt(2), this.resize()), this.make_screenshot && this.lIl0I.is_app && this.screenshot_time < Date.now())
+						for (this.make_screenshot = !1, this.screen.render(this.IIl11, !1), n = {
+								type: this.screenshot_type,
+								value: this.screenshot_value
+							}, t = this.IIl11.domElement, l = document.createElement("canvas"), l.width = t.width, l.height = t.height, e = l.getContext("2d"), e.drawImage(t, 0, 0), n.image = l, "user" === n.type && this.showCapture(l), this.screen.renderScreen(this.IIl11), l = document.createElement("canvas"), l.width = t.width, l.height = t.height, e = l.getContext("2d"), e.drawImage(t, 0, 0), n.full_image = l, this.screenshots.push(n), this.screenshots.sort(function(t, e) {
+								return t.value - e.value
+							}); this.screenshots.length > 9;) this.screenshots.splice(0, 1);
+					else this.screen.render(this.IIl11, !0);
+					return this.lIl0I.lI1O1(), null != this.screen.OI01O.II0O1 && this.screen.OI01O.II0O1.IIlI0(this.lIl0I.OIO01.Ol000.status.x, this.lIl0I.OIO01.Ol000.status.y), this.fps_count++, this.fps_count >= 20 && Date.now() >= this.fps_time + 1e3 && (i = Date.now() - this.fps_time, this.fps = Math.round(this.fps_count / (.001 * i)), this.fps_count = 0, this.fps_time = Date.now(), this.fps < this.maxFPS ? this.raming++ : this.raming = 0, this.raming >= 8 && (this.raming = 0, this.lIl0I.settings.auto && (this.lIl0I.settings.set("antialias", !1), this.lIl0I.settings.set("galaxies", !1)))), this.make_screenshot && !this.lIl0I.is_app ? (this.make_screenshot = !1, t = this.IIl11.domElement, l = document.createElement("canvas"), l.width = t.width, l.height = t.height, e = l.getContext("2d"), e.drawImage(t, 0, 0), l.toBlob(function(t) {
+						var e;
+						return e = new Date, saveAs(t, "starblast-" + e.getTime() + ".png")
+					}, "image/png", 1)) : void 0
+				}
+			}, t
         }(), extend = function(t, e) {
             function i() {
                 this.constructor = t
