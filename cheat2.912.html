@@ -4203,7 +4203,7 @@
                 this.lIl0I = t, this.welcome = null != e && e, this.antialiasing = this.lIl0I.settings.check("antialias"), this.IIl11 = new THREE.WebGLRenderer({
                     antialias: this.antialiasing,
                     transparent: !1
-                }), this.IIl11.setSize(1280, 720), this.IIl11.autoClear = !1, this.hideCursor(), this.lIl0I.is_app && this.welcome ? this.screen = new AppScreen(this.lIl0I, this.welcome) : this.screen = new lO0IO(this.lIl0I, this.welcome), this.screen.startControl(this.IIl11.domElement), this.OIOlO = this.lIl0I.settings.check("fullres") ? 1 : Math.sqrt(2), this.pixelated = !1, this.OOII0 = 1, this.fps_time = Date.now(), this.fps_count = 10, this.raming = 0, this.frame_count = 0, this.fadein_start = 0, window.addEventListener("resize", function(t) {
+                }), this.IIl11.setSize(1280, 720), this.IIl11.autoClear = !1, this.hideCursor(), this.lIl0I.is_app && this.welcome ? this.screen = new AppScreen(this.lIl0I, this.welcome) : this.screen = new lO0IO(this.lIl0I, this.welcome), this.screen.startControl(this.IIl11.domElement), this.OIOlO = this.lIl0I.settings.check("fullres") ? 1 : Math.sqrt(2), this.pixelated = !1, this.OOII0 = 1, this.fps_time = Date.now(), this.fps_count = 10, this.raming = 0, this.frame_count = 10, this.fadein_start = 0, window.addEventListener("resize", function(t) {
                     return function() {
                         return t.resize()
                     }
