@@ -3878,7 +3878,14 @@
             }
             return t.prototype.IIlI0 = function(t, e) {
                 var i;
-                t /= this.lIl0I.size, e /= this.lIl0I.size, i = .5 - .5 / this.lIl0I.mode.radar_zoom, this.texture.offset.x = t + i, this.texture.offset.y = e + i
+				t /= this.lIl0I.size;
+				e /= this.lIl0I.size;
+				var offsetX = t + (0.5 - 0.5 / this.lIl0I.mode.radar_zoom);
+				var offsetY = e + (0.5 - 0.5 / this.lIl0I.mode.radar_zoom);
+				// Умножаем на коэффициент, учитывающий изменение размера холста
+				offsetX *= this.canvas.width / this.canvas.height;
+				this.texture.offset.x = offsetX;
+				this.texture.offset.y = offsetY;
             }, t.prototype.setHue = function(t) {
                 if (t !== this.hue && null != this.data) return this.Il000(this.data, t)
             }, t.prototype.lIO1l = function(t) {
