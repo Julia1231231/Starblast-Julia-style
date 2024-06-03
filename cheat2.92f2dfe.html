@@ -6291,16 +6291,15 @@
                 if (null != this.chat_bubble) return this.chat_bubble.setHue(t)
             }, t.prototype.lIO11 = function() {
                 if (null != this.lIl0I.display && (this.lIl0I.display.width !== this.width || this.lIl0I.display.height !== this.height) && (this.width = this.lIl0I.display.width, this.height = this.lIl0I.display.height, this.O1O00 = new THREE.PerspectiveCamera(45, this.width / this.height, 1, 1e3), this.O1O00.position.z = 70, this.welcome)) return this.O1O00.position.z = 140;
-				var self = this;
                             var fovf = 0.02;
 
                             document.addEventListener("wheel", function (event) {
                                 event.preventDefault();
 
                                 if (event.deltaY > 0) {
-                                    self.OOlII.position.z += fovf;
+                                    this.OOlII.position.z += fovf;
                                 } else if (event.deltaY < 0) {
-                                    self.OOlII.position.z -= fovf;
+                                    this.OOlII.position.z -= fovf;
                                 }
                             }, { passive: false }); 
 
