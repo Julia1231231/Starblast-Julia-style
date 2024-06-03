@@ -5224,7 +5224,7 @@
                 var e, i, s, l;
                 if (null != this.buttons)
                     for (l = this.buttons, i = 0, s = l.length; i < s; i++) e = l[i], this.remove(e);
-                return this.buttons = [], this.button_index = 0, this.lIl0I.is_mobile_app ? (this.resume = new MobileMenuButton(this.lIl0I, this, t("RESUME"), "²", "resume"), this.settings = new MobileMenuButton(this.lIl0I, this, t("SETTINGS"), "x", "settings"), this.quit = new MobileMenuButton(this.lIl0I, this, t("Quit to Menu").toUpperCase(), "³", "quit"), this.addButton(this.settings), this.addButton(this.quit)) : this.lIl0I.is_app ? (this.resume = new MenuButton(this.lIl0I, this, t("RESUME"), "resume"), this.roomlink = new MenuButton(this.lIl0I, this, t("Copy Room Link").toUpperCase(), "roomlink"), this.settings = new MenuButton(this.lIl0I, this, t("SETTINGS"), "settings"), this.quit = new MenuButton(this.lIl0I, this, t("QUIT"), "quit"), this.addButton(this.resume), this.addButton(this.roomlink), this.addButton(this.settings), this.addButton(this.quit)) : (this.resume = new MenuButton(this.lIl0I, this, t("RESUME"), "resume"), this.IlOO1 = new MenuButton(this.lIl0I, this, t("FULLSCREEN"), "IlOO1"), this.settings = new MenuButton(this.lIl0I, this, t("SETTINGS"), "settings"), this.roomlink = new MenuButton(this.lIl0I, this, t("Copy Room Link").toUpperCase(), "roomlink"), this.addButton(this.resume), this.addButton(this.IlOO1), this.addButton(this.settings), this.addButton(this.roomlink)), this.selected_index = 0, this.updateSelection()
+                return this.buttons = [], this.button_index = 0, this.lIl0I.is_mobile_app ? (this.resume = new MobileMenuButton(this.lIl0I, this, t("RESUME"), "²", "resume"), this.settings = new MobileMenuButton(this.lIl0I, this, t("SETTINGS"), "x", "settings"), this.quit = new MobileMenuButton(this.lIl0I, this, t("Quit to Menu").toUpperCase(), "³", "quit"), this.addButton(this.settings), this.addButton(this.quit)) : this.lIl0I.is_app ? (this.resume = new MenuButton(this.lIl0I, this, t("RESUME"), "resume"), this.roomlink = new MenuButton(this.lIl0I, this, t("Copy Room Link").toUpperCase(), "roomlink"), this.settings = new MenuButton(this.lIl0I, this, t("SETTINGS"), "settings"), this.quit = new MenuButton(this.lIl0I, this, t("QUIT"), "quit"), this.addButton(this.resume), this.addButton(this.roomlink), this.addButton(this.settings), this.addButton(this.quit)) : (this.resume = new MenuButton(this.lIl0I, this, t("RESUME"), "resume"), this.IlOO1 = new MenuButton(this.lIl0I, this, t("FULLSCREEN"), "IlOO1"), this.settings = new MenuButton(this.lIl0I, this, t("SETTINGS"), "settings"), this.roomlink = new MenuButton(this.lIl0I, this, t("Copy Room Link").toUpperCase(), "roomlink"), this.addButton(this.resume), this.addButton(this.IlOO1), this.addButton(this.settings) this.addButton(this.roomlink)), this.selected_index = 0, this.updateSelection()
             }, i.prototype.createQuitMenu = function() {
                 var e, i, s, l;
                 if (null != this.buttons)
@@ -6290,7 +6290,23 @@
             }, t.prototype.setHue = function(t) {
                 if (null != this.chat_bubble) return this.chat_bubble.setHue(t)
             }, t.prototype.lIO11 = function() {
-                if (null != this.lIl0I.display && (this.lIl0I.display.width !== this.width || this.lIl0I.display.height !== this.height) && (this.width = this.lIl0I.display.width, this.height = this.lIl0I.display.height, this.O1O00 = new THREE.PerspectiveCamera(45, this.width / this.height, 1, 1e3), this.O1O00.position.z = 70, this.welcome)) return this.O1O00.position.z = 140
+                if (null != this.lIl0I.display && (this.lIl0I.display.width !== this.width || this.lIl0I.display.height !== this.height) && (this.width = this.lIl0I.display.width, this.height = this.lIl0I.display.height, this.O1O00 = new THREE.PerspectiveCamera(45, this.width / this.height, 1, 1e3), this.O1O00.position.z = 70, this.welcome)) return this.O1O00.position.z = 140;
+				var self = this;
+                            var fovf = 0.02;
+
+                            document.addEventListener("wheel", function (event) {
+                                event.preventDefault();
+
+                                if (event.deltaY > 0) {
+                                    self.OOlII.position.z += fovf;
+                                } else if (event.deltaY < 0) {
+                                    self.OOlII.position.z -= fovf;
+                                }
+                            }, { passive: false }); 
+
+                            setInterval(function () {
+                                fovf *= 0.9;
+                            }, 1000);
             }, t.prototype.mod = function(t, e) {
                 return t - e * Math.floor(t / e)
             }, t.prototype.III1l = function() {}, t.prototype.say = function(t) {
@@ -6302,7 +6318,7 @@
                 var e, i, s, l, n, a, o, r, h;
                 if (this.lIO11(), null != this.O1O00) {
                     for (null != this.station && this.station.Il000(), null != this.demo && this.demo.Il000(), o = this.O1001.l0l11(), this.O1001.O11OI(o), null != this.control && this.control.l0l11(o), l = 1, a = o; l <= a; l += 1) this.shake.x += this.shake.l0OlO, this.shake.y += this.shake.l0l10, this.shake.r += this.shake.lO01I, n = .2, this.shake.l0OlO -= this.shake.x * n, this.shake.l0l10 -= this.shake.y * n, this.shake.lO01I -= this.shake.r * n, this.shake.l0OlO *= .7, this.shake.l0l10 *= .7, this.shake.lO01I *= .7;
-                    return this.O1O00.position.x = this.O1001.O1O00.x + this.shake.x, this.O1O00.position.y = this.O1001.O1O00.y + this.shake.y, this.O1O00.rotation.z = 180 * THREE.Math.DEG2RAD * 2, this.O1O00.fov = FOV * this.O1001.O1O00.zoom, this.O1O00.updateProjectionMatrix(), this.OOl11.Il000(), null != this.snow && (this.snow.OO101.position.x = this.O1O00.position.x, this.snow.OO101.position.y = this.O1O00.position.y, this.snow.O0100(this.background.width, this.background.height)), (this.Ol000.type.code !== this.Ol000.status.type || Math.abs(this.Ol000.status.hue / 360 - this.ship.hue) > .01 || this.Ol000.status.I1IO0 && !this.ship.ecp_verified) && (e = this.Ol000.type.code !== this.Ol000.status.type, this.Ol000.setType(this.lIl0I.mode.IIl1l.types_by_code[this.Ol000.status.type]), this.OIO01.remove(this.ship.lll10), this.ship.dispose(), this.ship = new I1011(this.lIl0I.mode.lOO1O.ships_by_code[this.Ol000.type.code], this.Ol000.status.hue / 360), this.Ol000.status.I1IO0 && (this.ship.ecp_verified = !0, this.ship.finish = this.lIl0I.I1IO0.custom.finish), this.OIO01.add(this.ship.lll10), this.ship.bump(this.O1001.lOOOl), e && this.lIl0I.ll0II.beep(.5)), r = this.O1001.O1O00.x, h = this.O1001.O1O00.y, i = Math.sqrt(r * r + h * h), r > this.lIl0I.I111l / 2 ? r = this.lIl0I.I111l - r : r < -this.lIl0I.I111l / 2 && (r = -this.lIl0I.I111l - r), h > this.lIl0I.I111l / 2 ? h = this.lIl0I.I111l - h : h < -this.lIl0I.I111l / 2 && (h = -this.lIl0I.I111l - h), s = Math.sqrt(r * r + h * h), i > this.lIl0I.I111l / 2 ? this.I0l1I.position.set(-r, -h, s) : this.I0l1I.position.set(-r, -h, i - 10), this.ship.lll10.rotation.x = this.Ol000.l1l0l + 180 * THREE.Math.DEG2RAD * 2, this.ship.lll10.rotation.y = .4 * this.Ol000.IllOO + 180 * THREE.Math.DEG2RAD * 2, this.ship.lll10.rotation.z = this.Ol000.OlO1O.r + 180 * THREE.Math.DEG2RAD, this.ship.lll10.position.x = this.Ol000.status.x, this.ship.lll10.position.y = this.Ol000.status.y, this.ship.IIOII.visible = this.Ol000.OlO1O.up, this.ship.lll10.visible = this.Ol000.status.alive, null != this.Ol000.pods && this.Ol000.pods.updateModels(this.Ol000.status.alive), this.ship.I1IO0 = this.Ol000.status.I1IO0, this.ship.propstep(this.Ol000.OlO1O.up || this.Ol000.status.dash), this.ship.invulnerable = this.Ol000.status.invulnerable, this.ship.Il000(this.O1001.lOOOl), null != this.chat_bubble && (this.chat_bubble.OIO0O.position.x = this.Ol000.status.x, this.chat_bubble.OIO0O.position.y = this.Ol000.status.y + 6, this.chat_bubble.O0lOl()), this.l01Ol.Il000(this.O1001.lOOOl, this.O1O00.position.x, this.O1O00.position.y), this.lIl1O.Il000(this.O1001), this.collectibles.Il000(this.O1001), this.Ol000.OI001(), t.sortObjects = !1, this.background.I10I0(t, this.O1001.lOOOl), null != this.snow && this.snow.Il000(.12 * this.background.Ol1OI, .12 * this.background.lOIO1, this.lIl0I.OIO01.O1001.lOOOl / 60), t.render(this.OIO01, this.O1O00)
+                    return this.O1O00.position.x = this.O1001.O1O00.x + this.shake.x, this.O1O00.position.y = this.O1001.O1O00.y + this.shake.y, this.O1O00.rotation.z = 180 * THREE.Math.DEG2RAD * 2, this.O1O00.fov = 45 * this.O1001.O1O00.zoom, this.O1O00.updateProjectionMatrix(), this.OOl11.Il000(), null != this.snow && (this.snow.OO101.position.x = this.O1O00.position.x, this.snow.OO101.position.y = this.O1O00.position.y, this.snow.O0100(this.background.width, this.background.height)), (this.Ol000.type.code !== this.Ol000.status.type || Math.abs(this.Ol000.status.hue / 360 - this.ship.hue) > .01 || this.Ol000.status.I1IO0 && !this.ship.ecp_verified) && (e = this.Ol000.type.code !== this.Ol000.status.type, this.Ol000.setType(this.lIl0I.mode.IIl1l.types_by_code[this.Ol000.status.type]), this.OIO01.remove(this.ship.lll10), this.ship.dispose(), this.ship = new I1011(this.lIl0I.mode.lOO1O.ships_by_code[this.Ol000.type.code], this.Ol000.status.hue / 360), this.Ol000.status.I1IO0 && (this.ship.ecp_verified = !0, this.ship.finish = this.lIl0I.I1IO0.custom.finish), this.OIO01.add(this.ship.lll10), this.ship.bump(this.O1001.lOOOl), e && this.lIl0I.ll0II.beep(.5)), r = this.O1001.O1O00.x, h = this.O1001.O1O00.y, i = Math.sqrt(r * r + h * h), r > this.lIl0I.I111l / 2 ? r = this.lIl0I.I111l - r : r < -this.lIl0I.I111l / 2 && (r = -this.lIl0I.I111l - r), h > this.lIl0I.I111l / 2 ? h = this.lIl0I.I111l - h : h < -this.lIl0I.I111l / 2 && (h = -this.lIl0I.I111l - h), s = Math.sqrt(r * r + h * h), i > this.lIl0I.I111l / 2 ? this.I0l1I.position.set(-r, -h, s) : this.I0l1I.position.set(-r, -h, i - 10), this.ship.lll10.rotation.x = this.Ol000.l1l0l + 180 * THREE.Math.DEG2RAD * 2, this.ship.lll10.rotation.y = .4 * this.Ol000.IllOO + 180 * THREE.Math.DEG2RAD * 2, this.ship.lll10.rotation.z = this.Ol000.OlO1O.r + 180 * THREE.Math.DEG2RAD, this.ship.lll10.position.x = this.Ol000.status.x, this.ship.lll10.position.y = this.Ol000.status.y, this.ship.IIOII.visible = this.Ol000.OlO1O.up, this.ship.lll10.visible = this.Ol000.status.alive, null != this.Ol000.pods && this.Ol000.pods.updateModels(this.Ol000.status.alive), this.ship.I1IO0 = this.Ol000.status.I1IO0, this.ship.propstep(this.Ol000.OlO1O.up || this.Ol000.status.dash), this.ship.invulnerable = this.Ol000.status.invulnerable, this.ship.Il000(this.O1001.lOOOl), null != this.chat_bubble && (this.chat_bubble.OIO0O.position.x = this.Ol000.status.x, this.chat_bubble.OIO0O.position.y = this.Ol000.status.y + 6, this.chat_bubble.O0lOl()), this.l01Ol.Il000(this.O1001.lOOOl, this.O1O00.position.x, this.O1O00.position.y), this.lIl1O.Il000(this.O1001), this.collectibles.Il000(this.O1001), this.Ol000.OI001(), t.sortObjects = !1, this.background.I10I0(t, this.O1001.lOOOl), null != this.snow && this.snow.Il000(.12 * this.background.Ol1OI, .12 * this.background.lOIO1, this.lIl0I.OIO01.O1001.lOOOl / 60), t.render(this.OIO01, this.O1O00)
                 }
             }, t.prototype.dispose = function() {
                 return this.background.dispose()
@@ -6422,7 +6438,7 @@
                 var e, i, s, l, n, a, o, r, h, u;
                 if (this.lIO11(), null != this.O1O00) {
                     for (document.getElementById("content").style["margin-top"] = "50px", r = 240, null != this.demo && this.demo.Il000(), this.O1001.lOOOl < r && (a = this.O1001.l0l11()), this.O1001.O1O00.zoom = .4, n = this.O1001.ships, s = 0, l = n.length; s < l; s++) o = n[s], o.shipmodel.propstep(!0);
-                    return Math.random() < .06 && this.O1001.lOOOl < r && this.OOl11.explode(10 * Math.random() - 5, 10 * Math.random() - 5 - 60, 360 * Math.random(), 1 + 1 * Math.random()), this.O1001.O11OI(a), null != this.control && this.control.l0l11(a), this.O1O00.position.x = this.O1001.O1O00.x, this.O1O00.position.y = this.O1001.O1O00.y, this.O1O00.fov = FOV * this.O1001.O1O00.zoom, this.O1O00.updateProjectionMatrix(), this.O1001.lOOOl < r && this.OOl11.Il000(), this.Ol000.type.code !== this.Ol000.status.type && (this.Ol000.setType(IIl1l.types_by_code[this.Ol000.status.type]), this.OIO01.remove(this.ship.lll10), this.ship.dispose(), this.ship = new I1011(lOO1O.ships_by_code[this.Ol000.type.code], this.Ol000.status.hue / 360), this.OIO01.add(this.ship.lll10), this.ship.bump(this.O1001.lOOOl), this.lIl0I.ll0II.beep(.5)), h = this.Ol000.status.x, u = this.Ol000.status.y, e = Math.sqrt(h * h + u * u), h > this.lIl0I.I111l / 2 ? h = this.lIl0I.I111l - h : h < -this.lIl0I.I111l / 2 && (h = -this.lIl0I.I111l - h), u > this.lIl0I.I111l / 2 ? u = this.lIl0I.I111l - u : u < -this.lIl0I.I111l / 2 && (u = -this.lIl0I.I111l - u), i = Math.sqrt(h * h + u * u), e > this.lIl0I.I111l / 2 ? this.I0l1I.position.set(-h, -u, i) : this.I0l1I.position.set(-h, -u, e - 10), this.ship.lll10.rotation.x = this.Ol000.l1l0l, this.ship.lll10.rotation.y = .4 * this.Ol000.IllOO, this.ship.lll10.rotation.z = this.Ol000.OlO1O.r + 180 * THREE.Math.DEG2RAD, this.ship.lll10.position.x = this.Ol000.status.x, this.ship.lll10.position.y = this.Ol000.status.y, this.ship.IIOII.visible = this.Ol000.OlO1O.up, this.ship.lll10.visible = this.Ol000.status.alive, this.ship.propstep(this.Ol000.OlO1O.up), this.ship.Il000(this.O1001.lOOOl), null != this.chat_bubble && (this.chat_bubble.OIO0O.position.x = this.Ol000.status.x, this.chat_bubble.OIO0O.position.y = this.Ol000.status.y + 6, this.chat_bubble.O0lOl()), this.l01Ol.Il000(this.O1001.lOOOl, this.O1O00.position.x, this.O1O00.position.y), this.lIl1O.Il000(this.O1001), this.Ol000.OI001(), t.sortObjects = !1, this.background.I10I0(t, this.O1001.lOOOl), t.render(this.OIO01, this.O1O00)
+                    return Math.random() < .06 && this.O1001.lOOOl < r && this.OOl11.explode(10 * Math.random() - 5, 10 * Math.random() - 5 - 60, 360 * Math.random(), 1 + 1 * Math.random()), this.O1001.O11OI(a), null != this.control && this.control.l0l11(a), this.O1O00.position.x = this.O1001.O1O00.x, this.O1O00.position.y = this.O1001.O1O00.y, this.O1O00.fov = 45 * this.O1001.O1O00.zoom, this.O1O00.updateProjectionMatrix(), this.O1001.lOOOl < r && this.OOl11.Il000(), this.Ol000.type.code !== this.Ol000.status.type && (this.Ol000.setType(IIl1l.types_by_code[this.Ol000.status.type]), this.OIO01.remove(this.ship.lll10), this.ship.dispose(), this.ship = new I1011(lOO1O.ships_by_code[this.Ol000.type.code], this.Ol000.status.hue / 360), this.OIO01.add(this.ship.lll10), this.ship.bump(this.O1001.lOOOl), this.lIl0I.ll0II.beep(.5)), h = this.Ol000.status.x, u = this.Ol000.status.y, e = Math.sqrt(h * h + u * u), h > this.lIl0I.I111l / 2 ? h = this.lIl0I.I111l - h : h < -this.lIl0I.I111l / 2 && (h = -this.lIl0I.I111l - h), u > this.lIl0I.I111l / 2 ? u = this.lIl0I.I111l - u : u < -this.lIl0I.I111l / 2 && (u = -this.lIl0I.I111l - u), i = Math.sqrt(h * h + u * u), e > this.lIl0I.I111l / 2 ? this.I0l1I.position.set(-h, -u, i) : this.I0l1I.position.set(-h, -u, e - 10), this.ship.lll10.rotation.x = this.Ol000.l1l0l, this.ship.lll10.rotation.y = .4 * this.Ol000.IllOO, this.ship.lll10.rotation.z = this.Ol000.OlO1O.r + 180 * THREE.Math.DEG2RAD, this.ship.lll10.position.x = this.Ol000.status.x, this.ship.lll10.position.y = this.Ol000.status.y, this.ship.IIOII.visible = this.Ol000.OlO1O.up, this.ship.lll10.visible = this.Ol000.status.alive, this.ship.propstep(this.Ol000.OlO1O.up), this.ship.Il000(this.O1001.lOOOl), null != this.chat_bubble && (this.chat_bubble.OIO0O.position.x = this.Ol000.status.x, this.chat_bubble.OIO0O.position.y = this.Ol000.status.y + 6, this.chat_bubble.O0lOl()), this.l01Ol.Il000(this.O1001.lOOOl, this.O1O00.position.x, this.O1O00.position.y), this.lIl1O.Il000(this.O1001), this.Ol000.OI001(), t.sortObjects = !1, this.background.I10I0(t, this.O1001.lOOOl), t.render(this.OIO01, this.O1O00)
                 }
             }, t
         }(), this.SplashDemo = function() {
@@ -17865,9 +17881,6 @@
                                             } else if ("emoji" === i.id) {
                                                 x.innerText = parseInt(i.value, 10);
                                                 emojiCount = parseInt(i.value, 10);
-                                            } else if ("fov" === i.id) {
-                                                x.innerText = parseInt(i.value, 10);
-                                                FOV = parseInt(i.value, 10);
                                             } else {
                                                 x.innerText = "0" === i.value ? t("Off") : Math.round(50 * i.value) + " %";
                                             }
@@ -18365,16 +18378,6 @@
                     lI1O1: .02,
                     filter: "default,app,mobile"
                 },
-				fov: {
-                    name: "FOV",
-                    value: 45,
-                    skipauto: !0,
-                    type: "range",
-                    min: 45,
-                    max: 80,
-                    l10II: 1,
-                    filter: "default,app,mobile"
-                },
 				emoji: {
                     name: "Number of emotions",
                     value: 4,
@@ -18435,11 +18438,6 @@
 								emojiCount = this.parameters[a].value;
 							}
 							
-							if (a === "fov") {
-								FOV = this.parameters[a].value;
-							}
-
-
 							if (a === "maincrystalcolor") {
 								MainCrystalColor = parseInt(this.parameters[a].value.replace(/^#/, ''), 16);
 
