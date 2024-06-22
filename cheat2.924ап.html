@@ -2573,8 +2573,6 @@
             </div>
         </div>
         <div class="mobile-social">
-            <i class="sbg sbg-facebook"></i><br />
-            <i class="sbg sbg-twitter"></i>
         </div>
         <div class="mobile-tools">
             <i class="sbg sbg-info"></i><br />
@@ -2636,8 +2634,6 @@
             <div id="cgbottom" class="adsbyvli" data-ad-slot="vi_462315138"></div><br>
             <i class="sbg sbg-info"></i>
             <i class="sbg sbg-gears"></i>
-            <i class="sbg sbg-facebook"><span class="sbg sbg-diamond"></span></i>
-            <i class="sbg sbg-twitter"><span class="sbg sbg-diamond"></span></i>
         </div>
         <div class="followtools">
             <a id="moddingspace" href="#" class="big">
@@ -3863,7 +3859,7 @@
         }(OO1l1), this.IIIO1 = function() {
             function t(t) {
                 this.lIl0I = t, this.canvas = document.createElement("canvas"), this.canvas.width = 512, this.canvas.height = 512,
-                    (this.lIl0I.mode.radar_zoom > 2 || this.lIl0I.mode.high_def_radar) && (this.canvas.width = 1024, this.canvas.height = 1024), this.canvas2 = document.createElement("canvas"), this.canvas2.width = 512, this.canvas2.height = 512, this.lll10 = new THREE.Group, this.texture = new THREE.Texture(this.canvas), this.texture.minFilter = THREE.LinearFilter, this.texture.wrapS = this.texture.wrapT = THREE.RepeatWrapping, this.texture.repeat.set(2 / this.lIl0I.mode.radar_zoom, 2 / this.lIl0I.mode.radar_zoom ), this.texture2 = new THREE.Texture(this.canvas2),  this.texture2.minFilter = THREE.LinearFilter, this.O001I = new THREE.PlaneGeometry(1, 1), this.material = new THREE.MeshBasicMaterial({
+                    (this.lIl0I.mode.radar_zoom > 2 || this.lIl0I.mode.high_def_radar) && (this.canvas.width = 1024, this.canvas.height = 1024), this.canvas2 = document.createElement("canvas"), this.canvas2.width = 512, this.canvas2.height = 512, this.lll10 = new THREE.Group, this.texture = new THREE.Texture(this.canvas), this.texture.minFilter = THREE.LinearFilter, this.texture.wrapS = this.texture.wrapT = THREE.RepeatWrapping, this.texture.repeat.set(1 / this.lIl0I.mode.radar_zoom, 1 / this.lIl0I.mode.radar_zoom), this.texture2 = new THREE.Texture(this.canvas2), this.texture2.minFilter = THREE.LinearFilter, this.O001I = new THREE.PlaneGeometry(1, 1), this.material = new THREE.MeshBasicMaterial({
                         map: this.texture,
                         transparent: !0,
                         depthTest: !1,
@@ -3885,13 +3881,7 @@
                 var e, i, s, l, n, a, o, r, h, u;
                 for (i = this.canvas.getContext("2d"), i.save(), i.clearRect(0, 0, this.canvas.width, this.canvas.height), i.translate(this.canvas.width / 2, this.canvas.height / 2), i.scale(this.canvas.width / 2, this.canvas.height / 2), e = new OO1II(t, this.lIl0I.l011O, this.lIl0I.mode), u = {}, i.fillStyle = "hsla(" + this.hue + ",50%,50%,.4)", l = a = -this.lIl0I.l011O, r = this.lIl0I.l011O - 1; a <= r; l = a += 1)
                     for (n = o = -this.lIl0I.l011O, h = this.lIl0I.l011O - 1; o <= h; n = o += 1) e.get(l, n, u), u.on && (i.beginPath(), i.arc(u.x / this.lIl0I.l011O, -u.y / this.lIl0I.l011O, u.size / this.lIl0I.l011O, 0, 180 * THREE.Math.DEG2RAD * 2, !0), i.fill());
-                i.strokeStyle = "rgba(255, 255, 255, 0.5)";
-				i.lineWidth = 0.01;
-				i.strokeRect(-1, -1, 2, 2);
-				i.strokeRect(-1, -1, 2, 2);
-				i.strokeRect(-1, 1, 2, 2);
-				i.strokeRect(1, -1, 2, 2);
-				return s = i.createRadialGradient(0, 0, 0, 0, 0, .05), s.addColorStop(0, "rgba(255,255,255,1)"), s.addColorStop(.5, "hsla(" + this.hue + ",90%,80%,1)"), s.addColorStop(1, "hsla(" + this.hue + ",90%,80%,0)"), i.fillStyle = s, i.fillRect(-.05, -.05, .1, .1), this.lIl0I.mode.drawRadarInfo(i), i.restore(), this.texture.needsUpdate = !0
+                return s = i.createRadialGradient(0, 0, 0, 0, 0, .05), s.addColorStop(0, "rgba(255,255,255,1)"), s.addColorStop(.5, "hsla(" + this.hue + ",90%,80%,1)"), s.addColorStop(1, "hsla(" + this.hue + ",90%,80%,0)"), i.fillStyle = s, i.fillRect(-.05, -.05, .1, .1), this.lIl0I.mode.drawRadarInfo(i), i.restore(), this.texture.needsUpdate = !0
             }, t.prototype.Il000 = function(t, e) {
                 return this.data = t, this.hue = e, this.lIO1l(this.data.seed), this.update2(this.data, this.hue)
             }, t.prototype.update2 = function(t, e) {
@@ -6290,22 +6280,7 @@
             }, t.prototype.setHue = function(t) {
                 if (null != this.chat_bubble) return this.chat_bubble.setHue(t)
             }, t.prototype.lIO11 = function() {
-                if (null != this.lIl0I.display && (this.lIl0I.display.width !== this.width || this.lIl0I.display.height !== this.height) && (this.width = this.lIl0I.display.width, this.height = this.lIl0I.display.height, this.O1O00 = new THREE.PerspectiveCamera(45, this.width / this.height, 1, 1e3), this.O1O00.position.z = 70, this.welcome)) return this.O1O00.position.z = 140;
-                            var fovf = 0.02;
-
-                            document.addEventListener("wheel", function (event) {
-                                event.preventDefault();
-
-                                if (event.deltaY > 0) {
-                                    this.O1O00.position.z += fovf;
-                                } else if (event.deltaY < 0) {
-                                    this.O1O00.position.z -= fovf;
-                                }
-                            }, { passive: false }); 
-
-                            setInterval(function () {
-                                fovf *= 0.9;
-                            }, 1000);
+                if (null != this.lIl0I.display && (this.lIl0I.display.width !== this.width || this.lIl0I.display.height !== this.height) && (this.width = this.lIl0I.display.width, this.height = this.lIl0I.display.height, this.O1O00 = new THREE.PerspectiveCamera(45, this.width / this.height, 1, 1e3), this.O1O00.position.z = 70, this.welcome)) return this.O1O00.position.z = 140
             }, t.prototype.mod = function(t, e) {
                 return t - e * Math.floor(t / e)
             }, t.prototype.III1l = function() {}, t.prototype.say = function(t) {
@@ -17673,7 +17648,7 @@
             }
         }, e.prototype.O0110 = function() {
             var t, e, i, s, l, n, a, o, r;
-            return this.ismobile = window.innerWidth < 800, t = document.querySelector("#content"), n = document.querySelector(".social"), o = document.querySelector(".top-right"), a = document.querySelector(".top-left"), i = document.querySelector(".gameloader"), "block" === i.style.display && (i.style.marginTop = (window.innerHeight - i.offsetHeight) / 2 + "px"), r = window.innerHeight, window.innerWidth, o && (o.style.display = this.ismobile ? "none" : "block", a.style.display = this.ismobile ? "none" : "block"), s = this.ismobile ? r : r - n.offsetHeight + 160, e = t.offsetHeight, l = e < s ? 1 : s / e, t.style.marginTop = (s - e) / 2 + "px", t.style.transform = "scale(" + l + ")"
+            return this.ismobile = window.innerWidth < 800, t = document.querySelector("#content"), n = document.querySelector(".social"), o = document.querySelector(".top-right"), a = document.querySelector(".top-left"), i = document.querySelector(".gameloader"), "block" === i.style.display && (i.style.marginTop = (window.innerHeight - i.offsetHeight) / 2 + "px"), r = window.innerHeight, window.innerWidth, o && (o.style.display = this.ismobile ? "none" : "block", a.style.display = this.ismobile ? "none" : "block"), s = this.ismobile ? r : r - n.offsetHeight + 140, e = t.offsetHeight, l = e < s ? 1 : s / e, t.style.marginTop = ((s - e) / 2) - 29 + "px", t.style.transform = "scale(" + 0.8 + ")"
         }, e.prototype.IllIl = function(t, e) {
             return null == e && (e = !1), t && t.classList.add("hide"), setTimeout(function() {
                 return e ? void t.remove() : t.style.display = "none"
@@ -18436,7 +18411,7 @@
 							if (a === "emoji") {
 								emojiCount = this.parameters[a].value;
 							}
-							
+
 							if (a === "maincrystalcolor") {
 								MainCrystalColor = parseInt(this.parameters[a].value.replace(/^#/, ''), 16);
 
@@ -18802,6 +18777,7 @@
                 blank: "Blank",
                 srcchamp: "SRC Champ",
                 lover: "Love",
+				seasonal: "Seasonal"
             },
             finish: {
                 zinc: "Zinc",
@@ -31232,7 +31208,7 @@
                     fr: "Votre ECP vous permet également de personnaliser votre vaisseau et votre badge. Vous brillerez en changeant le métal de votre vaisseau et le style de vos lasers !",
                     es: "El ECP también te permite personalizar la nave e insignia: ¡brillarás con los materiales especiales para tu nave (titanio, aleación, carbono...), estilos de lásers e iconos de insignia!",
                     ja: "ECPで、あなたの船とゲーム内のバッジをカスタマイズできます：例:特別な船の材料（チタン、合金、カーボン…）、レーザーのスタイルと特別なバッジアイコン",
-                    de: "Dein Elite-Ausweis ermöglicht es dir auch, dein Schiff zu gestalten: Material, Laser-Stile und Abzeichen sind für die Elite frei veränderbar!",
+                    de: "Dein Elite-Ausweis ermöglicht es dir auch, dein Schiff zu gestalten: Material, Laser-Stile und Abzeichen sind für die Elite frei veränderbar!",
                     pt: "Seu ECP também permite que você personalize sua nave e emblema do jogo: você vai brilhar com o seu material de nave especial (titânio, liga, carbono ...), estilos de lasers e ícones de emblema!",
                     ru: "Ваш пропуск Капитана также позволяет настроить ваш корабль и игровой значок: вы будете сиять с вашим специальным материалом корабля (титан, сплав, углерод...), стилем лазеров и значками!",
                     hu: "Az EKJ-d lehetővé teszi, hogy személyre szabd a hajódat és a jelvényedet: a hajód ragyogni fog különleges anyagoktól (titánium, ötvözet, szén...), lézerstílusoktól és jelvényikonoktól.",
@@ -32716,7 +32692,7 @@
                     fr: "Rejoindre ma partie",
                     es: "Únete a mi partida personalizada",
                     ja: "カスタムゲームに参加",
-                    de: "Meinem eigenem Spiel beitreten",
+                    de: "Meinem eigenem Spiel beitreten",
                     pt: "Entre em meu Jogo Personalizado",
                     ru: "Зайти в свою игру",
                     hu: "Belépés a saját játékomba",
