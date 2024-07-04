@@ -462,7 +462,7 @@ input[type=range]::-moz-range-track {
 }
 
 .social {
-    z-index: 0;
+    z-index: 1;
 }
 
 #content {
@@ -520,4 +520,28 @@ nav.menu ul li:after {
 .flexs-between {
     display: flex;
     justify-content: space-between;
+}
+
+#background {
+	position: fixed; 
+	z-index: -1;
+	height: 100%; 
+	width: 100%; 
+}
+
+#background > img {
+	height: 100%; width: 100%;
+}
+
+#background > img[src=""] {
+	display: none;
+}
+
+#custommenu {
+	position: absolute;
+	display: none;
+	left: 0;
+	height: 100%;
+	width: 20%;
+	background: #fff;
 }
