@@ -538,6 +538,10 @@ nav.menu ul li:after {
 }
 
 #custommenu{
+	display: flex;
+    flex-wrap: wrap;
+    align-content: center;
+	justify-content: center;
 	display: none;
 	height: 100%;
 	width: 20%;
@@ -563,5 +567,5 @@ nav.menu ul li:after {
 }
 
 #custommenu.show {
-
+	display: flex;
 }
