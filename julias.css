@@ -537,11 +537,26 @@ nav.menu ul li:after {
 	display: none;
 }
 
-#custommenu {
-	position: absolute;
-	display: none;
-	left: 0;
+#custommenu{
 	height: 100%;
 	width: 20%;
-	background: #fff;
+	border-radius: 0 5px 5px 0;
+	position: absolute;
+	z-index: 5;
+	background: inherit;
+	overflow: hidden;
+}
+
+#custommenu:before {
+	content: "";
+	position: absolute;
+	background: inherit;
+	z-index: -1;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	box-shadow: inset 0 0 2000px rgba(255, 192, 203, .5);
+	filter: blur(10px);
+	margin: -20px;
 }
