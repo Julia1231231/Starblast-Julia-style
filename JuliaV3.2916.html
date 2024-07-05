@@ -17778,7 +17778,6 @@
                 }(this), i = 0, s = r.length; i < s; i++) o = r[i], e(o);
             return this.showModal("myaccount")
         }, e.prototype.buildSettings = function() {
-			updateBackground()
             var e, i, s, l, n, a, o, r, h, u, d, c, p, I, O, m, f, g, y, v, b, w, x;
             document.querySelector(".modal .modaltitle").innerHTML = t("SETTINGS"), e = "", h = document.querySelector(".modal .modalbody");
             for (s in this.lIl0I.settings.parameters)
@@ -17835,7 +17834,6 @@
                                             e.updateSettings(s, true);
                                         }), i.dispatchEvent(new Event("input")), "sounds" === i.id) {
                                         i.addEventListener("change", function(t) {
-											updateBackground()
                                             return e.lIl0I.ll0II.beep(4 + .2 * Math.random(), 1)
                                         });
                                     }
@@ -17843,7 +17841,6 @@
                             }(this), p = 0, o = f.length; p < o; p++) m = f[p], i(m);
                         for (w = document.querySelectorAll(".option select, .option input[type=color]"), y = [], O = 0, r = w.length; O < r; O++) b = w[O], y.push(b.addEventListener("change", function(t) {
                             return function(e) {
-								updateBackground();
                                 return t.updateSettings(e, !0)				 
                             }
                         }(this)));
@@ -18380,6 +18377,7 @@
 			this.auto = JSON.parse(localStorage.getItem("auto") || "true"); // Обратите внимание на "true" вместо !0
             this.forced = {};
             for (var a in this.parameters) {
+						updateBackground()
 						if (!localStorage.getItem("maincrystalcolor")) {
 							localStorage.setItem("maincrystalcolor", JSON.stringify("#FF0000"));
 						}
