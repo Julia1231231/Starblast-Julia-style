@@ -537,14 +537,14 @@ nav.menu ul li:after {
 	display: none;
 }
 
-#custommenu{
+#custommenu {
 	display: flex;
     flex-wrap: wrap;
     align-content: center;
 	justify-content: center;
-	display: none;
 	height: 100%;
 	width: 20%;
+	max-width: 0; /* Start with a width of 0 */
 	border-radius: 0 5px 5px 0;
 	position: absolute;
 	z-index: 5;
@@ -554,9 +554,13 @@ nav.menu ul li:after {
 	box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
 	backdrop-filter: blur( 12px );
 	-webkit-backdrop-filter: blur( 12px );
+	transition: max-width 0.5s ease; 
 }
 
+#custommenu > #training {
+	display: block !important; 
+}
 
 #custommenu.show {
-	display: flex;
+	max-width: 20%; 
 }
