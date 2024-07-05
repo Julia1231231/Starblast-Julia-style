@@ -538,27 +538,50 @@ nav.menu ul li:after {
 }
 
 #custommenu {
-	display: flex;
-    flex-wrap: wrap;
-    align-content: center;
-	justify-content: center;
-	height: 100%;
-	width: 20%;
-	max-width: 0;
-	border-radius: 0 5px 5px 0;
-	position: absolute;
-	z-index: 5;
-	background: inherit;
-	overflow: hidden;
-	background: rgba(255, 192, 203, 0.2);
+    display: flex;
+    justify-content: center;
+    height: 100%;
+    width: 20%;
+    max-width: 0;
+    border-radius: 0 5px 5px 0;
+    position: absolute;
+    z-index: 5;
+    background: inherit;
+    overflow: hidden;
+    background: rgba(255, 192, 203, 0.2);
     box-shadow: 0 8px 32px 0 rgba(255, 192, 203, 0.35);
-	backdrop-filter: blur( 12px );
-	-webkit-backdrop-filter: blur( 12px );
-	transition: max-width 0.5s ease; 
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    transition: max-width 0.5s ease;
+    flex-direction: column;
+    align-items: center;
 }
 
 #custommenu.show {
 	max-width: 20%; 
+}
+
+#custommenu > a {
+	transition: color .3s;
+	margin: 10px 0;
+	width: 100%;
+}
+
+#custommenu > a:hover {
+	color: hsl(310deg 95.72% 85.05%);
+}
+
+#custommenu > a > span {
+	font-size: .6em;
+	display: inline-block; 
+}
+
+#custommenu > a > i {
+	font-size: .9em;
+}
+
+#custommenu > a > i > img {
+	height: 40px;
 }
 
 #custommenu > #training {
@@ -566,7 +589,6 @@ nav.menu ul li:after {
 }
 
 #rankings > span {
-    display: inline-block;
     text-transform: lowercase;
 }
 
@@ -574,3 +596,19 @@ nav.menu ul li:after {
     text-transform: uppercase;
 }
 
+#custommenu > .bottom {
+    margin: 10px;
+    position: absolute;
+    bottom: 0;
+}
+
+#custommenu > .bottom > i {
+	transition: color .3s;
+	cursor: pointer;
+	margin: 0 10px;
+	color: hsl(310, 50%, 60%);
+}
+
+#custommenu > .bottom > i:hover {
+	color: hsl(310deg 95.72% 85.05%);
+}
