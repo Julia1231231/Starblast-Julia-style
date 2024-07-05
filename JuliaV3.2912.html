@@ -17792,7 +17792,8 @@
 						} 
                     else {
                         for (e += '<div class="option">' + t(p.name) + '<select id="' + s + '">', "language" === s && p.options.sort(), g = p.options, l = 0, n = g.length; l < n; l++) d = g[l], "language" === s ? (x = t(d, d) + " - " + t(d, "en"), v = "style='font-size:.8em'") : (x = t(d), v = ""), e += "<option " + v + ' value="' + d + '" ' + (p.value === d ? 'selected="selected"' : "") + ">" + x + "</option>";
-                        e += "</select></div>"
+                        e += "</select></div>";
+						document.getElementById("backgrounds").addEventListener("change", updateBackground);
                     }
             else e += '<div class="option">' + t(p.name) + '<div class="range">\n  <input id=\'' + s + "' type=\"range\" min='" + p.min + "' max='" + p.max + "' value='" + p.value + "' step='" + p.lI1O1 + "'>\n<span id='" + s + "_value'>" + p.value + "</span>\n  </div>\n</div>";
             for (h.innerHTML = e, c = document.querySelectorAll(".option input[type=checkbox]"), u = 0, a = c.length; u < a; u++) d = c[u], d.addEventListener("click", function(t) {
@@ -17849,7 +17850,6 @@
             var t;
             return t = document.querySelector(".modal"),
                 "block" === t.style.display ? "settings" === this.lastModal ? this.closeModal() : this.closeModal(this.showSettings) : (this.buildSettings(), this.showModal("settings"));
-			document.getElementById("backgrounds").addEventListener("change", updateBackground);
         }, e.prototype.O0l11 = function() {
             var e, i, s, l;
             return i = document.querySelector(".modal"), "block" === i.style.display ? "gamecreator" === this.lastModal ? this.closeModal() : this.closeModal(this.O0l11) : (s = document.querySelector(".modal .modalbody"), document.querySelector(".modal .modaltitle").innerHTML = t("Create custom game"), e = "", l = new XMLHttpRequest, l.open("GET", "https://starblast.io/simstatus.json", !0), l.onreadystatechange = function(i) {
