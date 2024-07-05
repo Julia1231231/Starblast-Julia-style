@@ -2446,16 +2446,16 @@
     </script>
 	<script>
 		function updateBackground() {
-            var backgroundId = document.getElementById("backgrounds").value;
+            var backgroundId = localStorage.getItem("backgrounds");
 
             switch (backgroundId) {
-                case "none":
+                case "\"none\"":
                     document.getElementById("backgroundimg").src = "";
                     break;
-                case "first":
+                case "\"first\"":
                     document.getElementById("backgroundimg").src = "https://kartinki.pics/pics/uploads/posts/2022-08/1659868716_1-kartinkin-net-p-krutie-anime-oboi-na-rabochii-stol-krasivo-1.jpg";
                     break;
-                case "background3":
+                case "\"background3\"":
                     document.getElementById("backgroundimg").src = "path/to/background3.jpg";
                     break;
                 default:
