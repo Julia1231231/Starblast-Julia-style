@@ -2784,7 +2784,7 @@
     </script>
 	<script>
 	(function(s, t, a, r, b, l, i, o) {
-    var saveAs, IO00I, extend, hasProp, OIlOl, lO0IO, BuyWeaponButton, HealingButton, RemoveWeaponButton, StoreCountDown, TransferButton, WeaponStoreBackground, WeaponStoreExitButton, WeaponStorePlaceholder, WeaponStoreShipView, WeaponStoreTitle, deepspaceworker, workerfunk, nebulasworker, Scene, ll01l, ll1I0, lI100, IIl1l, BATTLE_SHIP_TYPES, WEAPON_TYPES, ALIEN_TYPES, l00I0, Il0OI, ll1ll, OlOl1, OIO10, STATION_MODULES, ATTACK_POD_MODEL, DEFENCE_POD_MODEL, MINING_POD_MODEL, i, MISSILE_MODEL, ROCKET_MODEL, TORPEDO_MODEL, MINE2_MODEL, MINE_MODEL, j, k, l, m, expand, indexOf, bind, IFrameDetection, llOl1, base, lOO1O, BATTLE_SHIPS, arrayMult, ALIEN_MODELS, HALO_MODELS, GIFT_MODEL, PUMPKIN_MODEL, battle_finished, battle_started, I0l10, exportShipTree, lIl0I, gamesettings, Translations, t, texists, translations;
+    var saveAs, IO00I, extend, hasProp, OIlOl, lO0IO, Background, BuyWeaponButton, HealingButton, RemoveWeaponButton, StoreCountDown, TransferButton, WeaponStoreBackground, WeaponStoreExitButton, WeaponStorePlaceholder, WeaponStoreShipView, WeaponStoreTitle, deepspaceworker, workerfunk, nebulasworker, Scene, ll01l, ll1I0, lI100, IIl1l, BATTLE_SHIP_TYPES, WEAPON_TYPES, ALIEN_TYPES, l00I0, Il0OI, ll1ll, OlOl1, OIO10, STATION_MODULES, ATTACK_POD_MODEL, DEFENCE_POD_MODEL, MINING_POD_MODEL, i, MISSILE_MODEL, ROCKET_MODEL, TORPEDO_MODEL, MINE2_MODEL, MINE_MODEL, j, k, l, m, expand, indexOf, bind, IFrameDetection, llOl1, base, lOO1O, BATTLE_SHIPS, arrayMult, ALIEN_MODELS, HALO_MODELS, GIFT_MODEL, PUMPKIN_MODEL, battle_finished, battle_started, I0l10, exportShipTree, lIl0I, gamesettings, Translations, t, texists, translations;
     ! function(t) {
         "use strict";
         var e = t.HTMLCanvasElement && t.HTMLCanvasElement.prototype,
@@ -18329,6 +18329,13 @@
                     type: "color",
                     filter: "default,app,mobile"
                 },
+				background: {
+                    name: "Background",
+                    value: !1,
+                    type: "select",
+                    options: ["none", "first"],
+                    filter: "default,app,mobile"
+                },
                 language: {
                     name: "Language",
                     value: !1,
@@ -18357,6 +18364,10 @@
 						if (!localStorage.getItem("secondcrystalcolor")) {
 							localStorage.setItem("secondcrystalcolor", "\"#FF0000\"");
 						}
+						
+						if (!localStorage.getItem("background")) {
+							localStorage.setItem("background", "none");
+						}
                         if (localStorage.getItem(a)) {
 							this.parameters[a].stored = true;
 							this.parameters[a].value = JSON.parse(localStorage.getItem(a));
@@ -18378,6 +18389,14 @@
 
 								if (!this.parameters[a].value) {
 									localStorage.setItem("maincrystalcolor", "\"#FF0000\"");
+								}
+							}
+							
+							if (a === "background") {
+								Background = this.parameters[a].value;
+
+								if (!this.parameters[a].value) {
+									localStorage.setItem("background", "none");
 								}
 							}
 
