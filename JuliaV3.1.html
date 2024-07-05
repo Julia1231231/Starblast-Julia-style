@@ -2444,6 +2444,16 @@
         ga('create', 'UA-49553618-3', 'auto');
         ga('send', 'pageview');
     </script>
+	<script>
+		document.addEventListener('DOMContentLoaded', function() {
+			const menu = document.getElementById('custommenu');
+			const toggleButton = document.getElementById('toggleButton'); // Assuming you have a button with this ID
+
+			toggleButton.addEventListener('click', function() {
+				menu.classList.toggle('show');
+			});
+		});
+	</script>
     <div id="canvaswrapper"></div>
     <div id="overlay">
 		<div id="background">
@@ -2452,13 +2462,13 @@
 		<div id="custommenu">
 			<a id="moddingspace" href="#" class="big">
                 <i class="sbg sbg-modding"></i><span data-translate="Modding Space">Modding Space</span>
-            </a><br />
+            </a>
             <a id="donate" href="#" class="big gold">
                 <i class="fa ecplogo"></i><span data-translate="Elite Commander Pass">Elite Commander Pass</span>
-            </a><br />
+            </a>
             <a id="rankings" href="#" class="big cup">
                 <i class="fa fa-fw fa-trophy"></i><span data-translate="LEADERBOARD">LEADERBOARD</span>
-            </a><br />
+            </a>
             <a data-display-only="en,fr" id="training" href="#" class="big">
                 <i class="sbg sbg-fw sbg-fly-mid"></i><span data-translate="Training">Training</span>
             </a>
