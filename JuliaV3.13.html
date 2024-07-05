@@ -2447,9 +2447,8 @@
 	<script>
 		document.addEventListener('DOMContentLoaded', function() {
 			const menu = document.getElementById('custommenu');
-
 			document.addEventListener('keydown', function(event) {
-				if (event.key === 'M' || event.key === 'm') {
+				 if (event.keyCode === 77) {
 					menu.classList.toggle('show');
 				}
 			});
