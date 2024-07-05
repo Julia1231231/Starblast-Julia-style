@@ -18329,7 +18329,7 @@
                     type: "color",
                     filter: "default,app,mobile"
                 },
-				background: {
+				backgrounds: {
 					name: "Background",
 					value: "none",
 					type: "select",
@@ -18365,8 +18365,8 @@
 							localStorage.setItem("secondcrystalcolor", JSON.stringify("#FF8080"));
 						}
 
-						if (!localStorage.getItem("background")) {
-							localStorage.setItem("background", JSON.stringify("none"));
+						if (!localStorage.getItem("backgrounds")) {
+							localStorage.setItem("backgrounds", JSON.stringify("none"));
 						}
 
 						if (localStorage.getItem(a)) {
@@ -18393,11 +18393,11 @@
 								}
 							}
 
-							if (a === "background") {
+							if (a === "backgrounds") {
 								Background = this.parameters[a].value;
 
 								if (!this.parameters[a].value) {
-									localStorage.setItem("background", JSON.stringify("none"));
+									localStorage.setItem("backgrounds", JSON.stringify("none"));
 								}
 							}
 
