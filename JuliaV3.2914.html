@@ -17841,8 +17841,7 @@
                             }(this), p = 0, o = f.length; p < o; p++) m = f[p], i(m);
                         for (w = document.querySelectorAll(".option select, .option input[type=color]"), y = [], O = 0, r = w.length; O < r; O++) b = w[O], y.push(b.addEventListener("change", function(t) {
                             return function(e) {
-								updateBackground();
-                                return t.updateSettings(e, !0);					 
+                                return t.updateSettings(e, !0)				 
                             }
                         }(this)));
             return y
@@ -18070,6 +18069,7 @@
                 }
             }, h.send(null), this.showModal("pdmrankings"))
         }, e.prototype.updateSettings = function(t, e) {
+			updateBackground()
             var i;
             if (null == e && (e = !1), this.lIl0I.settings.set(t.target.id, e ? t.target.value : t.target.checked), this.lIl0I.settings.auto = !1, localStorage.setItem("auto", !1), "language" === t.target.id) return translations.langChanged(), this.buildSettings(), this.lIl0I.is_app ? this.lIl0I.is_mobile_app ? i = document.querySelector(".gamemodes") : (i = document.querySelector(".gamemodes"), i.innerHTML = "", this.modeMenuBuilt = !1) : this.changeGameMode(0)
         }, e.prototype.openingCountdown = function() {
