@@ -2465,8 +2465,6 @@
 
         document.addEventListener("DOMContentLoaded", function() {
             updateBackground();
-
-            document.getElementById("backgrounds").addEventListener("change", updateBackground);
 		
 			const menu = document.getElementById('custommenu');
 			document.addEventListener('keydown', function(event) {
@@ -17850,7 +17848,8 @@
         }, e.prototype.showSettings = function() {
             var t;
             return t = document.querySelector(".modal"),
-                "block" === t.style.display ? "settings" === this.lastModal ? this.closeModal() : this.closeModal(this.showSettings) : (this.buildSettings(), this.showModal("settings"))
+                "block" === t.style.display ? "settings" === this.lastModal ? this.closeModal() : this.closeModal(this.showSettings) : (this.buildSettings(), this.showModal("settings"));
+			document.getElementById("backgrounds").addEventListener("change", updateBackground);
         }, e.prototype.O0l11 = function() {
             var e, i, s, l;
             return i = document.querySelector(".modal"), "block" === i.style.display ? "gamecreator" === this.lastModal ? this.closeModal() : this.closeModal(this.O0l11) : (s = document.querySelector(".modal .modalbody"), document.querySelector(".modal .modaltitle").innerHTML = t("Create custom game"), e = "", l = new XMLHttpRequest, l.open("GET", "https://starblast.io/simstatus.json", !0), l.onreadystatechange = function(i) {
