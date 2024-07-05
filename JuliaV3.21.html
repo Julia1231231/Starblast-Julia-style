@@ -18330,12 +18330,12 @@
                     filter: "default,app,mobile"
                 },
 				background: {
-                    name: "Background",
-                    value: !1,
-                    type: "select",
-                    options: ["none", "first"],
-                    filter: "default,app,mobile"
-                },
+					name: "Background",
+					value: "none",
+					type: "select",
+					options: ["none", "first"],
+					filter: "default,app,mobile"
+				},
                 language: {
                     name: "Language",
                     value: !1,
@@ -18358,17 +18358,18 @@
             this.forced = {};
             for (var a in this.parameters) {
 						if (!localStorage.getItem("maincrystalcolor")) {
-							localStorage.setItem("maincrystalcolor", "\"#FF0000\"");
+							localStorage.setItem("maincrystalcolor", JSON.stringify("#FF0000"));
 						}
 
 						if (!localStorage.getItem("secondcrystalcolor")) {
-							localStorage.setItem("secondcrystalcolor", "\"#FF0000\"");
+							localStorage.setItem("secondcrystalcolor", JSON.stringify("#FF8080"));
 						}
-						
+
 						if (!localStorage.getItem("background")) {
-							localStorage.setItem("background", "none");
+							localStorage.setItem("background", JSON.stringify("none"));
 						}
-                        if (localStorage.getItem(a)) {
+
+						if (localStorage.getItem(a)) {
 							this.parameters[a].stored = true;
 							this.parameters[a].value = JSON.parse(localStorage.getItem(a));
 
@@ -18380,7 +18381,7 @@
 								MainCrystalColor = parseInt(this.parameters[a].value.replace(/^#/, ''), 16);
 
 								if (!this.parameters[a].value) {
-									localStorage.setItem("secondcrystalcolor", "\"#FF0000\"");
+									localStorage.setItem("secondcrystalcolor", JSON.stringify("#FF0000"));
 								}
 							}
 
@@ -18388,15 +18389,15 @@
 								SecondCrystalColor = parseInt(this.parameters[a].value.replace(/^#/, ''), 16);
 
 								if (!this.parameters[a].value) {
-									localStorage.setItem("maincrystalcolor", "\"#FF0000\"");
+									localStorage.setItem("maincrystalcolor", JSON.stringify("#FF0000"));
 								}
 							}
-							
+
 							if (a === "background") {
 								Background = this.parameters[a].value;
 
 								if (!this.parameters[a].value) {
-									localStorage.setItem("background", "none");
+									localStorage.setItem("background", JSON.stringify("none"));
 								}
 							}
 
