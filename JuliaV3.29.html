@@ -2446,29 +2446,27 @@
     </script>
 	<script>
 		function updateBackground() {
-            var backgroundId = localStorage.getItem("backgrounds");
+            var backgroundId = document.getElementById("backgrounds").value;
 
             switch (backgroundId) {
-                case "\"none\"":
+                case "none":
                     document.getElementById("backgroundimg").src = "";
                     break;
-                case "\"first\"":
+                case "first":
                     document.getElementById("backgroundimg").src = "https://kartinki.pics/pics/uploads/posts/2022-08/1659868716_1-kartinkin-net-p-krutie-anime-oboi-na-rabochii-stol-krasivo-1.jpg";
                     break;
-                case "\"background3\"":
+                case "background3":
                     document.getElementById("backgroundimg").src = "path/to/background3.jpg";
                     break;
                 default:
                     console.log("Background not set or not recognized.");
             }
         }
-        window.addEventListener("storage", function(event) {
-            if (event.key === "backgrounds") {
-                updateBackground();
-            }
-        });
-		document.addEventListener('DOMContentLoaded', function() {
-			updateBackground();
+
+        document.addEventListener("DOMContentLoaded", function() {
+            updateBackground();
+
+            document.getElementById("backgrounds").addEventListener("change", updateBackground);
 		
 			const menu = document.getElementById('custommenu');
 			document.addEventListener('keydown', function(event) {
