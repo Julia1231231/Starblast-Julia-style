@@ -2447,10 +2447,11 @@
 	<script>
 		document.addEventListener('DOMContentLoaded', function() {
 			const menu = document.getElementById('custommenu');
-			const toggleButton = document.getElementById('toggleButton'); // Assuming you have a button with this ID
 
-			toggleButton.addEventListener('click', function() {
-				menu.classList.toggle('show');
+			document.addEventListener('keydown', function(event) {
+				if (event.key === 'M' || event.key === 'm') {
+					menu.classList.toggle('show');
+				}
 			});
 		});
 	</script>
