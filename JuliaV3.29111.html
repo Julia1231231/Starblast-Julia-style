@@ -18474,12 +18474,13 @@
                     var e = this.parameters[t];
                     return null == e ? 0 : typeof e.value === "boolean" ? e.value ? 1 : 0 : e.value;
                 }, t.prototype.set = function(t, e) {
+					updateBackground();
                     if (this.parameters[t].value !== e) return this.parameters[t].value = e, this.save(t), this.lIl0I.propertyChanged(t, e)
                 }, t.prototype.get = function(t) {
+					updateBackground();
                     var e;
                     return null != (e = this.parameters[t]) && e.value
                 }, t.prototype.save = function(t) {
-					updateBackground();
                     var e;
                     if (null == t && (t = null), null != t) return localStorage.setItem(t, JSON.stringify(this.parameters[t].value));
                     for (e in this.parameters) localStorage.setItem(e, JSON.stringify(this.parameters[e].value));
