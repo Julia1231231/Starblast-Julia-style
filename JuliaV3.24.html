@@ -2452,6 +2452,22 @@
 					menu.classList.toggle('show');
 				}
 			});
+			
+			var backgroundId = localStorage.getItem("background");
+
+			switch (backgroundId) {
+				case "none":
+					document.getElementById("backgroundimg").src = "";
+					break;
+				case "first":
+					document.getElementById("backgroundimg").src = "https://kartinki.pics/pics/uploads/posts/2022-08/1659868716_1-kartinkin-net-p-krutie-anime-oboi-na-rabochii-stol-krasivo-1.jpg";
+					break;
+				case "background3":
+					document.getElementById("backgroundimg").src = "path/to/background3.jpg";
+					break;
+				default:
+					console.log("Background not set or not recognized.");
+			}
 		});
 	</script>
     <div id="canvaswrapper"></div>
