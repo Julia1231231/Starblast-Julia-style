@@ -17814,6 +17814,15 @@
                     return t.updateSettings(e)
                 }
             }(this));
+			for (f = document.querySelectorAll(".option select"), i = function(e) {
+				return function(selectElement) {
+					selectElement.addEventListener("change", function(event) {
+						var backgroundid = JSON.stringify(selectElement.value);
+						updateBackground();
+					});
+					selectElement.dispatchEvent(new Event("change"));
+				};
+			}(this));
             for (f = document.querySelectorAll(".option input[type=range]"), i = function(e) {
                                 return function(i) {
                                     if (i.addEventListener("input", function(s) {
