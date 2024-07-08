@@ -17820,6 +17820,7 @@
 				selectElement.addEventListener("change", function(event) {
 					var backgroundid = JSON.stringify(selectElement.value);
 					updateBackground(backgroundid);
+					console.log("bg changed");
 				});
 				selectElement.dispatchEvent(new Event("change"));
 			};
