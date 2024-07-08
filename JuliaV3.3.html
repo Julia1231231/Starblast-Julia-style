@@ -2445,7 +2445,7 @@
         ga('send', 'pageview');
     </script>
 	<script>
-		var backgroundId = localStorage.getItem("backgrounds");
+		var backgroundId;
 		function updateBackground() {
 
             switch (backgroundId) {
@@ -17819,6 +17819,7 @@
 			var handleSelectChange = function(selectElement) {
 				selectElement.addEventListener("change", function(event) {
 					var backgroundId = JSON.stringify(selectElement.value);
+					console.log(backgroundId + "bg");
 					updateBackground();
 				});
 				selectElement.dispatchEvent(new Event("change"));
