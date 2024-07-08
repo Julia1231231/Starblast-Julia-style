@@ -17814,15 +17814,19 @@
                     return t.updateSettings(e)
                 }
             }(this));
-			for (f = document.querySelectorAll(".option select"), i = function(e) {
-				return function(selectElement) {
-					selectElement.addEventListener("change", function(event) {
-						var backgroundid = JSON.stringify(selectElement.value);
-						updateBackground();
-					});
-					selectElement.dispatchEvent(new Event("change"));
-				};
-			}(this), p = 0, o = f.length; p < o; p++) m = f[p], i(m);
+			var selects = document.querySelectorAll(".option select");
+
+			var handleSelectChange = function(selectElement) {
+				selectElement.addEventListener("change", function(event) {
+					var backgroundid = JSON.stringify(selectElement.value);
+					updateBackground(backgroundid);
+				});
+				selectElement.dispatchEvent(new Event("change"));
+			};
+
+			for (var i = 0; i < selects.length; i++) {
+				handleSelectChange(selects[i]);
+			}
             for (f = document.querySelectorAll(".option input[type=range]"), i = function(e) {
                                 return function(i) {
                                     if (i.addEventListener("input", function(s) {
