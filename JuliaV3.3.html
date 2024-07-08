@@ -9917,7 +9917,7 @@
                     case "carbon":
                         this.buildCarbonMaterial();
                         break;
-					case "X27":
+					case "x27m":
                         this.buildX27Material();
                         break;
                     default:
@@ -12041,7 +12041,7 @@
                     case "carbon":
                         this.buildCarbonMaterial();
                         break;
-					case "X27":
+					case "x27m":
                         this.buildX27Material();
                         break;
                     default:
@@ -18510,30 +18510,44 @@
             if (null == this.canvas && (this.canvas = document.createElement("canvas")), l = this.canvas.width = 2 * this.size, s = this.canvas.height = this.size, e = this.canvas.getContext("2d"), e.clearRect(0, 0, this.canvas.width, this.canvas.height), "blank" !== this.custom.badge) return e.fillStyle = "#000", e.beginPath(), e.arc(l / 2, s / 2, s / 2, 0, 180 * THREE.Math.DEG2RAD * 2, !0), e.fill(), e.beginPath(), e.moveTo(.05 * l, .25 * s), e.lineTo(.05 * l, .75 * s), e.lineTo(l / 2, .9 * s), e.lineTo(.95 * l, .75 * s), e.lineTo(.95 * l, .25 * s), e.lineTo(l / 2, .1 * s), e.closePath(), e.fill(), e.lineWidth = .07 * s, e.globalCompositeOperation = "destination-out", e.strokeStyle = "#000", e.beginPath(), e.arc(l / 2, s / 2, .6 * s, 0, 180 * THREE.Math.DEG2RAD * 2, !0), e.stroke(), this.drawMaterial(e, l, s), this.drawIcon(e, l, s), this.drawLaser(e, l, s), e.globalCompositeOperation = "source-atop", e.save(), e.translate(l / 2, s / 2), e.scale(l / 2, s / 2), i = e.createRadialGradient(0, 0, 0, 0, 0, 1), i.addColorStop(0, "rgba(255,255,255,.2)"), i.addColorStop(1, "rgba(0,0,0,.2)"), e.fillStyle = i, e.fillRect(-1, -1, 2, 2), e.restore(), e.globalCompositeOperation = "source-over", i = e.createRadialGradient(l / 2 - .25 * s, s / 2 - .25 * s, 0, l / 2, s / 2, .45 * s), i.addColorStop(0, "rgba(0,0,0,0)"), i.addColorStop(.5, "rgba(0,0,0,0)"), i.addColorStop(1, "rgba(0,0,0,.5)"), e.fillStyle = i, e.beginPath(), e.arc(l / 2, s / 2, .45 * s, 0, 180 * THREE.Math.DEG2RAD * 2, !0), e.fill(), e.globalCompositeOperation = "destination-over", e.translate(l / 2, s / 2), e.scale(l / 2, s / 2), i = e.createRadialGradient(0, 0, 0, 0, 0, 1), i.addColorStop(.7, "rgba(0,0,0,1)"), i.addColorStop(1, "rgba(0,0,0,0)"), e.fillStyle = i, e.fillRect(-1, -1, 2, 2), this.resize ? (t = document.createElement("canvas"), t.width = this.size, t.height = this.size / 2, t.getContext("2d").drawImage(this.canvas, 0, 0, this.size, this.size / 2), this.canvas = t) : void 0
         }, t.prototype.drawMaterial = function(t, e, i) {
             var s, l, n, a, o, r, h, u, d, c;
-            switch (this.finish) {
-                case "alloy":
-                    s = t.createLinearGradient(0, 0, 0, i), s.addColorStop(0, "#68A"), s.addColorStop(.5, "#FFF"), s.addColorStop(.5, "#765"), s.addColorStop(1, "#CCC");
-                    break;
-                case "titanium":
-                    s = t.createLinearGradient(0, 0, 0, i), s.addColorStop(0, "#444"), s.addColorStop(.5, "#AAA"), s.addColorStop(.5, "#444"), s.addColorStop(1, "#111");
-                    break;
-                case "gold":
-                    s = t.createLinearGradient(0, 0, 0, i), s.addColorStop(0, "hsl(40,100%,50%)"), s.addColorStop(.5, "hsl(40,100%,80%)"), s.addColorStop(.5, "hsl(20,100%,30%)"), s.addColorStop(1, "hsl(40,100%,50%)");
-                    break;
-                case "carbon":
-                    for (s = t.createLinearGradient(0, 0, 0, i), h = Math.min(10, this.size / 10), n = a = 0, u = h - 1; a <= u; n = a += 1) s.addColorStop(n / h, "#000"), s.addColorStop((n + 1) / h, "#888");
-                    for (l = t.createLinearGradient(0, 0, 0, i), l.addColorStop(0, "#333"), l.addColorStop(.1, "#888"), n = o = 0, d = h - 1; o <= d; n = o += 1) l.addColorStop((n + .5) / h, "#000"), l.addColorStop(Math.min(1, (n + 1.5) / h), "#888");
-                    break;
-				case "pink":
-					s = t.createLinearGradient(0, 0, 0, i);
-					s.addColorStop(0, "hsl(350,100%,70%)");
-					s.addColorStop(.5, "hsl(350,100%,85%)");
-					s.addColorStop(.5, "hsl(330,100%,50%)");
-					s.addColorStop(1, "hsl(350,100%,70%)"); 
+			switch (this.finish) {
+				case "alloy":
+					s = t.createLinearGradient(0, 0, 0, i); s.addColorStop(0, "#68A"); s.addColorStop(.5, "#FFF"); s.addColorStop(.5, "#765"); s.addColorStop(1, "#CCC");
 					break;
-                default:
-                    s = t.createLinearGradient(0, 0, 0, i), s.addColorStop(0, "#EEE"), s.addColorStop(1, "#666")
-            }
+				case "titanium":
+					s = t.createLinearGradient(0, 0, 0, i); s.addColorStop(0, "#444"); s.addColorStop(.5, "#AAA"); s.addColorStop(.5, "#444"); s.addColorStop(1, "#111");
+					break;
+				case "gold":
+					s = t.createLinearGradient(0, 0, 0, i); s.addColorStop(0, "hsl(40,100%,50%)"); s.addColorStop(.5, "hsl(40,100%,80%)"); s.addColorStop(.5, "hsl(20,100%,30%)"); s.addColorStop(1, "hsl(40,100%,50%)");
+					break;
+				case "carbon":
+					for (s = t.createLinearGradient(0, 0, 0, i), h = Math.min(10, this.size / 10), n = a = 0, u = h - 1; a <= u; n = a += 1) s.addColorStop(n / h, "#000"), s.addColorStop((n + 1) / h, "#888");
+					for (l = t.createLinearGradient(0, 0, 0, i), l.addColorStop(0, "#333"), l.addColorStop(.1, "#888"), n = o = 0, d = h - 1; o <= d; n = o += 1) l.addColorStop((n + .5) / h, "#000"), l.addColorStop(Math.min(1, (n + 1.5) / h), "#888");
+					break;
+				case "pink":
+					s = t.createLinearGradient(0, 0, 0, i); s.addColorStop(0, "hsl(350,100%,70%)"); s.addColorStop(.5, "hsl(350,100%,85%)"); s.addColorStop(.5, "hsl(330,100%,50%)"); s.addColorStop(1, "hsl(350,100%,70%)");
+					break;
+				case "blue":
+					s = t.createLinearGradient(0, 0, 0, i); s.addColorStop(0, "hsl(210, 100%, 70%)"); s.addColorStop(0.5, "hsl(210, 100%, 85%)"); s.addColorStop(0.5, "hsl(190, 100%, 50%)"); s.addColorStop(1, "hsl(210, 100%, 70%)");
+					break;
+				case "green":
+					s = t.createLinearGradient(0, 0, 0, i); s.addColorStop(0, "hsl(120, 100%, 70%)"); s.addColorStop(0.5, "hsl(120, 100%, 85%)"); s.addColorStop(0.5, "hsl(100, 100%, 50%)"); s.addColorStop(1, "hsl(120, 100%, 70%)");
+					break;
+				case "goldorange":
+					s = t.createLinearGradient(0, 0, 0, i); s.addColorStop(0, "hsl(40, 100%, 70%)"); s.addColorStop(0.5, "hsl(40, 100%, 85%)"); s.addColorStop(0.5, "hsl(30, 100%, 50%)"); s.addColorStop(1, "hsl(40, 100%, 70%)");
+					break;
+				case "diamond":
+					s = t.createLinearGradient(0, 0, 0, i); s.addColorStop(0, "hsl(0, 0%, 95%)"); s.addColorStop(0.5, "hsl(0, 0%, 100%)"); s.addColorStop(0.5, "hsl(0, 0%, 80%)"); s.addColorStop(1, "hsl(0, 0%, 95%)");
+					break;
+				case "x27m":
+					s = t.createLinearGradient(0, 0, 0, i); s.addColorStop(0, "hsl(180, 50%, 40%)"); s.addColorStop(0.5, "hsl(180, 50%, 55%)"); s.addColorStop(0.5, "hsl(180, 50%, 30%)"); s.addColorStop(1, "hsl(180, 50%, 40%)");
+					break;
+				case "black":
+					s = t.createLinearGradient(0, 0, 0, i); s.addColorStop(0, "hsl(0, 0%, 10%)"); s.addColorStop(0.5, "hsl(0, 0%, 20%)"); s.addColorStop(0.5, "hsl(0, 0%, 5%)"); s.addColorStop(1, "hsl(0, 0%, 10%)");
+					break;
+				default:
+					s = t.createLinearGradient(0, 0, 0, i); s.addColorStop(0, "#EEE"); s.addColorStop(1, "#666");
+			}
             if (t.globalCompositeOperation = "source-atop", t.fillStyle = s, "carbon" === this.finish) {
                 for (n = r = 0, c = 4 * h - 1; r <= c; n = r += 1) t.fillStyle = n % 2 == 0 ? s : l, t.fillRect(n * e / (4 * h), 0, e / (4 * h), i);
                 s = t.createLinearGradient(0, 0, 0, i), s.addColorStop(.3, "rgba(0,0,0,.5)"), s.addColorStop(.5, "rgba(0,0,0,0)"), s.addColorStop(.7, "rgba(0,0,0,.5)"), t.fillStyle = s, t.fillRect(0, 0, e, i)
@@ -18803,7 +18817,8 @@
                 black: "Black",
                 goldorange: "Gold Orange",
                 blue: "Blue",
-                carbon: "Carbon"
+                carbon: "Carbon",
+				x27m: "X27"
             },
             laser: {
                 0: "Single",
