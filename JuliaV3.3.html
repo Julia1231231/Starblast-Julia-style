@@ -17820,6 +17820,34 @@
 				selectElement.addEventListener("change", function(event) {
 					var backgroundId = JSON.stringify(selectElement.value);
 					console.log(backgroundId + "bg");
+					function updateBackground() {
+						switch (backgroundId) {
+							case "\"none\"":
+								document.getElementById("backgroundimg").src = "";
+								break;
+							case "\"Witch\"":
+								document.getElementById("backgroundimg").src = "https://i.ibb.co/48pXTL4/OGFXJt-EOWh-I.jpg";
+								break;
+							case "\"Chanterelle\"":
+								document.getElementById("backgroundimg").src = "https://i.ibb.co/xFfpxdd/9-Ms-Dd-Y20wp-M.jpg";
+								break;
+							case "\"Chess\"":
+								document.getElementById("backgroundimg").src = "https://i.ibb.co/rk1Vdt3/SOl-z-Bq-Sba-M.jpg";
+								break;
+							case "\"Interworld\"":
+								document.getElementById("backgroundimg").src = "https://i.ibb.co/pKzZwv3/d5-PXFRDe-Ftk.jpg";
+								break;
+							case "\"Rize\"":
+								document.getElementById("backgroundimg").src = "https://i.ibb.co/QrvzWkk/9-Qylhmckz7s.jpg";
+								break;
+							case "\"Satoru Gojo\"":
+								document.getElementById("backgroundimg").src = "https://i.ibb.co/Gn42pVG/Ecevweez03-Y.jpg";
+								break;
+							default:
+								document.getElementById("backgroundimg").src = "";
+								console.log("Background not set or not recognized.");
+						}
+					}
 					updateBackground();
 				});
 				selectElement.dispatchEvent(new Event("change"));
