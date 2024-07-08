@@ -17819,7 +17819,6 @@
 			var handleSelectChange = function(selectElement) {
 				selectElement.addEventListener("change", function(event) {
 					var backgroundid = JSON.stringify(selectElement.value);
-					updateBackground();
 				});
 				selectElement.dispatchEvent(new Event("change"));
 			};
@@ -18097,6 +18096,7 @@
             }, h.send(null), this.showModal("pdmrankings"))
         }, e.prototype.updateSettings = function(t, e) {
             var i;
+			updateBackground();
             if (null == e && (e = !1), this.lIl0I.settings.set(t.target.id, e ? t.target.value : t.target.checked), this.lIl0I.settings.auto = !1, localStorage.setItem("auto", !1), "language" === t.target.id) return translations.langChanged(), this.buildSettings(), this.lIl0I.is_app ? this.lIl0I.is_mobile_app ? i = document.querySelector(".gamemodes") : (i = document.querySelector(".gamemodes"), i.innerHTML = "", this.modeMenuBuilt = !1) : this.changeGameMode(0)
         }, e.prototype.openingCountdown = function() {
             var e, i, s, l, n, a, o, r, h;
