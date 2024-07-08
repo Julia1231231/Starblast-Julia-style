@@ -17643,7 +17643,6 @@
             var e, i, s, l;
             if (!(1 === t && this.game_modes.length - 1 === this.selectedMode || -1 === t && 0 === this.selectedMode)) return l = document.querySelector("#prevMode"), s = document.querySelector("#nextMode"), l.style.visibility = "visible", s.style.visibility = "visible", this.selectedMode += t, this.selectedMode %= this.game_modes.length, 0 === this.selectedMode && (l.style.visibility = "hidden"), this.game_modes.length - 1 === this.selectedMode && (s.style.visibility = "hidden"), this.selectedMode < 0 && (this.selectedMode = this.game_modes.length - 1), document.querySelector("#play").classList.remove("orange"), this.game_modes[this.selectedMode].ecponly && document.querySelector("#play").classList.add("orange"), e = document.querySelector("#game_modes span:first-child"), i = document.querySelector("#game_modes"), e.style.marginLeft = -1 * this.selectedMode * i.offsetWidth + "px", document.querySelector(".colorwrapper").style.display = this.game_modes[this.selectedMode].custom_color ? "block" : "none", document.querySelector("#colors").style.display = "none", this.O0110(), this.game_modes[this.selectedMode]
         }, e.prototype.closeModal = function(t) {
-			updateBackground();
             var e;
             if (this.getrealtimer && clearTimeout(this.getrealtimer), e = document.querySelector(".modal"), "none" !== e.style.display) return e.style.top = -1 * window.innerHeight + "px", this.modalHideTimer = setTimeout(function() {
                 if (e.style.display = "none", "function" == typeof t) return t()
@@ -17819,7 +17818,6 @@
 			var handleSelectChange = function(selectElement) {
 				selectElement.addEventListener("change", function(event) {
 					var backgroundId = JSON.stringify(selectElement.value);
-					console.log(backgroundId + "bg");
 					function updateBackground() {
 						switch (backgroundId) {
 							case "\"none\"":
