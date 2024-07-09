@@ -4232,13 +4232,18 @@
                 var t, e, i, s, l, n;
                 if (!this.killed) {
                     if (requestAnimationFrame(function(t) {
-                            return function() {
-                                return t.I10I0()
-                            }
-                        }(this)), this.lIl0I.paused) {
-                        if (this.paused) return;
-                        this.paused = !0
-                    } else this.paused = !1;
+						return function() {
+							return t.I10I0();
+						};
+					}(this)), this.lIl0I.paused) {
+						if (this.paused) {
+							return;
+						}
+						this.paused = true;
+					} else {
+						this.paused = false;
+						callback(performance.now());
+					}
                     if (this.frame_count++, this.fixed || this.fixSize(), 0 === this.fadein_start && (this.fadein_start = Date.now()), this.fadein_start > 0 && (s = Math.max(0, Math.min(1, (Date.now() - this.fadein_start) / 2e3)), document.getElementById("canvaswrapper").style.opacity = s, 1 === s && (this.fadein_start = -1, document.getElementById("canvaswrapper").style.removeProperty("opacity"))), this.doJobs(), this.lIl0I.settings.check("antialias") !== this.antialiasing && (this.antialiasing = this.lIl0I.settings.check("antialias"), document.getElementById("canvaswrapper").removeChild(this.IIl11.domElement), this.IIl11 = new THREE.WebGLRenderer({
                             antialias: this.antialiasing,
                             transparent: !1
