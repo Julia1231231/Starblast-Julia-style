@@ -24351,7 +24351,7 @@ input[type=range]:focus::-ms-fill-upper{background:hsl(200,60%,55%)}[data-toolti
 	}, exportShipTree = function(t, e) {
 		var i, s;
 		return null == t && (t = null), null == e && (e = {}), s = "", null == t && (t = lII01.types_by_code[101]), null != e[t.code] ? s : (e[t.code] = t, i = lII01.next(t), 0 === i.length ? "" : (s += t.name + " => ", null != i[0] && (s += i[0].name), null != i[1] && (s += " or " + i[1].name), s += "\n", null != i[0] && (s += this.exportShipTree(i[0], e)), null != i[1] && (s += this.exportShipTree(i[1], e)), s))
-	}, IO1l1.is_app = true, indexOf = [].indexOf || function(t) {
+	}, IO1l1.is_app = false, indexOf = [].indexOf || function(t) {
 		for (var e = 0, i = this.length; e < i; e++)
 			if (e in this && this[e] === t) return e;
 		return -1
