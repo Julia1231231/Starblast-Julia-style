@@ -5200,35 +5200,7 @@
                 var e, i, s, l;
                 if (null != this.buttons)
                     for (l = this.buttons, i = 0, s = l.length; i < s; i++) e = l[i], this.remove(e);
-				return this.buttons = [],
-					this.button_index = 0,
-					this.lIl0I.is_mobile_app ? (
-						this.resume = new MobileMenuButton(this.lIl0I, this, t("RESUME"), "²", "resume"),
-						this.settings = new MobileMenuButton(this.lIl0I, this, t("SETTINGS"), "x", "settings"),
-						this.quit = new MobileMenuButton(this.lIl0I, this, t("Quit to Menu").toUpperCase(), "³", "quit"),
-						this.addButton(this.settings),
-						this.addButton(this.quit)
-					) : this.lIl0I.is_app ? (
-						this.resume = new MenuButton(this.lIl0I, this, t("RESUME"), "resume"),
-						this.roomlink = new MenuButton(this.lIl0I, this, t("Copy Room Link").toUpperCase(), "roomlink"),
-						this.settings = new MenuButton(this.lIl0I, this, t("SETTINGS"), "settings"),
-						this.quit = new MenuButton(this.lIl0I, this, t("QUIT"), "quit"),
-						this.addButton(this.resume),
-						this.addButton(this.roomlink),
-						this.addButton(this.settings),
-						this.addButton(this.quit)
-					) : (
-						this.resume = new MenuButton(this.lIl0I, this, t("RESUME"), "resume"),
-						this.IlOO1 = new MenuButton(this.lIl0I, this, t("FULLSCREEN"), "IlOO1"),
-						this.quit = new MenuButton(this.lIl0I, this, t("QUIT"), "quit"),
-						this.roomlink = new MenuButton(this.lIl0I, this, t("Copy Room Link").toUpperCase(), "roomlink"),
-						this.addButton(this.resume),
-						this.addButton(this.IlOO1),
-						this.addButton(this.roomlink),
-						this.addButton(this.quit)
-					),
-					this.selected_index = 0,
-					this.updateSelection();
+                return this.buttons = [], this.button_index = 0, this.lIl0I.is_mobile_app ? (this.resume = new MobileMenuButton(this.lIl0I, this, t("RESUME"), "²", "resume"), this.settings = new MobileMenuButton(this.lIl0I, this, t("SETTINGS"), "x", "settings"), this.quit = new MobileMenuButton(this.lIl0I, this, t("Quit to Menu").toUpperCase(), "³", "quit"), this.addButton(this.settings), this.addButton(this.quit)) : this.lIl0I.is_app ? (this.resume = new MenuButton(this.lIl0I, this, t("RESUME"), "resume"), this.roomlink = new MenuButton(this.lIl0I, this, t("Copy Room Link").toUpperCase(), "roomlink"), this.settings = new MenuButton(this.lIl0I, this, t("SETTINGS"), "settings"), this.quit = new MenuButton(this.lIl0I, this, t("QUIT"), "quit"), this.addButton(this.resume), this.addButton(this.roomlink), this.addButton(this.settings), this.addButton(this.quit)) : (this.resume = new MenuButton(this.lIl0I, this, t("RESUME"), "resume"), this.IlOO1 = new MenuButton(this.lIl0I, this, t("FULLSCREEN"), "IlOO1"), this.roomlink = new MenuButton(this.lIl0I, this, t("Copy Room Link").toUpperCase(), "roomlink"), this.quit = new MenuButton(this.lIl0I, this, t("QUIT"), "quit"), this.addButton(this.resume), this.addButton(this.IlOO1), this.addButton(this.roomlink), this.addButton(this.quit)), this.selected_index = 0, this.updateSelection()
             }, i.prototype.createQuitMenu = function() {
                 var e, i, s, l;
                 if (null != this.buttons)
