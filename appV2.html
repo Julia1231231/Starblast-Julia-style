@@ -1516,7 +1516,7 @@
         
         .modal .modalbody .regions {
             text-align: center;
-            border-bottom: 1px solid hsla(200, 50%, 70%, .5);
+            border-bottom: 1px solid hsla(310, 100%, 80%, 1);
             margin: 0 -40px 40px -40px;
             padding: 10px 0;
             background: rgba(120, 180, 255, .08)
@@ -5241,8 +5241,7 @@
                     case "quit_to_menu":
                         return window.onbeforeunload = null, document.location.hash = "", document.location.reload();
                     case "quit_game":
-                        if (null != window.parent) return window.parent.postMessage("quit", "*");
-						sendCloseWindow();
+                        if (null != window.parent) return window.postMessage("quit", "*");
                         break;
                     case "quit_cancel":
                         return this.quit_menu_shown = !1, this.createMainMenu();
