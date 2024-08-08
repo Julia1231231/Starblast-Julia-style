@@ -522,7 +522,12 @@ nav.menu ul li:after {
     justify-content: space-between;
 }
 
+#messagePanel {
+	user-select: none;
+}
+
 #background {
+	user-select: none;
 	position: fixed; 
 	z-index: -1;
 	height: 100%; 
