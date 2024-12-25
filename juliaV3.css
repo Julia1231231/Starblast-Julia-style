@@ -213,12 +213,8 @@ a:visited {
     border: 1px dashed hsl(310, 50%, 50%);
 }
 
-#ranks .rankings td:nth-child(3) {
-    border-left: 1px dashed hsl(310, 50%, 50%) !important;
-}
-
-#ranks .rankings td:nth-child(5) {
-    border-right: 1px dashed hsl(310, 50%, 50%);
+#ranks .rankings td {
+	border-color: hsl(310, 50%, 50%) !important;
 }
 
 a.full-changelog,
