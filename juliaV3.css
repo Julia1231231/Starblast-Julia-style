@@ -714,7 +714,6 @@ nav.menu ul li:after {
     background: #ff69b4;
     cursor: pointer;
     position: relative;
-    top: -5.5px;
     transition: background 0.3s ease-in-out;
     box-shadow: 0 0 6px hsl(310, 50%, 70%);
 }
