@@ -609,3 +609,182 @@ nav.menu ul li:after {
 #custommenu > .bottom > i:hover {
 	color: hsl(310deg 95.72% 85.05%);
 }
+
+#JSettings {
+    display: none;
+    font-family: Play, Verdana;
+    padding: 20px;
+    width: 500px;
+    height: 260px;
+    border-radius: 10px;
+    background: linear-gradient(135deg, hsla(310, 30%, 10%, 1) 0, hsla(310, 30%, 30%, 1) 150%);
+    border: 1px solid #ffc0cb;
+    color: hsla(200, 80%, 100%, .8);
+    box-shadow: 0 0 6px hsla(310, 100%, 80%, 1);
+    text-shadow: 0 0 6px hsla(310, 100%, 60%, .75);
+    position: absolute;
+    cursor: move;
+    user-select: none;
+}
+
+#JSettings .option {
+    cursor: default;
+    height: 45px;
+    font-size: 1.5em;
+}
+
+#JSettings label {
+    float: right;
+    vertical-align: middle;
+}
+
+#JSettings .switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+}
+
+#JSettings .switch input {
+    display: none;
+}
+
+#JSettings .slider {
+    background-color: hsl(310, 50%, 10%);
+    border-radius: 15px;
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+#JSettings .slider:before {
+    transition: .5s;
+    background-color: rgb(255, 0, 0);
+    border-radius: 15px;
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+}
+
+#JSettings input:checked+.slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+    background-color: rgb(0, 255, 0);
+}
+
+#JSettings .range {
+    float: right;
+    vertical-align: middle;
+    font-size: .9em;
+    position: relative;
+    height: 30px;
+    line-height: 30px;
+    width: 16%;
+    padding: 0 150px 0 10px;
+}
+
+#JSettings input[type=range] {
+    position: relative;
+    top: -3px;
+    -webkit-appearance: none;
+    width: 200%;
+    height: 8px;
+    background: transparent;
+    outline: none;
+    margin: 10px 0;
+}
+
+#JSettings input[type=range]::-webkit-slider-thumb {
+    border: none;
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #ff69b4;
+    cursor: pointer;
+    position: relative;
+    top: -5.5px;
+    transition: background 0.3s ease-in-out;
+    box-shadow: 0 0 6px hsl(310, 50%, 70%);
+}
+
+#JSettings input[type=range]::-webkit-slider-thumb:hover {
+    background: #ff3385;
+}
+
+#JSettings input[type=range]::-webkit-slider-runnable-track {
+    width: 100%;
+    height: 8px;
+    cursor: pointer;
+    background: #d3d3d3 !important;
+    border: none;
+    border-radius: 5px;
+}
+
+#JSettings input[type=range]:focus {
+    outline: none;
+}
+
+#JSettings .range span {
+    position: absolute;
+    top: 0;
+    right: 10px;
+}
+
+#JSettings .flexs-between {
+    display: flex;
+    justify-content: space-between;
+}
+
+#JSettings select {
+    background: hsl(310, 60%, 15%);
+    border: 1px solid hsl(310, 60%, 10%);
+    font-size: .8em;
+    padding: 3px 5px;
+    color: white;
+    float: right;
+    vertical-align: middle;
+    box-sizing: border-box;
+}
+
+#JSettings #JButtons {
+    width: 100%;
+    display: inline-flex;
+    justify-content: center;
+}
+
+#JSettings #JButtons > button {
+    font-size: 1em;
+    margin: 0 8px;
+    border-radius: 12px;
+    padding: 12px 16px;
+    border: none;
+    color: hsla(200, 80%, 95%, 0.9);
+    box-shadow: 0 4px 8px hsla(310, 70%, 50%, 0.5), 0 0 6px hsla(310, 70%, 40%, 0.4);
+    text-shadow: 0 0 4px hsla(310, 60%, 80%, 0.75);
+    background: linear-gradient(135deg, hsl(310, 50%, 25%) 0%, hsl(310, 40%, 20%) 100%);
+    cursor: pointer;
+    transition: all 0.3s ease, box-shadow 0.2s ease;
+}
+
+#JSettings #JButtons > button:hover {
+    background: linear-gradient(135deg, hsl(310, 60%, 35%) 0%, hsl(310, 50%, 25%) 100%);
+    box-shadow: 0 6px 12px hsla(310, 70%, 60%, 0.6), 0 0 8px hsla(310, 70%, 50%, 0.5);
+    transform: translateY(-2px);
+}
+
+#JSettings #JButtons > button:active {
+    box-shadow: 0 2px 4px hsla(310, 70%, 40%, 0.4), 0 0 6px hsla(310, 70%, 30%, 0.3);
+    transform: translateY(0);
+    background: linear-gradient(135deg, hsl(310, 40%, 20%) 0%, hsl(310, 30%, 15%) 100%);
+}
