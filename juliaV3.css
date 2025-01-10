@@ -1,3 +1,7 @@
+html, body {
+    background-color: #ff1493 !important;
+}
+
 .inputwrapper {
     display: inline-block;
     background: linear-gradient(to top, hsla(310, 70%, 70%, .5) 0, hsla(31, 50%, 0%, 1) 20%, hsla(310, 50%, 0%, 1) 60%, hsla(310, 20%, 40%, .5) 100%);
