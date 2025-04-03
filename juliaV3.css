@@ -828,3 +828,89 @@ nav.menu ul li:after {
     border-bottom: 1px solid hsla(var(--main-hue), 50%, 70%, 0.5);
     background: hsla(var(--main-hue), 100%, 73.53%, 0.08);
 }
+
+
+
+
+
+    @import url('https://fonts.cdnfonts.com/css/stage-wander');
+
+    .logo {
+      position: relative;
+      font-family: 'Stage Wander', sans-serif;
+      font-size: 55px;
+      text-transform: uppercase;
+      letter-spacing: 6px;
+      color: hsl(var(--main-hue), 100%, 50%);
+      animation: glitch 3s infinite ease-in-out;
+    }
+
+    @keyframes glitch {
+      0% {
+        text-shadow:
+          -1px 0 3px hsl(calc(var(--main-hue) + 60), 100%, 50%),
+           1px 0 3px hsl(calc(var(--main-hue) + 120), 100%, 50%);
+        transform: translateX(0) translateY(0);
+      }
+      10% {
+        text-shadow:
+          -2px 0 5px hsl(calc(var(--main-hue) + 60), 100%, 60%),
+           2px 0 5px hsl(calc(var(--main-hue) + 120), 100%, 60%);
+        transform: translateX(1px);
+      }
+      20% {
+        text-shadow:
+          -3px 0 7px hsl(calc(var(--main-hue) + 60), 100%, 70%),
+           3px 0 7px hsl(calc(var(--main-hue) + 120), 100%, 70%);
+        transform: translateY(-1px);
+      }
+      30% {
+        text-shadow:
+          -4px 0 9px hsl(calc(var(--main-hue) + 60), 100%, 80%),
+           4px 0 9px hsl(calc(var(--main-hue) + 120), 100%, 80%);
+        transform: translateX(-1px) translateY(1px);
+      }
+      40% {
+        text-shadow:
+          -5px 0 11px hsl(calc(var(--main-hue) + 60), 100%, 90%),
+           5px 0 11px hsl(calc(var(--main-hue) + 120), 100%, 90%);
+        transform: translateY(2px);
+      }
+      50% {
+        text-shadow:
+          -6px 0 13px hsl(calc(var(--main-hue) + 60), 100%, 100%),
+           6px 0 13px hsl(calc(var(--main-hue) + 120), 100%, 100%);
+        transform: translateX(2px) translateY(-2px);
+      }
+      60% {
+        text-shadow:
+          -5px 0 11px hsl(calc(var(--main-hue) + 60), 100%, 90%),
+           5px 0 11px hsl(calc(var(--main-hue) + 120), 100%, 90%);
+        transform: translateY(1px);
+      }
+      70% {
+        text-shadow:
+          -4px 0 9px hsl(calc(var(--main-hue) + 60), 100%, 80%),
+           4px 0 9px hsl(calc(var(--main-hue) + 120), 100%, 80%);
+        transform: translateX(-1px) translateY(-1px);
+      }
+      80% {
+        text-shadow:
+          -3px 0 7px hsl(calc(var(--main-hue) + 60), 100%, 70%),
+           3px 0 7px hsl(calc(var(--main-hue) + 120), 100%, 70%);
+        transform: translateY(1px);
+      }
+      90% {
+        text-shadow:
+          -2px 0 5px hsl(calc(var(--main-hue) + 60), 100%, 60%),
+           2px 0 5px hsl(calc(var(--main-hue) + 120), 100%, 60%);
+        transform: translateX(1px);
+      }
+      100% {
+        text-shadow:
+          -1px 0 3px hsl(calc(var(--main-hue) + 60), 100%, 50%),
+           1px 0 3px hsl(calc(var(--main-hue) + 120), 100%, 50%);
+        transform: translateX(0) translateY(0);
+      }
+    }
+  
