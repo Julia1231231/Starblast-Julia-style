@@ -1,5 +1,3 @@
-@import url('https://fonts.cdnfonts.com/css/stage-wander');
-
 :root {
     --main-color: hsl(var(--main-hue), 70%, 70%);
 }
@@ -846,72 +844,82 @@ nav.menu ul li:after {
       animation: glitch 3s infinite ease-in-out;
     }
 
-    @keyframes glitch {
+@keyframes glitch {
       0% {
         text-shadow:
-          -1px 0 3px hsl(calc(var(--main-hue) + 60), 100%, 50%),
-           1px 0 3px hsl(calc(var(--main-hue) + 120), 100%, 50%);
+          -2px 0 10px hsl(calc(var(--main-hue) + 60), 100%, 70%),
+           2px 0 10px hsl(calc(var(--main-hue) + 120), 100%, 70%),
+           0 0 20px hsl(var(--main-hue), 100%, 80%);
         transform: translateX(0) translateY(0);
       }
       10% {
         text-shadow:
-          -2px 0 5px hsl(calc(var(--main-hue) + 60), 100%, 60%),
-           2px 0 5px hsl(calc(var(--main-hue) + 120), 100%, 60%);
+          -4px 0 15px hsl(calc(var(--main-hue) + 60), 100%, 80%),
+           4px 0 15px hsl(calc(var(--main-hue) + 120), 100%, 80%),
+           0 0 25px hsl(var(--main-hue), 100%, 90%);
         transform: translateX(1px);
       }
       20% {
         text-shadow:
-          -3px 0 7px hsl(calc(var(--main-hue) + 60), 100%, 70%),
-           3px 0 7px hsl(calc(var(--main-hue) + 120), 100%, 70%);
+          -6px 0 20px hsl(calc(var(--main-hue) + 60), 100%, 90%),
+           6px 0 20px hsl(calc(var(--main-hue) + 120), 100%, 90%),
+           0 0 30px hsl(var(--main-hue), 100%, 100%);
         transform: translateY(-1px);
       }
       30% {
         text-shadow:
-          -4px 0 9px hsl(calc(var(--main-hue) + 60), 100%, 80%),
-           4px 0 9px hsl(calc(var(--main-hue) + 120), 100%, 80%);
+          -8px 0 25px hsl(calc(var(--main-hue) + 60), 100%, 100%),
+           8px 0 25px hsl(calc(var(--main-hue) + 120), 100%, 100%),
+           0 0 35px hsl(var(--main-hue), 100%, 90%);
         transform: translateX(-1px) translateY(1px);
       }
       40% {
         text-shadow:
-          -5px 0 11px hsl(calc(var(--main-hue) + 60), 100%, 90%),
-           5px 0 11px hsl(calc(var(--main-hue) + 120), 100%, 90%);
+          -10px 0 30px hsl(calc(var(--main-hue) + 60), 100%, 90%),
+           10px 0 30px hsl(calc(var(--main-hue) + 120), 100%, 90%),
+           0 0 40px hsl(var(--main-hue), 100%, 80%);
         transform: translateY(2px);
       }
       50% {
         text-shadow:
-          -6px 0 13px hsl(calc(var(--main-hue) + 60), 100%, 100%),
-           6px 0 13px hsl(calc(var(--main-hue) + 120), 100%, 100%);
+          -12px 0 35px hsl(calc(var(--main-hue) + 60), 100%, 80%),
+           12px 0 35px hsl(calc(var(--main-hue) + 120), 100%, 80%),
+           0 0 45px hsl(var(--main-hue), 100%, 70%);
         transform: translateX(2px) translateY(-2px);
       }
       60% {
         text-shadow:
-          -5px 0 11px hsl(calc(var(--main-hue) + 60), 100%, 90%),
-           5px 0 11px hsl(calc(var(--main-hue) + 120), 100%, 90%);
+          -10px 0 30px hsl(calc(var(--main-hue) + 60), 100%, 90%),
+           10px 0 30px hsl(calc(var(--main-hue) + 120), 100%, 90%),
+           0 0 40px hsl(var(--main-hue), 100%, 80%);
         transform: translateY(1px);
       }
       70% {
         text-shadow:
-          -4px 0 9px hsl(calc(var(--main-hue) + 60), 100%, 80%),
-           4px 0 9px hsl(calc(var(--main-hue) + 120), 100%, 80%);
+          -8px 0 25px hsl(calc(var(--main-hue) + 60), 100%, 100%),
+           8px 0 25px hsl(calc(var(--main-hue) + 120), 100%, 100%),
+           0 0 35px hsl(var(--main-hue), 100%, 90%);
         transform: translateX(-1px) translateY(-1px);
       }
       80% {
         text-shadow:
-          -3px 0 7px hsl(calc(var(--main-hue) + 60), 100%, 70%),
-           3px 0 7px hsl(calc(var(--main-hue) + 120), 100%, 70%);
+          -6px 0 20px hsl(calc(var(--main-hue) + 60), 100%, 90%),
+           6px 0 20px hsl(calc(var(--main-hue) + 120), 100%, 90%),
+           0 0 30px hsl(var(--main-hue), 100%, 100%);
         transform: translateY(1px);
       }
       90% {
         text-shadow:
-          -2px 0 5px hsl(calc(var(--main-hue) + 60), 100%, 60%),
-           2px 0 5px hsl(calc(var(--main-hue) + 120), 100%, 60%);
+          -4px 0 15px hsl(calc(var(--main-hue) + 60), 100%, 80%),
+           4px 0 15px hsl(calc(var(--main-hue) + 120), 100%, 80%),
+           0 0 25px hsl(var(--main-hue), 100%, 90%);
         transform: translateX(1px);
       }
       100% {
         text-shadow:
-          -1px 0 3px hsl(calc(var(--main-hue) + 60), 100%, 50%),
-           1px 0 3px hsl(calc(var(--main-hue) + 120), 100%, 50%);
+          -2px 0 10px hsl(calc(var(--main-hue) + 60), 100%, 70%),
+           2px 0 10px hsl(calc(var(--main-hue) + 120), 100%, 70%),
+           0 0 20px hsl(var(--main-hue), 100%, 80%);
         transform: translateX(0) translateY(0);
       }
     }
-  
