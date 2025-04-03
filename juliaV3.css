@@ -1,3 +1,5 @@
+@import url('https://fonts.cdnfonts.com/css/stage-wander');
+
 :root {
     --main-color: hsl(var(--main-hue), 70%, 70%);
 }
@@ -833,7 +835,6 @@ nav.menu ul li:after {
 
 
 
-    @import url('https://fonts.cdnfonts.com/css/stage-wander');
 
     #logo {
       position: relative;
