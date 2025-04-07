@@ -67,8 +67,8 @@ body {
 #respawn_actions button,
 .donate-btn {
     background: radial-gradient(ellipse at center,
-        hsla(var(--main-hue), 50%, 0%, 1) 0,
-        hsla(var(--main-hue), 100%, 70%, 0.5) 150%);
+            hsla(var(--main-hue), 50%, 0%, 1) 0,
+            hsla(var(--main-hue), 100%, 70%, 0.5) 150%);
     box-shadow: 0 0 6px hsla(var(--main-hue), 100%, 80%, 1);
     text-shadow: 0 0 7px hsla(var(--main-hue), 100%, 80%, 1);
     color: hsla(var(--main-hue), 100%, 90%, 0.8);
@@ -87,8 +87,8 @@ body {
 .changelog-new,
 .extrabutton {
     background: linear-gradient(-45deg,
-        hsla(var(--main-hue), 50%, 10%, 0.5) 0,
-        hsla(var(--main-hue), 50%, 50%, 0.15) 100%);
+            hsla(var(--main-hue), 50%, 10%, 0.5) 0,
+            hsla(var(--main-hue), 50%, 50%, 0.15) 100%);
     border-radius: 15px;
     box-shadow: 0 0 6px hsla(var(--main-hue), 100%, 80%, 1);
 }
@@ -120,8 +120,8 @@ a:visited {
 .mobile-tools i,
 .stats i {
     background: radial-gradient(ellipse at center,
-        hsla(var(--main-hue), 50%, 0%, 1) 0,
-        hsla(var(--main-hue), 100%, 70%, 0.5) 150%);
+            hsla(var(--main-hue), 50%, 0%, 1) 0,
+            hsla(var(--main-hue), 100%, 70%, 0.5) 150%);
     box-shadow: 0 0 6px hsla(var(--main-hue), 100%, 80%, 1);
     text-shadow: 0 0 7px hsla(var(--main-hue), 100%, 80%, 1);
     color: hsla(var(--main-hue), 100%, 90%, 0.8);
@@ -278,8 +278,8 @@ input:checked+.slider:before {
 #donate_mobile {
     text-shadow: 0 0 7px hsla(var(--main-hue), 100%, 80%, 1);
     background: radial-gradient(ellipse at center,
-        hsla(var(--main-hue), 50%, 0%, 1) 0,
-        hsla(var(--main-hue), 100%, 80%, 0.5) 150%);
+            hsla(var(--main-hue), 50%, 0%, 1) 0,
+            hsla(var(--main-hue), 100%, 80%, 0.5) 150%);
     box-shadow: 0 0 6px hsla(var(--main-hue), 100%, 80%, 1);
     color: hsla(var(--main-hue), 100%, 90%, 0.9);
 }
@@ -800,16 +800,16 @@ nav.menu ul li:after {
         0 0 6px hsla(var(--main-hue), 70%, 40%, 0.4);
     text-shadow: 0 0 4px hsla(var(--main-hue), 60%, 80%, 0.75);
     background: linear-gradient(135deg,
-        hsla(var(--main-hue), 50%, 25%, 1) 0%,
-        hsla(var(--main-hue), 40%, 20%, 1) 100%);
+            hsla(var(--main-hue), 50%, 25%, 1) 0%,
+            hsla(var(--main-hue), 40%, 20%, 1) 100%);
     cursor: pointer;
     transition: all 0.3s ease, box-shadow 0.2s ease;
 }
 
 #JSettings #JButtons>button:hover {
     background: linear-gradient(135deg,
-        hsla(var(--main-hue), 60%, 35%, 1) 0%,
-        hsla(var(--main-hue), 50%, 25%, 1) 100%);
+            hsla(var(--main-hue), 60%, 35%, 1) 0%,
+            hsla(var(--main-hue), 50%, 25%, 1) 100%);
     box-shadow: 0 6px 12px hsla(var(--main-hue), 70%, 60%, 0.6),
         0 0 8px hsla(var(--main-hue), 70%, 50%, 0.5);
     transform: translateY(-2px);
@@ -820,8 +820,8 @@ nav.menu ul li:after {
         0 0 6px hsla(var(--main-hue), 70%, 30%, 0.3);
     transform: translateY(0);
     background: linear-gradient(135deg,
-        hsla(var(--main-hue), 40%, 20%, 1) 0%,
-        hsla(var(--main-hue), 30%, 15%, 1) 100%);
+            hsla(var(--main-hue), 40%, 20%, 1) 0%,
+            hsla(var(--main-hue), 30%, 15%, 1) 100%);
 }
 
 .modal .modalbody .regions {
@@ -834,92 +834,102 @@ nav.menu ul li:after {
 
 
 
-    #logo {
-      position: relative;
-      font-family: 'Stage Wander', sans-serif;
-      font-size: 55px;
-      text-transform: uppercase;
-      letter-spacing: 6px;
-      color: hsl(var(--main-hue), 100%, 50%);
-      animation: glitch 3s infinite ease-in-out;
-    }
+#logo {
+    position: relative;
+    font-family: 'Stage Wander', sans-serif;
+    font-size: 55px;
+    text-transform: uppercase;
+    letter-spacing: 6px;
+    color: hsl(var(--main-hue), 100%, 50%);
+    animation: glitch 3s infinite ease-in-out;
+}
 
 @keyframes glitch {
-      0% {
+    0% {
         text-shadow:
-          -2px 0 10px hsl(calc(var(--main-hue) + 60), 100%, 70%),
-           2px 0 10px hsl(calc(var(--main-hue) + 120), 100%, 70%),
-           0 0 20px hsl(var(--main-hue), 100%, 80%);
+            -2px 0 10px hsl(calc(var(--main-hue) + 60), 100%, 70%),
+            2px 0 10px hsl(calc(var(--main-hue) + 120), 100%, 70%),
+            0 0 20px hsl(var(--main-hue), 100%, 80%);
         transform: translateX(0) translateY(0);
-      }
-      10% {
-        text-shadow:
-          -4px 0 15px hsl(calc(var(--main-hue) + 60), 100%, 80%),
-           4px 0 15px hsl(calc(var(--main-hue) + 120), 100%, 80%),
-           0 0 25px hsl(var(--main-hue), 100%, 90%);
-        transform: translateX(1px);
-      }
-      20% {
-        text-shadow:
-          -6px 0 20px hsl(calc(var(--main-hue) + 60), 100%, 90%),
-           6px 0 20px hsl(calc(var(--main-hue) + 120), 100%, 90%),
-           0 0 30px hsl(var(--main-hue), 100%, 100%);
-        transform: translateY(-1px);
-      }
-      30% {
-        text-shadow:
-          -8px 0 25px hsl(calc(var(--main-hue) + 60), 100%, 100%),
-           8px 0 25px hsl(calc(var(--main-hue) + 120), 100%, 100%),
-           0 0 35px hsl(var(--main-hue), 100%, 90%);
-        transform: translateX(-1px) translateY(1px);
-      }
-      40% {
-        text-shadow:
-          -10px 0 30px hsl(calc(var(--main-hue) + 60), 100%, 90%),
-           10px 0 30px hsl(calc(var(--main-hue) + 120), 100%, 90%),
-           0 0 40px hsl(var(--main-hue), 100%, 80%);
-        transform: translateY(2px);
-      }
-      50% {
-        text-shadow:
-          -12px 0 35px hsl(calc(var(--main-hue) + 60), 100%, 80%),
-           12px 0 35px hsl(calc(var(--main-hue) + 120), 100%, 80%),
-           0 0 45px hsl(var(--main-hue), 100%, 70%);
-        transform: translateX(2px) translateY(-2px);
-      }
-      60% {
-        text-shadow:
-          -10px 0 30px hsl(calc(var(--main-hue) + 60), 100%, 90%),
-           10px 0 30px hsl(calc(var(--main-hue) + 120), 100%, 90%),
-           0 0 40px hsl(var(--main-hue), 100%, 80%);
-        transform: translateY(1px);
-      }
-      70% {
-        text-shadow:
-          -8px 0 25px hsl(calc(var(--main-hue) + 60), 100%, 100%),
-           8px 0 25px hsl(calc(var(--main-hue) + 120), 100%, 100%),
-           0 0 35px hsl(var(--main-hue), 100%, 90%);
-        transform: translateX(-1px) translateY(-1px);
-      }
-      80% {
-        text-shadow:
-          -6px 0 20px hsl(calc(var(--main-hue) + 60), 100%, 90%),
-           6px 0 20px hsl(calc(var(--main-hue) + 120), 100%, 90%),
-           0 0 30px hsl(var(--main-hue), 100%, 100%);
-        transform: translateY(1px);
-      }
-      90% {
-        text-shadow:
-          -4px 0 15px hsl(calc(var(--main-hue) + 60), 100%, 80%),
-           4px 0 15px hsl(calc(var(--main-hue) + 120), 100%, 80%),
-           0 0 25px hsl(var(--main-hue), 100%, 90%);
-        transform: translateX(1px);
-      }
-      100% {
-        text-shadow:
-          -2px 0 10px hsl(calc(var(--main-hue) + 60), 100%, 70%),
-           2px 0 10px hsl(calc(var(--main-hue) + 120), 100%, 70%),
-           0 0 20px hsl(var(--main-hue), 100%, 80%);
-        transform: translateX(0) translateY(0);
-      }
     }
+
+    10% {
+        text-shadow:
+            -4px 0 15px hsl(calc(var(--main-hue) + 60), 100%, 80%),
+            4px 0 15px hsl(calc(var(--main-hue) + 120), 100%, 80%),
+            0 0 25px hsl(var(--main-hue), 100%, 90%);
+        transform: translateX(1px);
+    }
+
+    20% {
+        text-shadow:
+            -6px 0 20px hsl(calc(var(--main-hue) + 60), 100%, 90%),
+            6px 0 20px hsl(calc(var(--main-hue) + 120), 100%, 90%),
+            0 0 30px hsl(var(--main-hue), 100%, 100%);
+        transform: translateY(-1px);
+    }
+
+    30% {
+        text-shadow:
+            -8px 0 25px hsl(calc(var(--main-hue) + 60), 100%, 100%),
+            8px 0 25px hsl(calc(var(--main-hue) + 120), 100%, 100%),
+            0 0 35px hsl(var(--main-hue), 100%, 90%);
+        transform: translateX(-1px) translateY(1px);
+    }
+
+    40% {
+        text-shadow:
+            -10px 0 30px hsl(calc(var(--main-hue) + 60), 100%, 90%),
+            10px 0 30px hsl(calc(var(--main-hue) + 120), 100%, 90%),
+            0 0 40px hsl(var(--main-hue), 100%, 80%);
+        transform: translateY(2px);
+    }
+
+    50% {
+        text-shadow:
+            -12px 0 35px hsl(calc(var(--main-hue) + 60), 100%, 80%),
+            12px 0 35px hsl(calc(var(--main-hue) + 120), 100%, 80%),
+            0 0 45px hsl(var(--main-hue), 100%, 70%);
+        transform: translateX(2px) translateY(-2px);
+    }
+
+    60% {
+        text-shadow:
+            -10px 0 30px hsl(calc(var(--main-hue) + 60), 100%, 90%),
+            10px 0 30px hsl(calc(var(--main-hue) + 120), 100%, 90%),
+            0 0 40px hsl(var(--main-hue), 100%, 80%);
+        transform: translateY(1px);
+    }
+
+    70% {
+        text-shadow:
+            -8px 0 25px hsl(calc(var(--main-hue) + 60), 100%, 100%),
+            8px 0 25px hsl(calc(var(--main-hue) + 120), 100%, 100%),
+            0 0 35px hsl(var(--main-hue), 100%, 90%);
+        transform: translateX(-1px) translateY(-1px);
+    }
+
+    80% {
+        text-shadow:
+            -6px 0 20px hsl(calc(var(--main-hue) + 60), 100%, 90%),
+            6px 0 20px hsl(calc(var(--main-hue) + 120), 100%, 90%),
+            0 0 30px hsl(var(--main-hue), 100%, 100%);
+        transform: translateY(1px);
+    }
+
+    90% {
+        text-shadow:
+            -4px 0 15px hsl(calc(var(--main-hue) + 60), 100%, 80%),
+            4px 0 15px hsl(calc(var(--main-hue) + 120), 100%, 80%),
+            0 0 25px hsl(var(--main-hue), 100%, 90%);
+        transform: translateX(1px);
+    }
+
+    100% {
+        text-shadow:
+            -2px 0 10px hsl(calc(var(--main-hue) + 60), 100%, 70%),
+            2px 0 10px hsl(calc(var(--main-hue) + 120), 100%, 70%),
+            0 0 20px hsl(var(--main-hue), 100%, 80%);
+        transform: translateX(0) translateY(0);
+    }
+}
