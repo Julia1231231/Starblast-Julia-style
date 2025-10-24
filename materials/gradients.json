@@ -1,0 +1,65 @@
+[
+    {
+        "key": "pink",
+        "stops": [
+            { "pos": 0, "color": "hsl(350,100%,70%)" },
+            { "pos": 0.5, "color": "hsl(350,100%,85%)" },
+            { "pos": 0.5, "color": "hsl(330,100%,50%)" },
+            { "pos": 1, "color": "hsl(350,100%,70%)" }
+        ]
+    },
+    {
+        "key": "black",
+        "stops": [
+            { "pos": 0, "color": "hsl(0,0%,10%)" },
+            { "pos": 0.5, "color": "hsl(0,0%,20%)" },
+            { "pos": 0.5, "color": "hsl(0,0%,5%)" },
+            { "pos": 1, "color": "hsl(0,0%,10%)" }
+        ]
+    },
+    {
+        "key": "goldorange",
+        "stops": [
+            { "pos": 0, "color": "hsl(40,100%,70%)" },
+            { "pos": 0.5, "color": "hsl(40,100%,85%)" },
+            { "pos": 0.5, "color": "hsl(30,100%,50%)" },
+            { "pos": 1, "color": "hsl(40,100%,70%)" }
+        ]
+    },
+    {
+        "key": "blue",
+        "stops": [
+            { "pos": 0, "color": "hsl(210,100%,70%)" },
+            { "pos": 0.5, "color": "hsl(210,100%,85%)" },
+            { "pos": 0.5, "color": "hsl(190,100%,50%)" },
+            { "pos": 1, "color": "hsl(210,100%,70%)" }
+        ]
+    },
+    {
+        "key": "green",
+        "stops": [
+            { "pos": 0, "color": "hsl(120,100%,70%)" },
+            { "pos": 0.5, "color": "hsl(120,100%,85%)" },
+            { "pos": 0.5, "color": "hsl(100,100%,50%)" },
+            { "pos": 1, "color": "hsl(120,100%,70%)" }
+        ]
+    },
+    {
+        "key": "diamond",
+        "stops": [
+            { "pos": 0, "color": "hsl(0,0%,95%)" },
+            { "pos": 0.5, "color": "hsl(0,0%,100%)" },
+            { "pos": 0.5, "color": "hsl(0,0%,80%)" },
+            { "pos": 1, "color": "hsl(0,0%,95%)" }
+        ]
+    },
+    {
+        "key": "x27m",
+        "stops": [
+            { "pos": 0, "color": "hsl(180,50%,40%)" },
+            { "pos": 0.5, "color": "hsl(180,50%,55%)" },
+            { "pos": 0.5, "color": "hsl(180,50%,30%)" },
+            { "pos": 1, "color": "hsl(180,50%,40%)" }
+        ]
+    }
+]
