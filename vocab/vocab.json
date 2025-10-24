@@ -1,1 +1,25 @@
-
+{
+    "survival": [
+        { "text": "Love", "icon": "❤️", "key": "J" },
+        { "text": "Skill Issue", "icon": "x", "key": "V" },
+        { "text": "Discord", "icon": "{", "key": "D" },
+        { "text": "You", "icon": "N", "key": "I" },
+        { "text": "Me", "icon": "O", "key": "E" }
+    ],
+    "team": [
+        { "text": "Love", "icon": "❤️", "key": "J" },
+        { "text": "Skill Issue", "icon": "x", "key": "V" }
+    ],
+    "invasion": [
+        { "text": "Love", "icon": "❤️", "key": "J" },
+        { "text": "Skill Issue", "icon": "x", "key": "V" }
+    ],
+    "deathmatch": [
+        { "text": "Love", "icon": "❤️", "key": "J" },
+        { "text": "Skill Issue", "icon": "x", "key": "V" }
+    ],
+    "battleRoyale": [
+        { "text": "Love", "icon": "❤️", "key": "J" },
+        { "text": "Skill Issue", "icon": "x", "key": "V" }
+    ]
+}
