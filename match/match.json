@@ -1,1 +1,20 @@
-
+{
+    "badge": {
+        "srcchamp": "SRC Champ",
+        "lover": "Love"
+    },
+    "finish": {
+        "green": "Green",
+        "diamond": "Diamond",
+        "pink": "Pink",
+        "black": "Black",
+        "goldorange": "Gold Orange",
+        "blue": "Blue",
+        "x27m": "X27"
+    },
+    "laser": {
+        "4": "Ромбики",
+        "5": "Крестик",
+        "6": "Шарик"
+    }
+}
