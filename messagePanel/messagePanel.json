@@ -1,1 +1,9 @@
-
+{
+    "buttons": ["LOVE U", "HM THX", "LOVE ME", "HMMMM"],
+    "messages": {
+        "set1": ["JIJIJ", "IJIJI"],
+        "set2": ["XQQQQ", "QXQQQ", "QQXQQ", "QQQXQ", "QQQQX", "QQQXQ", "QQXQQ", "QXQQQ"],
+        "set3": ["JEJEJ", "EJEJE"],
+        "set4": ["Qwwww", "wQwww", "wwQww", "wwwQw", "wwwwQ", "wwwQw", "wwQww", "wQwww"]
+    }
+}
