@@ -1,1 +1,32 @@
-
+[
+    {
+        "name": "buildPinkMaterial",
+        "specular": 16758465,
+        "shininess": 50,
+        "color": 16716947
+    },
+    {
+        "name": "buildBlackMaterial",
+        "specular": "00000000",
+        "shininess": 15,
+        "color": "0000000"
+    },
+    {
+        "name": "buildGoldOrangeMaterial",
+        "specular": 10506256,
+        "shininess": 15,
+        "color": "0000000"
+    },
+    {
+        "name": "buildBlueMaterial",
+        "specular": 2108159,
+        "shininess": 15,
+        "color": 2108159
+    },
+    {
+        "name": "buildGreenMaterial",
+        "specular": 19836735,
+        "shininess": 15,
+        "color": "0000000"
+    }
+]
