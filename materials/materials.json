@@ -30,7 +30,7 @@
         "color": "0000000"
     },
     {
-        "name": "buildFullColorMaterial",
+        "name": "buildFullColorJMaterial",
         "specular": 12632256,
         "shininess": 50,
         "useHue": true
