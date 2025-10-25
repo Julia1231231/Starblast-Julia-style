@@ -10,7 +10,8 @@
         "black": "Black",
         "goldorange": "Gold Orange",
         "blue": "Blue",
-        "x27m": "X27"
+        "x27m": "X27",
+        "fullcolor": "Full Color"
     },
     "laser": {
         "4": "Ромбики",
