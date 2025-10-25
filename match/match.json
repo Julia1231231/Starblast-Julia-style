@@ -1,7 +1,8 @@
 {
     "badge": {
         "srcchamp": "SRC Champ",
-        "lover": "Love"
+        "lover": "Love",
+        "gif": "Gif"
     },
     "finish": {
         "green": "Green",
