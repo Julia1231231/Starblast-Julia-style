@@ -17,7 +17,7 @@
                 "ingame": "Full Color",
                 "cheese": "case \"weardfull\":this.fullbolor();break;",
                 "color": "case\"weardfull\":{colorreg}=t.createLinearGradient(0,0,0,i),{colorreg}.addColorStop(0,\"hsl(\" + this.hue + \",90%,50%)\"),{colorreg}.addColorStop(.5,\"hsl(\" + this.hue + \",90%,70%)\"),{colorreg}.addColorStop(.5,\"hsl(\" + this.hue + \",90%,30%)\"),{colorreg}.addColorStop(1,\"hsl(\" + this.hue + \",90%,60%)\");break;",
-                "func": "t.prototype.fullbolor=function(){var t; return t = {fullemmisiv}.hsvToRgbHex(this.hue, 1, 1), this.material=new THREE.MeshPhongMaterial({map:{mapvalue},bumpMap:{mapvalue},specular:12632256,shininess:50,bumpScale:.1,color:t,{emissiveregex}.hsvToRgbHex(this.hue, 1, 1),{alloyEmissiveMap}})},"
+                "func": "t.prototype.fullbolor=function(){var t; console.log(fullemmisiv); return t = {fullemmisiv}.hsvToRgbHex(this.hue, 1, 1), this.material=new THREE.MeshPhongMaterial({map:{mapvalue},bumpMap:{mapvalue},specular:12632256,shininess:50,bumpScale:.1,color:t,{emissiveregex}.hsvToRgbHex(this.hue, 1, 1),{alloyEmissiveMap}})},"
             },
             {
                 "name": "weardblue",
