@@ -40,7 +40,6 @@
         "specular": 15527148,
         "shininess": 90,
         "color": 12632256,
-        "transparent": true,
-        "opacity": 0.85
+        "opacity": 0.3
     }
 ]
