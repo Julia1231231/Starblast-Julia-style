@@ -36,11 +36,11 @@
         "useHue": true
     },
     {
-        "name": "buildNeonPulseMaterial",
-        "specular": 16777215,
-        "shininess": 80,
-        "color": 16711935,
-        "pulse": true,
-        "pulseSpeed": 2.0
+        "name": "buildHolographicMaterial",
+        "specular": 15527148,
+        "shininess": 90,
+        "color": 12632256,
+        "transparent": true,
+        "opacity": 0.85
     }
 ]
