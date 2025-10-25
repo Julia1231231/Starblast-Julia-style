@@ -34,5 +34,13 @@
         "specular": 12632256,
         "shininess": 50,
         "useHue": true
+    },
+    {
+        "name": "buildNeonPulseMaterial",
+        "specular": 16777215,
+        "shininess": 80,
+        "color": 16711935,
+        "pulse": true,
+        "pulseSpeed": 2.0
     }
 ]
