@@ -63,7 +63,7 @@
         ]
     },
     {
-        "key": "fullcolor",
+        "key": "fullcolorj",
         "stops": [
             { "pos": 0, "color": "hsl(0,100%,50%)" },
             { "pos": 0.17, "color": "hsl(30,100%,50%)" },
