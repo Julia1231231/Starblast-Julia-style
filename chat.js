@@ -68,8 +68,8 @@
         const canvas = document.querySelector('canvas');
         if (!canvas) return;
 
-        let wrap = canvas.parentElement;
-        const needWrap = !wrap || getComputedStyle(wrap).position === 'static' || !wrap.classList.contains('julia-canvas-wrap');
+        let wrap = document.querySelector('.julia-canvas-wrap');
+        const needWrap = !wrap;
         if (needWrap) {
             wrap = document.createElement('div');
             wrap.className = 'julia-canvas-wrap';
@@ -79,15 +79,12 @@
                 top: '50%',
                 left: '50%',
                 transform: 'translate(-50%, -50%)',
-                display: 'inline-block',
                 width: cs.width,
                 height: cs.height,
-                lineHeight: '0',
                 pointerEvents: 'none',
                 zIndex: '9'
             });
-            canvas.parentNode.insertBefore(wrap, canvas);
-            wrap.appendChild(canvas);
+            document.body.appendChild(wrap);
         }
 
         if (!document.getElementById('juliaChatOverlay')) wrap.appendChild(overlay);
