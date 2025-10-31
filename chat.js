@@ -188,6 +188,4 @@
   }
 
   init();
-
-  return { init };
 }));
