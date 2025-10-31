@@ -10,6 +10,9 @@
   let isInputOpen = false;
   const partialStrBySender = new Map();
 
+  let __wsPollTimer = null;
+  let __sendQueue = [];
+
   const now = () => Date.now();
 
   function encodeSurrogate(cp){
@@ -79,8 +82,54 @@
     } else if (isInputOpen){ e.stopPropagation(); }
   }, true);
 
-  function findSocketFromSettings(){ try{ const settings=window.module?.exports?.settings; if(!settings) return null; const modeNode=Object.values(settings).find(v=>v&&v.mode); if(!modeNode) return null; const maybe=Object.values(modeNode).find(v=>v&&v.socket)?.socket; return maybe||null; }catch{ return null; } }
-  function getOpenSocket(){ if (wsRef && wsRef.readyState===WebSocket.OPEN) return wsRef; const s=findSocketFromSettings(); if (s && s.readyState===WebSocket.OPEN){ wsRef=s; return s; } return null; }
+  function locateSocket() {
+    try {
+      const settings = window.module?.exports?.settings;
+      if (!settings) return null;
+      const modeNode = Object.values(settings).find(v => v && v.mode);
+      if (!modeNode) return null;
+      const hit = Object.values(modeNode).find(v => v && v.socket && typeof v.socket.send === 'function');
+      return hit?.socket || null;
+    } catch { return null; }
+  }
+
+  function scanForSocket(obj, seen = new Set()) {
+    if (!obj || typeof obj !== 'object' || seen.has(obj)) return null;
+    seen.add(obj);
+    if (typeof obj.send === 'function' && typeof obj.addEventListener === 'function' && typeof obj.readyState === 'number') return obj;
+    for (const v of Object.values(obj)) {
+      const s = scanForSocket(v, seen);
+      if (s) return s;
+    }
+    return null;
+  }
+
+  function getOpenSocket(){
+    if (wsRef && wsRef.readyState === WebSocket.OPEN) return wsRef;
+
+    let s = locateSocket();
+    if (!s) s = scanForSocket(window.module?.exports);
+
+    if (s) wsRef = s;
+    if (wsRef && wsRef.readyState === WebSocket.OPEN) return wsRef;
+
+    if (!__wsPollTimer) {
+      __wsPollTimer = setInterval(() => {
+        let c = locateSocket();
+        if (!c) c = scanForSocket(window.module?.exports);
+        if (c) wsRef = c;
+        if (wsRef && wsRef.readyState === WebSocket.OPEN) {
+          clearInterval(__wsPollTimer);
+          __wsPollTimer = null;
+          while (__sendQueue.length) {
+            const pkt = __sendQueue.shift();
+            try { wsRef.send(JSON.stringify({ name:'say', data:pkt })); } catch {}
+          }
+        }
+      }, 250);
+    }
+    return null;
+  }
 
   const MIN_INTERVAL_MS = 350;
 
@@ -101,9 +150,10 @@
   }
 
   function wsSendSay(packet){
-    const sock=getOpenSocket();
-    if(!sock){ pushOverlayLine('System','WS недоступен (не в игре?)',0); return false; }
-    try{ sock.send(JSON.stringify({name:'say',data:packet})); return true; } catch{ pushOverlayLine('System','Ошибка отправки',0); return false; }
+    const sock = getOpenSocket();
+    if(!sock){ __sendQueue.push(packet); return false; }
+    try{ sock.send(JSON.stringify({name:'say',data:packet})); return true; }
+    catch{ __sendQueue.push(packet); return false; }
   }
 
   function trySendFromInput(){
@@ -143,7 +193,7 @@
           const text = decodeTransport(next);
           const who=(ownId!=null && senderId===ownId)?'You':(playerInfo[senderId]?.name||`ID${senderId}`);
           const hue=(ownId!=null && senderId===ownId)?310:playerInfo[senderId]?.hue;
-          if(text.trim().length>0) pushOverlayLine(who,text,hue);
+          if(text.trim().length>0) pushOverlayLine(who, text, hue);
           partialStrBySender.delete(senderId);
         }
       }).catch(()=>{});
@@ -153,7 +203,12 @@
   function wrapWS(){
     const OrigWS=window.WebSocket;
     if (!OrigWS || OrigWS.__juliaWrapped) return;
-    function W(...args){ const ws=new OrigWS(...args); initSocket(ws); wsRef=ws; return ws; }
+    function W(...args){
+      const ws=new OrigWS(...args);
+      ws.addEventListener('open', ()=>{ wsRef = ws; });
+      initSocket(ws);
+      return ws;
+    }
     W.prototype=OrigWS.prototype; Object.setPrototypeOf(W, OrigWS); W.__juliaWrapped = true; window.WebSocket = W;
   }
 
