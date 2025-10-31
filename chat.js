@@ -1,4 +1,3 @@
-// Safe browser-only export: no CommonJS branch to avoid touching window.module.exports
 (function (root, factory) {
   root.JuliaChatModule = root.JuliaChatModule || factory();
 })(typeof self !== 'undefined' ? self : this, function () {
@@ -186,6 +185,6 @@
   }
 
   init();
-
+  console.log(window.module.exports);
   return { init, push: pushOverlayLine, decodeTransport };
 });
