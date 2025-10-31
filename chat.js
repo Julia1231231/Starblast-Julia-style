@@ -10,7 +10,7 @@
   const MAX_LINES = 10;
   let isInputOpen = false;
   let __sendQueue = [];
-  const partialBySender = new Map(); // senderId -> pending payload without delimiters
+  const partialBySender = new Map();
 
   const overlay = document.createElement('div');
   const list = document.createElement('div'); overlay.appendChild(list);
@@ -146,23 +146,14 @@
     }catch{ return null; }
   }
 
-  // Fragmentation protocol:
-  // - Transport string S (unicode-escaped) is split into chunks of max 5 chars.
-  // - Each chunk starts with '!' and carries up to 4 payload chars.
-  // - If the chunk is not the last, append trailing '!' (continuation marker).
-  // - Last chunk is just '!' + <<=4 chars> (no trailing '!').
+  // Fragmentation protocol (max 5 chars per chunk, first is '!')
   function chunkEncodedFive(s){
     const out = [];
     let i = 0;
     while (i < s.length) {
       const remain = s.length - i;
-      if (remain <= 4) {
-        out.push('!' + s.slice(i)); // final chunk
-        i = s.length;
-      } else {
-        out.push('!' + s.slice(i, i + 3) + '!'); // continue
-        i += 3;
-      }
+      if (remain <= 4) { out.push('!' + s.slice(i)); i = s.length; }
+      else { out.push('!' + s.slice(i, i + 3) + '!'); i += 3; }
     }
     return out;
   }
@@ -174,7 +165,7 @@
     (function step(){
       if (i >= parts.length) return;
       wsSendSay(parts[i++]);
-      setTimeout(step, 100);
+      setTimeout(step, 380);
     })();
   }
 
@@ -212,33 +203,25 @@
     window.JULIA_CHAT_BRIDGE = window.JULIA_CHAT_BRIDGE || {};
     window.JULIA_CHAT_BRIDGE.show = function(senderId, raw){
       try{
+        const str = String(raw);
+        if (!(str.length >= 1 && str[0] === '!')) return; // показываем только сообщения, начинающиеся на '!'
         const own = getOwnIdSafe();
         const map = namesMap();
-        // raw is the transport chunk like "!abc!" or "!xy"
-        const str = String(raw);
-        if (str.length >= 1 && str[0] === '!') {
-          const isFinal = str[str.length - 1] !== '!';
-          const body = isFinal ? str.slice(1) : str.slice(1, -1);
-          const prev = partialBySender.get(senderId) || '';
-          const next = prev + body;
-          if (!isFinal) {
-            partialBySender.set(senderId, next);
-            return;
-          }
-          // final
-          partialBySender.delete(senderId);
-          const text = decodeTransport(next);
-          const meta = map && map.get(senderId>>>0);
-          const who = (own != null && senderId === own) ? 'You' : (meta?.name || ('ID' + senderId));
-          const hue = (own != null && senderId === own) ? 310 : (meta?.hue);
-          if (text.trim().length > 0) pushOverlayLine(who, text, hue);
+
+        const isFinal = str[str.length - 1] !== '!';
+        const body = isFinal ? str.slice(1) : str.slice(1, -1);
+        const prev = partialBySender.get(senderId) || '';
+        const next = prev + body;
+        if (!isFinal) {
+          partialBySender.set(senderId, next);
           return;
         }
-        // If chunk does not start with '!' (unexpected), fallback show raw
+        partialBySender.delete(senderId);
+        const text = decodeTransport(next);
         const meta = map && map.get(senderId>>>0);
         const who = (own != null && senderId === own) ? 'You' : (meta?.name || ('ID' + senderId));
         const hue = (own != null && senderId === own) ? 310 : (meta?.hue);
-        pushOverlayLine(who, String(raw), hue);
+        if (text.trim().length > 0) pushOverlayLine(who, text, hue);
       }catch{}
     };
   })();
