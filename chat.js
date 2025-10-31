@@ -33,14 +33,14 @@
     }
     function encodeTransport(str) {
         const t = String(str || '');
-        let alnum = true; for (const ch of t) { const c = ch.charCodeAt(0); if (!((c >= 48 && c <= 57) || (c >= 65 && c <= 90) || (c >= 97 && c <= 122))) { alnum = false; break; } }
-        if (alnum) return t.replace(/ /g, '+');
+        const isPlain = /^[A-Za-z0-9 ]*$/.test(t);
+        if (isPlain) return t.replace(/ /g, '+');
         const u16 = new Uint16Array(t.length); for (let i = 0; i < t.length; i++) u16[i] = t.charCodeAt(i);
         const u8 = new Uint8Array(u16.length * 2); for (let i = 0, j = 0; i < u16.length; i++, j += 2) { const v = u16[i]; u8[j] = (v >> 8) & 0xFF; u8[j + 1] = v & 0xFF; }
-        return b64urlEncodeBytes(u8).replace(/ /g, '+');
+        return b64urlEncodeBytes(u8);
     }
-    function decodeTransport(enc, wasAlnum) {
-        if (wasAlnum) return enc;
+    function decodeTransport(enc, isPlain) {
+        if (isPlain) return enc.replace(/\+/g, ' ');
         const u8 = b64urlDecodeToBytes(String(enc || '')); const u16 = new Uint16Array(u8.length >> 1);
         for (let i = 0, j = 0; i < u16.length; i++, j += 2) u16[i] = (u8[j] << 8) | (u8[j + 1]);
         let out = ''; for (let i = 0; i < u16.length; i++) out += String.fromCharCode(u16[i]);
@@ -172,7 +172,7 @@
     function trySendFromInput() {
         const text = input.value.trim();
         if (!text) return;
-        sendChunkedEscaped(text.replace(/ /g,'+'));
+        sendChunkedEscaped(text);
         input.value = '';
     }
 
@@ -205,9 +205,8 @@
                 const next = prev + body;
                 if (!isFinal) { partialBySender.set(senderId, next); return; }
                 partialBySender.delete(senderId);
-                const alnum = /^[A-Za-z0-9+]+$/.test(next);
-                const norm = next.replace(/\+/g, ' ');
-                const text = decodeTransport(norm, alnum && !/[^\w+]/.test(next) ? true : false);
+                const isPlain = /^[A-Za-z0-9+]+$/.test(next);
+                const text = decodeTransport(next, isPlain);
                 const meta = map && map.get(senderId >>> 0);
                 const who = (own != null && senderId === own) ? 'You' : (meta?.name || ('ID' + senderId));
                 const hue = (own != null && senderId === own) ? 310 : (meta?.hue);
