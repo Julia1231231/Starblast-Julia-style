@@ -172,7 +172,7 @@
     function trySendFromInput() {
         const text = input.value.trim();
         if (!text) return;
-        sendChunkedEscaped(text);
+        sendChunkedEscaped(text.replace(/ /g,'+'));
         input.value = '';
     }
 
