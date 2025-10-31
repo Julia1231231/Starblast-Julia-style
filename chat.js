@@ -92,7 +92,7 @@
         Object.assign(overlay.style, {
             position: 'absolute',
             top: '10px',
-            left: '20px',
+            left: '25%',
             maxWidth: '40vw',
             zIndex: '10',
             pointerEvents: 'none',
