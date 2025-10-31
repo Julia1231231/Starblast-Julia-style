@@ -68,41 +68,27 @@
         const canvas = document.querySelector('canvas');
         if (!canvas) return;
 
-        let frame = document.querySelector('.julia-canvas-frame');
-        if (!frame) {
-            frame = document.createElement('div');
-            frame.className = 'julia-canvas-frame';
-            Object.assign(frame.style, {
-                position: 'fixed',
-                inset: '0',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                pointerEvents: 'none',
-                zIndex: '9'
-            });
-            document.body.appendChild(frame);
-        }
-
         let wrap = canvas.parentElement;
-        const needWrap = !wrap || !wrap.classList || !wrap.classList.contains('julia-canvas-wrap');
+        const needWrap = !wrap || getComputedStyle(wrap).position === 'static' || !wrap.classList.contains('julia-canvas-wrap');
         if (needWrap) {
             wrap = document.createElement('div');
             wrap.className = 'julia-canvas-wrap';
             const cs = getComputedStyle(canvas);
             Object.assign(wrap.style, {
-                position: 'relative',
+                position: 'fixed',
+                top: '50%',
+                left: '50%',
+                transform: 'translate(-50%, -50%)',
                 display: 'inline-block',
                 width: cs.width,
                 height: cs.height,
                 lineHeight: '0',
-                pointerEvents: 'none'
+                pointerEvents: 'none',
+                zIndex: '9'
             });
-            if (canvas.parentNode) canvas.parentNode.insertBefore(wrap, canvas);
+            canvas.parentNode.insertBefore(wrap, canvas);
             wrap.appendChild(canvas);
         }
-
-        if (wrap.parentElement !== frame) frame.appendChild(wrap);
 
         if (!document.getElementById('juliaChatOverlay')) wrap.appendChild(overlay);
 
