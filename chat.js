@@ -64,46 +64,79 @@
     const sendBtn = document.createElement('button'); sendBtn.textContent = 'Send';
     inputWrap.appendChild(hint); inputWrap.appendChild(input); inputWrap.appendChild(sendBtn);
 
-    function ensureOverlayFixedNearCanvas() {
+    function anchorOverlayToCanvas() {
         const canvas = document.querySelector('canvas');
-        const apply = () => {
-            const baseTop = 10, baseLeft = 20;
-            if (canvas) {
-                const r = canvas.getBoundingClientRect();
-                overlay.style.position = 'fixed';
-                overlay.style.top = (r.top + baseTop) + 'px';
-                overlay.style.left = (r.left + baseLeft) + 'px';
-                overlay.style.maxWidth = Math.max(200, Math.floor(r.width * 0.4)) + 'px';
-            } else {
-                overlay.style.position = 'fixed';
-                overlay.style.top = baseTop + 'px';
-                overlay.style.left = baseLeft + 'px';
-                overlay.style.maxWidth = '40vw';
-            }
-            overlay.style.zIndex = '2147483647';
-            overlay.style.pointerEvents = 'none';
-            overlay.style.fontFamily = 'Play, system-ui, sans-serif';
-            overlay.style.fontSize = '12pt';
-            overlay.style.lineHeight = '1.25';
-            overlay.style.color = 'white';
-            overlay.style.textShadow = '0 1px 2px rgba(0,0,0,.6)';
-            overlay.style.filter = 'drop-shadow(0 2px 3px rgba(0,0,0,.35))';
-        };
-        apply();
-        if (!window.__juliaOverlaySync) {
-            window.__juliaOverlaySync = true;
-            const ro = new ResizeObserver(apply);
-            if (canvas) ro.observe(canvas);
-            window.addEventListener('resize', apply);
-            window.addEventListener('scroll', apply, true);
-            const mo = new MutationObserver(apply);
-            mo.observe(document.body, { attributes: true, childList: true, subtree: true });
+        if (!canvas) return;
+
+        let frame = document.querySelector('.julia-canvas-frame');
+        if (!frame) {
+            frame = document.createElement('div');
+            frame.className = 'julia-canvas-frame';
+            Object.assign(frame.style, {
+                position: 'fixed',
+                inset: '0',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                pointerEvents: 'none',
+                zIndex: '9'
+            });
+            document.body.appendChild(frame);
+        }
+
+        let wrap = canvas.parentElement;
+        const needWrap = !wrap || !wrap.classList || !wrap.classList.contains('julia-canvas-wrap');
+        if (needWrap) {
+            wrap = document.createElement('div');
+            wrap.className = 'julia-canvas-wrap';
+            const cs = getComputedStyle(canvas);
+            Object.assign(wrap.style, {
+                position: 'relative',
+                display: 'inline-block',
+                width: cs.width,
+                height: cs.height,
+                lineHeight: '0',
+                pointerEvents: 'none'
+            });
+            if (canvas.parentNode) canvas.parentNode.insertBefore(wrap, canvas);
+            wrap.appendChild(canvas);
+        }
+
+        if (wrap.parentElement !== frame) frame.appendChild(wrap);
+
+        if (!document.getElementById('juliaChatOverlay')) wrap.appendChild(overlay);
+
+        Object.assign(overlay.style, {
+            position: 'absolute',
+            top: '10px',
+            left: '20px',
+            maxWidth: '40vw',
+            zIndex: '10',
+            pointerEvents: 'none',
+            fontFamily: 'Play, system-ui, sans-serif',
+            fontSize: '12pt',
+            lineHeight: '1.25',
+            color: 'white',
+            textShadow: '0 1px 2px rgba(0,0,0,.6)',
+            filter: 'drop-shadow(0 2px 3px rgba(0,0,0,.35))'
+        });
+
+        if (!wrap.__resizeObs) {
+            const syncSize = () => {
+                const cst = getComputedStyle(canvas);
+                wrap.style.width = cst.width;
+                wrap.style.height = cst.height;
+            };
+            syncSize();
+            const ro = new ResizeObserver(syncSize);
+            ro.observe(canvas);
+            wrap.__resizeObs = ro;
         }
     }
 
     function mountUI() {
         if (!document.body) return;
-        ensureOverlayFixedNearCanvas();
+        anchorOverlayToCanvas();
         if (!document.getElementById('juliaChatInput')) {
             inputWrap.id = 'juliaChatInput';
             document.body.appendChild(inputWrap);
