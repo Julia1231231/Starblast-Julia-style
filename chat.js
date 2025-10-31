@@ -10,6 +10,7 @@
   const MAX_LINES = 10;
   let isInputOpen = false;
   let __sendQueue = [];
+  const partialBySender = new Map(); // senderId -> pending payload without delimiters
 
   const overlay = document.createElement('div');
   const list = document.createElement('div'); overlay.appendChild(list);
@@ -145,11 +146,52 @@
     }catch{ return null; }
   }
 
-  const MIN_INTERVAL_MS = 100;
-  function chunkEncoded(s){ const out=[]; let i=0; while(i<s.length){ const r=s.length-i; if(r>4){ out.push('!'+s.slice(i,i+3)+'!'); i+=3; } else { out.push('!'+s.slice(i)); i=s.length; } } return out; }
-  function sendChunkedEscaped(text){ const enc=encodeTransport(text); const parts=chunkEncoded(enc); let i=0; (function step(){ if(i>=parts.length) return; wsSendSay(parts[i++]); setTimeout(step, MIN_INTERVAL_MS); })(); }
-  function wsSendSay(packet){ const sock=getSendSocket(); if(!sock || sock.readyState!==WebSocket.OPEN){ __sendQueue.push(packet); return false; } try{ sock.send(JSON.stringify({ name:'say', data:packet })); return true; } catch{ __sendQueue.push(packet); return false; } }
-  function trySendFromInput(){ const text=input.value.trim(); if(!text) return; sendChunkedEscaped(text); input.value=''; }
+  // Fragmentation protocol:
+  // - Transport string S (unicode-escaped) is split into chunks of max 5 chars.
+  // - Each chunk starts with '!' and carries up to 4 payload chars.
+  // - If the chunk is not the last, append trailing '!' (continuation marker).
+  // - Last chunk is just '!' + <<=4 chars> (no trailing '!').
+  function chunkEncodedFive(s){
+    const out = [];
+    let i = 0;
+    while (i < s.length) {
+      const remain = s.length - i;
+      if (remain <= 4) {
+        out.push('!' + s.slice(i)); // final chunk
+        i = s.length;
+      } else {
+        out.push('!' + s.slice(i, i + 3) + '!'); // continue
+        i += 3;
+      }
+    }
+    return out;
+  }
+
+  function sendChunkedEscaped(text){
+    const enc = encodeTransport(text);
+    const parts = chunkEncodedFive(enc);
+    let i = 0;
+    (function step(){
+      if (i >= parts.length) return;
+      wsSendSay(parts[i++]);
+      setTimeout(step, 100);
+    })();
+  }
+
+  function wsSendSay(packet){
+    const sock = getSendSocket();
+    if(!sock || sock.readyState!==WebSocket.OPEN){ __sendQueue.push(packet); return false; }
+    try{ sock.send(JSON.stringify({ name:'say', data:packet })); return true; }
+    catch{ __sendQueue.push(packet); return false; }
+  }
+
+  function trySendFromInput(){
+    const text=input.value.trim();
+    if(!text) return;
+    sendChunkedEscaped(text);
+    input.value='';
+  }
+
   input.addEventListener('keydown',(e)=>{ if(e.key==='Enter'||e.code==='Enter'){ e.preventDefault(); trySendFromInput(); } else if(e.key==='Escape'||e.code==='Escape'){ e.preventDefault(); closeChatInput(); } });
   sendBtn.addEventListener('click', trySendFromInput);
 
@@ -164,6 +206,7 @@
     }, 300);
   }
 
+  // Receiving assembly via JULIA_CHAT_BRIDGE.show (called from patched case 240)
   (function(){
     const namesMap = () => getNamesMap();
     window.JULIA_CHAT_BRIDGE = window.JULIA_CHAT_BRIDGE || {};
@@ -171,11 +214,31 @@
       try{
         const own = getOwnIdSafe();
         const map = namesMap();
+        // raw is the transport chunk like "!abc!" or "!xy"
+        const str = String(raw);
+        if (str.length >= 1 && str[0] === '!') {
+          const isFinal = str[str.length - 1] !== '!';
+          const body = isFinal ? str.slice(1) : str.slice(1, -1);
+          const prev = partialBySender.get(senderId) || '';
+          const next = prev + body;
+          if (!isFinal) {
+            partialBySender.set(senderId, next);
+            return;
+          }
+          // final
+          partialBySender.delete(senderId);
+          const text = decodeTransport(next);
+          const meta = map && map.get(senderId>>>0);
+          const who = (own != null && senderId === own) ? 'You' : (meta?.name || ('ID' + senderId));
+          const hue = (own != null && senderId === own) ? 310 : (meta?.hue);
+          if (text.trim().length > 0) pushOverlayLine(who, text, hue);
+          return;
+        }
+        // If chunk does not start with '!' (unexpected), fallback show raw
         const meta = map && map.get(senderId>>>0);
-        const txt = (typeof decodeTransport === 'function') ? decodeTransport(raw) : String(raw);
         const who = (own != null && senderId === own) ? 'You' : (meta?.name || ('ID' + senderId));
         const hue = (own != null && senderId === own) ? 310 : (meta?.hue);
-        if (typeof pushOverlayLine === 'function') pushOverlayLine(who, txt, hue);
+        pushOverlayLine(who, String(raw), hue);
       }catch{}
     };
   })();
