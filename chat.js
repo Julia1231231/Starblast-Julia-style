@@ -176,6 +176,7 @@
     });
 
     ws.addEventListener('message',(ev)=>{
+        console.log(ev);
       if(!(ev.data instanceof Blob)) return;
       ev.data.arrayBuffer().then((ab)=>{
         const u8=new Uint8Array(ab);
