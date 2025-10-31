@@ -1,7 +1,10 @@
-// chatModule.js — browser global with auto-init (no UMD)
-(function () {
+(function (root, factory) {
+  if (typeof module === 'object' && module.exports) module.exports = factory();
+  else root.JuliaChatModule = factory();
+}(typeof self !== 'undefined' ? self : this, function () {
   'use strict';
-  if (window.__juliaChatBooted) return;
+
+  if (window.__juliaChatBooted) return window.JuliaChatModule || { init: function(){} };
   window.__juliaChatBooted = true;
 
   const playerInfo = {};
@@ -36,31 +39,93 @@
   }
 
   const overlay = document.createElement('div');
-  Object.assign(overlay.style, { position:'fixed', top:'10px', left:'20px', maxWidth:'40vw', zIndex:'2147483647', pointerEvents:'none', fontFamily:'Play, system-ui, sans-serif', fontSize:'12pt', lineHeight:'1.25', color:'white', textShadow:'0 1px 2px rgba(0,0,0,.6)', filter:'drop-shadow(0 2px 3px rgba(0,0,0,.35))' });
   const list = document.createElement('div'); overlay.appendChild(list);
   const MAX_LINES = 10;
+
   function pushOverlayLine(who, text, hue) {
     const row = document.createElement('div');
     row.style.margin='2px 0'; row.style.opacity='1'; row.style.transition='opacity .4s ease';
-    const nameSpan = document.createElement('span'); nameSpan.textContent = who + ': '; nameSpan.style.fontWeight='600'; nameSpan.style.color = typeof hue==='number' ? `hsl(${hue},80%,60%)` : 'hsl(0,0%,85%)';
-    const msgSpan = document.createElement('span'); msgSpan.textContent = text;
+    const nameSpan = document.createElement('span');
+    nameSpan.textContent = who + ': ';
+    nameSpan.style.fontWeight='600';
+    nameSpan.style.color = typeof hue==='number' ? `hsl(${hue},80%,60%)` : 'hsl(0,0%,85%)';
+    const msgSpan = document.createElement('span');
+    msgSpan.textContent = text;
     row.appendChild(nameSpan); row.appendChild(msgSpan); list.appendChild(row);
     while (list.childElementCount > MAX_LINES) list.firstElementChild?.remove();
-    const born = now(); setTimeout(()=>{ if (now()-born>=8000){ row.style.opacity='0'; setTimeout(()=>row.remove(),400);} },8000);
+    const born = now();
+    setTimeout(()=>{ if (now()-born>=8000){ row.style.opacity='0'; setTimeout(()=>row.remove(),400);} },8000);
   }
 
   const inputWrap = document.createElement('div');
-  Object.assign(inputWrap.style, { position:'fixed', bottom:'16px', left:'50%', transform:'translateX(-50%)', zIndex:'2147483647', display:'none', gap:'8px', alignItems:'center', background:'rgba(0,0,0,.55)', padding:'8px 10px', borderRadius:'8px', backdropFilter:'blur(4px)', boxShadow:'0 2px 8px rgba(0,0,0,.35)' });
-  const hint = document.createElement('span'); hint.textContent = 'Alt+C — open/close • Enter — send'; Object.assign(hint.style,{ color:'#ddd', fontFamily:'Play, system-ui, sans-serif', fontSize:'11pt', userSelect:'none' });
-  const input = document.createElement('input'); Object.assign(input,{ type:'text', placeholder:'Enter your message...', spellcheck:false, autocomplete:'off' }); Object.assign(input.style,{ width:'360px', maxWidth:'64vw', outline:'none', border:'1px solid rgba(255,255,255,.2)', background:'rgba(0,0,0,.4)', color:'white', padding:'8px 10px', borderRadius:'6px', fontSize:'12pt', fontFamily:'Play, system-ui, sans-serif' });
-  const sendBtn = document.createElement('button'); sendBtn.textContent='Send'; Object.assign(sendBtn.style,{ border:'none', padding:'8px 12px', borderRadius:'6px', color:'white', background:'hsl(310,80%,50%)', cursor:'pointer', fontSize:'12pt', fontFamily:'Play, system-ui, sans-serif' });
+  const hint = document.createElement('span'); hint.textContent = 'Alt+C — open/close • Enter — send';
+  const input = document.createElement('input');
+  Object.assign(input,{ type:'text', placeholder:'Enter your message...', spellcheck:false, autocomplete:'off' });
+  const sendBtn = document.createElement('button'); sendBtn.textContent='Send';
   inputWrap.appendChild(hint); inputWrap.appendChild(input); inputWrap.appendChild(sendBtn);
 
-  function mountUI(){ if(!document.body) return; if(!document.getElementById('juliaChatOverlay')) document.body.appendChild(overlay); if(!document.getElementById('juliaChatInput')){ inputWrap.id='juliaChatInput'; document.body.appendChild(inputWrap);} }
+  function anchorOverlayToCanvas(){
+    const canvas = document.querySelector('canvas');
+    if (!canvas) return;
+    let wrap = canvas.parentElement;
+    const needWrap = !wrap || getComputedStyle(wrap).position === 'static' || !wrap.classList.contains('julia-canvas-wrap');
+    if (needWrap) {
+      wrap = document.createElement('div');
+      wrap.className = 'julia-canvas-wrap';
+      const cs = getComputedStyle(canvas);
+      Object.assign(wrap.style, { position:'relative', display:'inline-block', width: cs.width, height: cs.height, lineHeight:'0' });
+      canvas.parentNode.insertBefore(wrap, canvas);
+      wrap.appendChild(canvas);
+    }
+    if (!document.getElementById('juliaChatOverlay')) wrap.appendChild(overlay);
+    Object.assign(overlay.style, {
+      position:'absolute',
+      top:'10px',
+      left:'20px',
+      maxWidth:'40vw',
+      zIndex:'10',
+      pointerEvents:'none',
+      fontFamily:'Play, system-ui, sans-serif',
+      fontSize:'12pt',
+      lineHeight:'1.25',
+      color:'white',
+      textShadow:'0 1px 2px rgba(0,0,0,.6)',
+      filter:'drop-shadow(0 2px 3px rgba(0,0,0,.35))'
+    });
+    if (!wrap.__resizeObs) {
+      const syncSize = () => { const cst = getComputedStyle(canvas); wrap.style.width = cst.width; wrap.style.height = cst.height; };
+      syncSize();
+      const ro = new ResizeObserver(syncSize);
+      ro.observe(canvas);
+      wrap.__resizeObs = ro;
+    }
+  }
+
+  function mountUI(){
+    if(!document.body) return;
+    anchorOverlayToCanvas();
+    if(!document.getElementById('juliaChatInput')){
+      inputWrap.id='juliaChatInput';
+      document.body.appendChild(inputWrap);
+    }
+    Object.assign(inputWrap.style, { position:'fixed', bottom:'16px', left:'50%', transform:'translateX(-50%)', zIndex:'2147483647', display:'none', gap:'8px', alignItems:'center', background:'rgba(0,0,0,.55)', padding:'8px 10px', borderRadius:'8px', backdropFilter:'blur(4px)', boxShadow:'0 2px 8px rgba(0,0,0,.35)' });
+    Object.assign(hint.style,{ color:'#ddd', fontFamily:'Play, system-ui, sans-serif', fontSize:'11pt', userSelect:'none' });
+    Object.assign(input.style,{ width:'360px', maxWidth:'64vw', outline:'none', border:'1px solid rgba(255,255,255,.2)', background:'rgba(0,0,0,.4)', color:'white', padding:'8px 10px', borderRadius:'6px', fontSize:'12pt', fontFamily:'Play, system-ui, sans-serif' });
+    Object.assign(sendBtn.style,{ border:'none', padding:'8px 12px', borderRadius:'6px', color:'white', background:'hsl(310,80%,50%)', cursor:'pointer', fontSize:'12pt', fontFamily:'Play, system-ui, sans-serif' });
+  }
   function openChatInput(){ mountUI(); inputWrap.style.display='flex'; isInputOpen=true; setTimeout(()=>{ input.focus({preventScroll:true}); input.select(); },0); }
   function closeChatInput(){ inputWrap.style.display='none'; isInputOpen=false; }
   function toggleChatInput(){ isInputOpen?closeChatInput():openChatInput(); }
-  document.addEventListener('keydown',(e)=>{ const target=e.target, ourInput=target===input; if (e.altKey && (e.code==='KeyC' || (e.key&&e.key.toLowerCase()==='c'))){ e.preventDefault(); e.stopPropagation(); toggleChatInput(); return; } if (ourInput){ if (e.key==='Enter' || e.code==='Enter'){ e.preventDefault(); e.stopPropagation(); trySendFromInput(); return; } if (e.key==='Escape' || e.code==='Escape'){ e.preventDefault(); e.stopPropagation(); closeChatInput(); return; } e.stopPropagation(); } else if (isInputOpen){ e.stopPropagation(); } }, true);
+
+  document.addEventListener('keydown',(e)=>{
+    const target=e.target, ourInput=target===input;
+    if (e.altKey && (e.code==='KeyC' || (e.key&&e.key.toLowerCase()==='c'))){ e.preventDefault(); e.stopPropagation(); toggleChatInput(); return; }
+    if (ourInput){
+      if (e.key==='Enter' || e.code==='Enter'){ e.preventDefault(); e.stopPropagation(); trySendFromInput(); return; }
+      if (e.key==='Escape' || e.code==='Escape'){ e.preventDefault(); e.stopPropagation(); closeChatInput(); return; }
+      e.stopPropagation();
+    } else if (isInputOpen){ e.stopPropagation(); }
+  }, true);
 
   function locateSocket() {
     try {
@@ -102,7 +167,8 @@
   function sendChunkedEscaped(text){ const enc=encodeTransport(text); const parts=chunkEncoded(enc); let i=0; (function step(){ if(i>=parts.length) return; wsSendSay(parts[i++]); setTimeout(step, MIN_INTERVAL_MS); })(); }
   function wsSendSay(packet){ const sock=getOpenSocket(); if(!sock){ __sendQueue.push(packet); return false; } try{ sock.send(JSON.stringify({name:'say',data:packet})); return true; } catch{ __sendQueue.push(packet); return false; } }
   function trySendFromInput(){ const text=input.value.trim(); if(!text) return; sendChunkedEscaped(text); input.value=''; }
-  input.addEventListener('keydown',(e)=>{ if(e.key==='Enter'||e.code==='Enter'){ e.preventDefault(); trySendFromInput(); } else if(e.key==='Escape'||e.code==='Escape'){ e.preventDefault(); closeChatInput(); } }); sendBtn.addEventListener('click', trySendFromInput);
+  input.addEventListener('keydown',(e)=>{ if(e.key==='Enter'||e.code==='Enter'){ e.preventDefault(); trySendFromInput(); } else if(e.key==='Escape'||e.code==='Escape'){ e.preventDefault(); closeChatInput(); } });
+  sendBtn.addEventListener('click', trySendFromInput);
 
   function initSocket(ws){
     ws.addEventListener('message',(ev)=>{ if (typeof ev.data!=='string') return; let msg; try{ msg=JSON.parse(ev.data);}catch{ return; }
@@ -127,8 +193,13 @@
     W.prototype=OrigWS.prototype; Object.setPrototypeOf(W, OrigWS); OrigWS.__juliaWrapped = true; window.WebSocket = W;
   }
 
-  function init(){ mountUI(); wrapWS(); const intv=setInterval(()=>{ mountUI(); if(document.body) clearInterval(intv); },50); }
+  function init(){
+    mountUI();
+    wrapWS();
+    const intv=setInterval(()=>{ mountUI(); if(document.body) clearInterval(intv); },50);
+  }
 
-  window.JuliaChatModule = { init };
   init();
-})();
+
+  return { init };
+}));
