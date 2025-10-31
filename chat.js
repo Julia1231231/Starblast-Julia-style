@@ -1,11 +1,8 @@
 (function (root, factory) {
-                console.log(window.module.exports);
   if (typeof module === 'object' && module.exports) module.exports = factory();
   else root.JuliaChatModule = factory();
 }(typeof self !== 'undefined' ? self : this, function () {
   'use strict';
-
-                  console.log(window.module.exports);
 
   if (window.__juliaChatBooted) return window.JuliaChatModule || { init: function () {} };
   window.__juliaChatBooted = true;
@@ -13,7 +10,6 @@
   const MAX_LINES = 10;
   let isInputOpen = false;
   let __sendQueue = [];
-                console.log(window.module.exports);
 
   const overlay = document.createElement('div');
   const list = document.createElement('div'); overlay.appendChild(list);
@@ -171,19 +167,18 @@
     };
   })();
 
-                  console.log(window.module.exports);
-
-
   function attachInitToModule(){
     const s = getSettingsSafe();
     if (!s) return;
     try{
+                        console.log(window.module.exports);
       if (!Object.prototype.hasOwnProperty.call(s, '__juliaInit')) {
         Object.defineProperty(s, '__juliaInit', {
           configurable: true, enumerable: false, writable: true,
           value: function(){ try{ window.JuliaChatModule && window.JuliaChatModule.init && window.JuliaChatModule.init(); }catch{} }
         });
       }
+                      console.log(window.module.exports);
     }catch{}
   }
 
@@ -191,7 +186,6 @@
     mountUI();
     attachInitToModule();
   }
-                console.log(window.module.exports);
 
   init();
 
