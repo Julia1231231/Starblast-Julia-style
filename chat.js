@@ -1,10 +1,10 @@
+// Safe browser-only export: no CommonJS branch to avoid touching window.module.exports
 (function (root, factory) {
-  if (typeof module === 'object' && module.exports) module.exports = factory();
-  else root.JuliaChatModule = factory();
-}(typeof self !== 'undefined' ? self : this, function () {
+  root.JuliaChatModule = root.JuliaChatModule || factory();
+})(typeof self !== 'undefined' ? self : this, function () {
   'use strict';
 
-  if (window.__juliaChatBooted) return window.JuliaChatModule || { init: function () {} };
+  if (window.__juliaChatBooted) return window.JuliaChatModule || { init: function(){} };
   window.__juliaChatBooted = true;
 
   const MAX_LINES = 10;
@@ -17,22 +17,22 @@
   const inputWrap = document.createElement('div');
   const hint = document.createElement('span'); hint.textContent = 'Alt+C — open/close • Enter — send';
   const input = document.createElement('input');
-  Object.assign(input, { type: 'text', placeholder: 'Enter your message...', spellcheck: false, autocomplete: 'off' });
+  Object.assign(input, { type:'text', placeholder:'Enter your message...', spellcheck:false, autocomplete:'off' });
   const sendBtn = document.createElement('button'); sendBtn.textContent = 'Send';
   inputWrap.appendChild(hint); inputWrap.appendChild(input); inputWrap.appendChild(sendBtn);
 
   const now = () => Date.now();
 
-  function encodeSurrogate(cp) {
-    if (cp <= 0xFFFF) return '\\u' + cp.toString(16).toUpperCase().padStart(4, '0');
+  function encodeSurrogate(cp){
+    if (cp <= 0xFFFF) return '\\u' + cp.toString(16).toUpperCase().padStart(4,'0');
     const v = cp - 0x10000;
     const hi = 0xD800 + (v >> 10);
     const lo = 0xDC00 + (v & 0x3FF);
-    return '\\u' + hi.toString(16).toUpperCase().padStart(4, '0') + '\\u' + lo.toString(16).toUpperCase().padStart(4, '0');
+    return '\\u' + hi.toString(16).toUpperCase().padStart(4,'0') + '\\u' + lo.toString(16).toUpperCase().padStart(4,'0');
   }
-  function encodeTransport(str) {
+  function encodeTransport(str){
     let out = '';
-    for (const ch of String(str || '')) {
+    for (const ch of String(str||'')){
       const code = ch.codePointAt(0);
       if ((code>=0x30&&code<=0x39)||(code>=0x41&&code<=0x5A)||(code>=0x61&&code<=0x7A)) out += ch;
       else out += encodeSurrogate(code);
@@ -171,14 +171,12 @@
     const s = getSettingsSafe();
     if (!s) return;
     try{
-                        console.log(window.module.exports);
       if (!Object.prototype.hasOwnProperty.call(s, '__juliaInit')) {
         Object.defineProperty(s, '__juliaInit', {
           configurable: true, enumerable: false, writable: true,
-          value: function(){ try{ window.JuliaChatModule && window.JuliaChatModule.init && window.JuliaChatModule.init(); }catch{} }
+          value: function(){ try{ window.JuliaChatModule?.init?.(); }catch{} }
         });
       }
-                      console.log(window.module.exports);
     }catch{}
   }
 
@@ -188,4 +186,6 @@
   }
 
   init();
-}));
+
+  return { init, push: pushOverlayLine, decodeTransport };
+});
