@@ -1,3 +1,4 @@
+// Safe browser-only export: no CommonJS branch to avoid touching window.module.exports
 (function (root, factory) {
   root.JuliaChatModule = root.JuliaChatModule || factory();
 })(typeof self !== 'undefined' ? self : this, function () {
@@ -124,6 +125,25 @@
       return found ? found.socket : null;
     }catch{ return null; }
   }
+  function getNamesMap(){
+    const s = getSettingsSafe(); if (!s) return null;
+    try{
+      const withUserClient = Object.values(s).find(o => o && o.user_client);
+      const names = withUserClient?.names?.data;
+      if (!Array.isArray(names)) return null;
+      const map = new Map();
+      for (const it of names) if (it && typeof it.id === 'number') map.set(it.id>>>0, { name: it.player_name, hue: it.hue, custom: it.custom||null });
+      return map;
+    }catch{ return null; }
+  }
+  function getOwnIdSafe(){
+    const s = getSettingsSafe(); if (!s) return null;
+    try{
+      const withUserClient = Object.values(s).find(o => o && o.user_client);
+      const withStatus = withUserClient && Object.values(withUserClient).find(o => o && o.status && typeof o.status.id === 'number');
+      return withStatus ? withStatus.status.id : null;
+    }catch{ return null; }
+  }
 
   const MIN_INTERVAL_MS = 100;
   function chunkEncoded(s){ const out=[]; let i=0; while(i<s.length){ const r=s.length-i; if(r>4){ out.push('!'+s.slice(i,i+3)+'!'); i+=3; } else { out.push('!'+s.slice(i)); i=s.length; } } return out; }
@@ -145,22 +165,16 @@
   }
 
   (function(){
-    function getOwnIdSafe(){
-      const s = getSettingsSafe(); if (!s) return null;
-      try{
-        const withUserClient = Object.values(s).find(o => o && o.user_client);
-        if (!withUserClient) return null;
-        const withStatus = Object.values(withUserClient).find(o => o && o.status && typeof o.status.id === 'number');
-        return withStatus ? withStatus.status.id : null;
-      }catch{ return null; }
-    }
+    const namesMap = () => getNamesMap();
     window.JULIA_CHAT_BRIDGE = window.JULIA_CHAT_BRIDGE || {};
     window.JULIA_CHAT_BRIDGE.show = function(senderId, raw){
       try{
-        var own = getOwnIdSafe();
-        var txt = (typeof decodeTransport === 'function') ? decodeTransport(raw) : String(raw);
-        var who = (own != null && senderId === own) ? 'You' : ('ID' + senderId);
-        var hue = (own != null && senderId === own) ? 310 : undefined;
+        const own = getOwnIdSafe();
+        const map = namesMap();
+        const meta = map && map.get(senderId>>>0);
+        const txt = (typeof decodeTransport === 'function') ? decodeTransport(raw) : String(raw);
+        const who = (own != null && senderId === own) ? 'You' : (meta?.name || ('ID' + senderId));
+        const hue = (own != null && senderId === own) ? 310 : (meta?.hue);
         if (typeof pushOverlayLine === 'function') pushOverlayLine(who, txt, hue);
       }catch{}
     };
@@ -185,6 +199,6 @@
   }
 
   init();
-  console.log(window.module.exports);
+
   return { init, push: pushOverlayLine, decodeTransport };
 });
