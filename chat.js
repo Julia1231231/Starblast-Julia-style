@@ -1,4 +1,3 @@
-// Safe browser-only export: no CommonJS branch to avoid touching window.module.exports
 (function (root, factory) {
   root.JuliaChatModule = root.JuliaChatModule || factory();
 })(typeof self !== 'undefined' ? self : this, function () {
@@ -24,25 +23,28 @@
 
   const now = () => Date.now();
 
-  function encodeSurrogate(cp){
-    if (cp <= 0xFFFF) return '\\u' + cp.toString(16).toUpperCase().padStart(4,'0');
-    const v = cp - 0x10000;
-    const hi = 0xD800 + (v >> 10);
-    const lo = 0xDC00 + (v & 0x3FF);
-    return '\\u' + hi.toString(16).toUpperCase().padStart(4,'0') + '\\u' + lo.toString(16).toUpperCase().padStart(4,'0');
+  function b64urlEncodeBytes(u8){
+    let s=''; for(let i=0;i<u8.length;i++) s+=String.fromCharCode(u8[i]);
+    return btoa(s).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'');
+  }
+  function b64urlDecodeToBytes(b64){
+    let s=b64.replace(/-/g,'+').replace(/_/g,'/'); const pad = s.length%4 ? 4-(s.length%4) : 0; s+= '='.repeat(pad);
+    const bin = atob(s); const out=new Uint8Array(bin.length); for(let i=0;i<bin.length;i++) out[i]=bin.charCodeAt(i); return out;
   }
   function encodeTransport(str){
-    let out = '';
-    for (const ch of String(str||'')){
-      const code = ch.codePointAt(0);
-      if ((code>=0x30&&code<=0x39)||(code>=0x41&&code<=0x5A)||(code>=0x61&&code<=0x7A)) out += ch;
-      else out += encodeSurrogate(code);
-      if (code > 0xFFFF) continue;
-    }
-    return out;
+    const t=String(str||'');
+    let alnum=true; for(const ch of t){ const c=ch.charCodeAt(0); if(!((c>=48&&c<=57)||(c>=65&&c<=90)||(c>=97&&c<=122))){ alnum=false; break; } }
+    if(alnum) return t;
+    const u16=new Uint16Array(t.length); for(let i=0;i<t.length;i++) u16[i]=t.charCodeAt(i);
+    const u8=new Uint8Array(u16.length*2); for(let i=0,j=0;i<u16.length;i++,j+=2){ const v=u16[i]; u8[j]=(v>>8)&0xFF; u8[j+1]=v&0xFF; }
+    return b64urlEncodeBytes(u8);
   }
-  function decodeTransport(str){
-    return str.replace(/\\u([0-9A-Fa-f]{4})/g, (_,h)=>String.fromCharCode(parseInt(h,16)));
+  function decodeTransport(enc, wasAlnum){
+    if(wasAlnum) return enc;
+    const u8=b64urlDecodeToBytes(String(enc||'')); const u16=new Uint16Array(u8.length>>1);
+    for(let i=0,j=0;i<u16.length;i++,j+=2) u16[i]=(u8[j]<<8)|(u8[j+1]);
+    let out=''; for(let i=0;i<u16.length;i++) out+=String.fromCharCode(u16[i]);
+    return out;
   }
 
   function pushOverlayLine(who, text, hue) {
@@ -68,10 +70,7 @@
       wrap = document.createElement('div');
       wrap.className = 'julia-canvas-wrap';
       const cs = getComputedStyle(canvas);
-      Object.assign(wrap.style, {
-        position:'fixed', top:'50%', left:'50%', transform:'translate(-50%, -50%)',
-        width: cs.width, height: cs.height, pointerEvents:'none', zIndex:'9'
-      });
+      Object.assign(wrap.style, { position:'fixed', top:'50%', left:'50%', transform:'translate(-50%, -50%)', width: cs.width, height: cs.height, pointerEvents:'none', zIndex:'9' });
       document.body.appendChild(wrap);
       const syncSize = () => { const cst = getComputedStyle(canvas); wrap.style.width = cst.width; wrap.style.height = cst.height; };
       syncSize();
@@ -80,12 +79,7 @@
       wrap.__resizeObs = ro;
     }
     if (!document.getElementById('juliaChatOverlay')) wrap.appendChild(overlay);
-    Object.assign(overlay.style, {
-      position:'absolute', top:'10px', left:'25%', maxWidth:'40vw', zIndex:'10',
-      pointerEvents:'none', fontFamily:'Play, system-ui, sans-serif', fontSize:'12pt',
-      lineHeight:'1.25', color:'white', textShadow:'0 1px 2px rgba(0,0,0,.6)',
-      filter:'drop-shadow(0 2px 3px rgba(0,0,0,.35))'
-    });
+    Object.assign(overlay.style, { position:'absolute', top:'10px', left:'25%', maxWidth:'40vw', zIndex:'10', pointerEvents:'none', fontFamily:'Play, system-ui, sans-serif', fontSize:'12pt', lineHeight:'1.25', color:'white', textShadow:'0 1px 2px rgba(0,0,0,.6)', filter:'drop-shadow(0 2px 3px rgba(0,0,0,.35))' });
   }
 
   function mountUI(){
@@ -146,7 +140,6 @@
     }catch{ return null; }
   }
 
-  // Fragmentation protocol (max 5 chars per chunk, first is '!')
   function chunkEncodedFive(s){
     const out = [];
     let i = 0;
@@ -197,27 +190,23 @@
     }, 300);
   }
 
-  // Receiving assembly via JULIA_CHAT_BRIDGE.show (called from patched case 240)
   (function(){
     const namesMap = () => getNamesMap();
     window.JULIA_CHAT_BRIDGE = window.JULIA_CHAT_BRIDGE || {};
     window.JULIA_CHAT_BRIDGE.show = function(senderId, raw){
       try{
         const str = String(raw);
-        if (!(str.length >= 1 && str[0] === '!')) return; // показываем только сообщения, начинающиеся на '!'
+        if (!(str.length >= 1 && str[0] === '!')) return;
         const own = getOwnIdSafe();
         const map = namesMap();
-
         const isFinal = str[str.length - 1] !== '!';
         const body = isFinal ? str.slice(1) : str.slice(1, -1);
         const prev = partialBySender.get(senderId) || '';
         const next = prev + body;
-        if (!isFinal) {
-          partialBySender.set(senderId, next);
-          return;
-        }
+        if (!isFinal) { partialBySender.set(senderId, next); return; }
         partialBySender.delete(senderId);
-        const text = decodeTransport(next);
+        const alnum = /^[A-Za-z0-9]+$/.test(next);
+        const text = decodeTransport(next, alnum);
         const meta = map && map.get(senderId>>>0);
         const who = (own != null && senderId === own) ? 'You' : (meta?.name || ('ID' + senderId));
         const hue = (own != null && senderId === own) ? 310 : (meta?.hue);
@@ -246,5 +235,5 @@
 
   init();
 
-  return { init, push: pushOverlayLine, decodeTransport };
+  return { init, push: pushOverlayLine };
 });
