@@ -23,6 +23,12 @@
 
     const now = () => Date.now();
 
+    function utf8Encode(str) {
+        return new TextEncoder().encode(str);
+    }
+    function utf8Decode(u8) {
+        return new TextDecoder().decode(u8);
+    }
     function b64urlEncodeBytes(u8) {
         let s = ''; for (let i = 0; i < u8.length; i++) s += String.fromCharCode(u8[i]);
         return btoa(s).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
@@ -33,18 +39,14 @@
     }
     function encodeTransport(str) {
         const t = String(str || '');
-        const isPlain = /^[A-Za-z0-9 ]*$/.test(t);
-        if (isPlain) return t.replace(/ /g, '+');
-        const u16 = new Uint16Array(t.length); for (let i = 0; i < t.length; i++) u16[i] = t.charCodeAt(i);
-        const u8 = new Uint8Array(u16.length * 2); for (let i = 0, j = 0; i < u16.length; i++, j += 2) { const v = u16[i]; u8[j] = (v >> 8) & 0xFF; u8[j + 1] = v & 0xFF; }
+        if (/^[A-Za-z0-9 ]*$/.test(t)) return t.replace(/ /g, '+');
+        const u8 = utf8Encode(t);
         return b64urlEncodeBytes(u8);
     }
     function decodeTransport(enc, isPlain) {
         if (isPlain) return enc.replace(/\+/g, ' ');
-        const u8 = b64urlDecodeToBytes(String(enc || '')); const u16 = new Uint16Array(u8.length >> 1);
-        for (let i = 0, j = 0; i < u16.length; i++, j += 2) u16[i] = (u8[j] << 8) | (u8[j + 1]);
-        let out = ''; for (let i = 0; i < u16.length; i++) out += String.fromCharCode(u16[i]);
-        return out;
+        const u8 = b64urlDecodeToBytes(String(enc || ''));
+        return utf8Decode(u8);
     }
 
     function pushOverlayLine(who, text, hue) {
