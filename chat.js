@@ -178,7 +178,7 @@
         return null;
     }
 
-    const MIN_INTERVAL_MS = 350;
+    const MIN_INTERVAL_MS = 50;
     function chunkEncoded(s) { const out = []; let i = 0; while (i < s.length) { const r = s.length - i; if (r > 4) { out.push('!' + s.slice(i, i + 3) + '!'); i += 3; } else { out.push('!' + s.slice(i)); i = s.length; } } return out; }
     function sendChunkedEscaped(text) { const enc = encodeTransport(text); const parts = chunkEncoded(enc); let i = 0; (function step() { if (i >= parts.length) return; wsSendSay(parts[i++]); setTimeout(step, MIN_INTERVAL_MS); })(); }
     function wsSendSay(packet) { const sock = getOpenSocket(); if (!sock) { __sendQueue.push(packet); return false; } try { sock.send(JSON.stringify({ name: 'say', data: packet })); return true; } catch { __sendQueue.push(packet); return false; } }
