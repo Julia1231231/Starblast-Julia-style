@@ -52,12 +52,13 @@
     function encodeTransport(str) {
         const t = String(str || '');
         if (/^[A-Za-z0-9 ]*$/.test(t)) return t.replace(/ /g, '+');
-        return enc62Bytes(utf8Encode(t));
+        return '0J' + enc62Bytes(utf8Encode(t));
     }
 
-    function decodeTransport(data, isPlain) {
-        if (isPlain) return data.replace(/\+/g, ' ');
-        return utf8Decode(dec62ToBytes(String(data || '')));
+    function decodeTransport(data) {
+        const s = String(data || '');
+        if (s.startsWith('0J')) return utf8Decode(dec62ToBytes(s.slice(2)));
+        return s.replace(/\+/g, ' ');
     }
 
     function pushOverlayLine(who, text, hue) {
@@ -218,8 +219,7 @@
                 const next = prev + body;
                 if (!isFinal) { partialBySender.set(senderId, next); return; }
                 partialBySender.delete(senderId);
-                const isPlain = /^[A-Za-z0-9+]+$/.test(next);
-                const text = decodeTransport(next, isPlain);
+                const text = decodeTransport(next);
                 const meta = map && map.get(senderId >>> 0);
                 const who = (own != null && senderId === own) ? 'You' : (meta?.name || ('ID' + senderId));
                 const hue = (own != null && senderId === own) ? 310 : (meta?.hue);
