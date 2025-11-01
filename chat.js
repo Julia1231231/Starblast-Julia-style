@@ -165,7 +165,7 @@
     (function step() {
       if (i >= parts.length) return;
       wsSendSay(parts[i++]);
-      setTimeout(step, 380);
+      setTimeout(step, 350);
     })();
   }
 
