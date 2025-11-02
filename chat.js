@@ -15,7 +15,7 @@
   const list = document.createElement('div'); overlay.appendChild(list);
 
   const inputWrap = document.createElement('div');
-  const hint = document.createElement('span'); hint.textContent = 'Alt+C — open/close • Enter — send';
+  const hint = document.createElement('span'); hint.textContent = 'Shift+C — open/close • Enter — send';
   const input = document.createElement('input');
   Object.assign(input, { type: 'text', placeholder: 'Enter your message...', spellcheck: false, autocomplete: 'off' });
   const sendBtn = document.createElement('button'); sendBtn.textContent = 'Send';
@@ -107,7 +107,7 @@
 
   document.addEventListener('keydown', (e) => {
     const target = e.target, ourInput = target === input;
-    if (e.altKey && (e.code === 'KeyC' || (e.key && e.key.toLowerCase() === 'c'))) { e.preventDefault(); e.stopPropagation(); toggleChatInput(); return; }
+    if (e.shiftKey && (e.code === 'KeyC' || (e.key && e.key.toLowerCase() === 'c'))) { e.preventDefault(); e.stopPropagation(); toggleChatInput(); return; }
     if (ourInput) {
       if (e.key === 'Enter' || e.code === 'Enter') { e.preventDefault(); e.stopPropagation(); trySendFromInput(); return; }
       if (e.key === 'Escape' || e.code === 'Escape') { e.preventDefault(); e.stopPropagation(); closeChatInput(); return; }
