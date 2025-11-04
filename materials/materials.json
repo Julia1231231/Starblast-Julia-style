@@ -30,6 +30,12 @@
         "color": "0000000"
     },
     {
+        "name": "buildX27Material",
+        "specular": 4243711,
+        "shininess": 30,
+        "color": "5275808"
+    },
+    {
         "name": "buildFullColorJMaterial",
         "specular": 12632256,
         "shininess": 50,
