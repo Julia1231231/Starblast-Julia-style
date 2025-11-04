@@ -60,12 +60,6 @@
         "color": 16744448
     },
     {
-        "name": "buildSilverMaterial",
-        "specular": 12632256,
-        "shininess": 60,
-        "color": 12632256
-    },
-    {
         "name": "buildFullColorJMaterial",
         "specular": 12632256,
         "shininess": 50,
