@@ -45,6 +45,60 @@
         ]
     },
     {
+        "key": "red",
+        "stops": [
+            { "pos": 0, "color": "hsl(0,100%,70%)" },
+            { "pos": 0.5, "color": "hsl(0,100%,85%)" },
+            { "pos": 0.5, "color": "hsl(0,100%,50%)" },
+            { "pos": 1, "color": "hsl(0,100%,70%)" }
+        ]
+    },
+    {
+        "key": "purple",
+        "stops": [
+            { "pos": 0, "color": "hsl(270,100%,70%)" },
+            { "pos": 0.5, "color": "hsl(270,100%,85%)" },
+            { "pos": 0.5, "color": "hsl(260,100%,50%)" },
+            { "pos": 1, "color": "hsl(270,100%,70%)" }
+        ]
+    },
+    {
+        "key": "cyan",
+        "stops": [
+            { "pos": 0, "color": "hsl(180,100%,70%)" },
+            { "pos": 0.5, "color": "hsl(180,100%,85%)" },
+            { "pos": 0.5, "color": "hsl(180,100%,50%)" },
+            { "pos": 1, "color": "hsl(180,100%,70%)" }
+        ]
+    },
+    {
+        "key": "yellow",
+        "stops": [
+            { "pos": 0, "color": "hsl(60,100%,70%)" },
+            { "pos": 0.5, "color": "hsl(60,100%,85%)" },
+            { "pos": 0.5, "color": "hsl(50,100%,50%)" },
+            { "pos": 1, "color": "hsl(60,100%,70%)" }
+        ]
+    },
+    {
+        "key": "orange",
+        "stops": [
+            { "pos": 0, "color": "hsl(30,100%,70%)" },
+            { "pos": 0.5, "color": "hsl(30,100%,85%)" },
+            { "pos": 0.5, "color": "hsl(25,100%,50%)" },
+            { "pos": 1, "color": "hsl(30,100%,70%)" }
+        ]
+    },
+    {
+        "key": "silver",
+        "stops": [
+            { "pos": 0, "color": "hsl(0,0%,85%)" },
+            { "pos": 0.5, "color": "hsl(0,0%,95%)" },
+            { "pos": 0.5, "color": "hsl(0,0%,70%)" },
+            { "pos": 1, "color": "hsl(0,0%,85%)" }
+        ]
+    },
+    {
         "key": "diamond",
         "stops": [
             { "pos": 0, "color": "hsl(0,0%,95%)" },
