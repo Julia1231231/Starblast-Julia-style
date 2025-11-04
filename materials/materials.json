@@ -30,6 +30,42 @@
         "color": "0000000"
     },
     {
+        "name": "buildRedMaterial",
+        "specular": 16711680,
+        "shininess": 15,
+        "color": 16711680
+    },
+    {
+        "name": "buildPurpleMaterial",
+        "specular": 10494288,
+        "shininess": 20,
+        "color": 10494288
+    },
+    {
+        "name": "buildCyanMaterial",
+        "specular": 65535,
+        "shininess": 25,
+        "color": 65535
+    },
+    {
+        "name": "buildYellowMaterial",
+        "specular": 16776960,
+        "shininess": 30,
+        "color": 16776960
+    },
+    {
+        "name": "buildOrangeMaterial",
+        "specular": 16744448,
+        "shininess": 25,
+        "color": 16744448
+    },
+    {
+        "name": "buildSilverMaterial",
+        "specular": 12632256,
+        "shininess": 60,
+        "color": 12632256
+    },
+    {
         "name": "buildFullColorJMaterial",
         "specular": 12632256,
         "shininess": 50,
