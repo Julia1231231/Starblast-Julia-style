@@ -45,7 +45,7 @@
         "name": "buildHolographicMaterial",
         "specular": 15527148,
         "shininess": 90,
-        "color": 12632256,
+        "useHue": true,
         "opacity": 0.3
     }
 ]
