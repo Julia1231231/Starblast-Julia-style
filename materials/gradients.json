@@ -90,21 +90,12 @@
         ]
     },
     {
-        "key": "silver",
-        "stops": [
-            { "pos": 0, "color": "hsl(0,0%,85%)" },
-            { "pos": 0.5, "color": "hsl(0,0%,95%)" },
-            { "pos": 0.5, "color": "hsl(0,0%,70%)" },
-            { "pos": 1, "color": "hsl(0,0%,85%)" }
-        ]
-    },
-    {
         "key": "diamond",
         "stops": [
-            { "pos": 0, "color": "hsl(0,0%,95%)" },
-            { "pos": 0.5, "color": "hsl(0,0%,100%)" },
-            { "pos": 0.5, "color": "hsl(0,0%,80%)" },
-            { "pos": 1, "color": "hsl(0,0%,95%)" }
+            { "pos": 0, "color": "hsla(0,0%,25%,0.5)" },
+            { "pos": 0.5, "color": "hsla(0,0%,40%,0.5)" },
+            { "pos": 0.5, "color": "hsla(0,0%,10%,0.5)" },
+            { "pos": 1, "color": "hsla(0,0%,25%,0.5)" }
         ]
     },
     {
