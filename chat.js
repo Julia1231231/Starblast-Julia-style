@@ -1,91 +1,164 @@
-(function (root, factory) {
-  root.JuliaChatModule = root.JuliaChatModule || factory();
-})(typeof self !== 'undefined' ? self : this, function () {
+(function () {
   'use strict';
 
-  if (window.__juliaChatBooted) return window.JuliaChatModule || { init: function () { } };
-  window.__juliaChatBooted = true;
-
-  const MAX_LINES = 10;
+  const playerInfo = {};
+  let ownId = null;
+  let wsRef = null;
   let isInputOpen = false;
-  let __sendQueue = [];
-  const partialBySender = new Map();
 
-  const overlay = document.createElement('div');
-  const list = document.createElement('div'); overlay.appendChild(list);
-
-  const inputWrap = document.createElement('div');
-  const hint = document.createElement('span'); hint.textContent = 'Shift+C — open/close • Enter — send';
-  const input = document.createElement('input');
-  Object.assign(input, { type: 'text', placeholder: 'Enter your message...', spellcheck: false, autocomplete: 'off' });
-  const sendBtn = document.createElement('button'); sendBtn.textContent = 'Send';
-  inputWrap.appendChild(hint); inputWrap.appendChild(input); inputWrap.appendChild(sendBtn);
+  const chatParticipants = new Set();
 
   const now = () => Date.now();
 
-  function utf8Encode(s) { return new TextEncoder().encode(String(s || '')); }
-  function utf8Decode(u8) { return new TextDecoder().decode(u8); }
+  const overlay = document.createElement('div');
+  overlay.id = 'juliaChatOverlay';
+  const list = document.createElement('div');
+  overlay.appendChild(list);
+  const MAX_LINES = 10;
+  const MESSAGE_LIFETIME = 10000;
+  list.style.whiteSpace = 'pre-wrap';
 
-  function b64urlFromBytes(u8) {
-    let bin = '';
-    for (let i = 0; i < u8.length; i++) bin += String.fromCharCode(u8[i]);
-    const b64 = btoa(bin);
-    return b64.replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
-  }
-
-  function b64urlToBytes(s) {
-    let b64 = s.replace(/-/g, '+').replace(/_/g, '/');
-    const pad = b64.length % 4;
-    if (pad) b64 += '==='.slice(pad - 1);
-    const bin = atob(b64);
-    const u8 = new Uint8Array(bin.length);
-    for (let i = 0; i < bin.length; i++) u8[i] = bin.charCodeAt(i);
-    return u8;
-  }
-
-  function encodeTransport(text) {
-    const u8 = utf8Encode(text);
-    return b64urlFromBytes(u8);
-  }
-
-  function decodeTransport(payload) {
-    const u8 = b64urlToBytes(payload);
-    return utf8Decode(u8);
-  }
-
-  function pushOverlayLine(who, text, hue) {
+  function pushOverlayLine(who, text, hue, kind) {
     const row = document.createElement('div');
-    row.style.margin = '2px 0'; row.style.opacity = '1'; row.style.transition = 'opacity .4s ease';
+    row.style.margin = '2px 0';
+    row.style.opacity = '1';
+    row.style.transition = 'opacity .4s ease';
+    row.style.padding = '3px 6px';
+    row.style.borderRadius = '6px';
+    row.style.background = 'rgba(0,0,0,.35)';
     const nameSpan = document.createElement('span');
     nameSpan.textContent = who + ': ';
     nameSpan.style.fontWeight = '600';
-    nameSpan.style.color = typeof hue === 'number' ? `hsl(${hue},80%,60%)` : 'hsl(0,0%,85%)';
     const msgSpan = document.createElement('span');
     msgSpan.textContent = text;
-    row.appendChild(nameSpan); row.appendChild(msgSpan); list.appendChild(row);
+    if (kind === 'presence') {
+      nameSpan.style.color = '#d8c455';
+      msgSpan.style.color = '#d8c455';
+      nameSpan.style.fontStyle = 'italic';
+      msgSpan.style.fontStyle = 'italic';
+    } else {
+      nameSpan.style.color = typeof hue === 'number' ? `hsl(${hue},80%,60%)` : 'hsl(0,0%,85%)';
+      msgSpan.style.color = 'hsl(0,0%,95%)';
+    }
+    row.appendChild(nameSpan);
+    row.appendChild(msgSpan);
+    list.appendChild(row);
     while (list.childElementCount > MAX_LINES) list.firstElementChild?.remove();
     const born = now();
-    setTimeout(() => { if (now() - born >= 8000) { row.style.opacity = '0'; setTimeout(() => row.remove(), 400); } }, 8000);
+    setTimeout(() => {
+      if (now() - born >= MESSAGE_LIFETIME) {
+        row.style.opacity = '0';
+        setTimeout(() => row.remove(), 400);
+      }
+    }, MESSAGE_LIFETIME);
   }
+
+  const inputWrap = document.createElement('div');
+  Object.assign(inputWrap.style, {
+    position: 'fixed',
+    bottom: '16px',
+    left: '50%',
+    transform: 'translateX(-50%)',
+    zIndex: '2147483647',
+    display: 'none',
+    gap: '8px',
+    alignItems: 'center',
+    background: 'rgba(0,0,0,.65)',
+    padding: '8px 10px',
+    borderRadius: '10px',
+    backdropFilter: 'blur(5px)',
+    boxShadow: '0 3px 10px rgba(0,0,0,.45)',
+    border: '1px solid rgba(255,255,255,.15)'
+  });
+  const hint = document.createElement('span');
+  hint.textContent = 'Shift+C — open/close • Enter — send';
+  Object.assign(hint.style, {
+    color: '#ddd',
+    fontFamily: 'Play, system-ui, sans-serif',
+    fontSize: '11pt',
+    userSelect: 'none'
+  });
+  const input = document.createElement('input');
+  Object.assign(input, {
+    type: 'text',
+    placeholder: 'Enter your message...',
+    spellcheck: false,
+    autocomplete: 'off'
+  });
+  Object.assign(input.style, {
+    width: '360px',
+    maxWidth: '64vw',
+    outline: 'none',
+    border: '1px solid rgba(255,255,255,.28)',
+    background: 'rgba(0,0,0,.5)',
+    color: 'white',
+    padding: '8px 10px',
+    borderRadius: '6px',
+    fontSize: '12pt',
+    fontFamily: 'Play, system-ui, sans-serif',
+    boxShadow: '0 1px 3px rgba(0,0,0,.4)'
+  });
+  const sendBtn = document.createElement('button');
+  sendBtn.textContent = 'Send';
+  Object.assign(sendBtn.style, {
+    border: 'none',
+    padding: '8px 12px',
+    borderRadius: '6px',
+    color: 'white',
+    background: 'linear-gradient(135deg, hsl(310,80%,55%), hsl(280,80%,50%))',
+    cursor: 'pointer',
+    fontSize: '12pt',
+    fontFamily: 'Play, system-ui, sans-serif',
+    boxShadow: '0 2px 6px rgba(0,0,0,.45)'
+  });
+  inputWrap.appendChild(hint);
+  inputWrap.appendChild(input);
+  inputWrap.appendChild(sendBtn);
 
   function anchorOverlayToCanvas() {
     const canvas = document.querySelector('canvas');
     if (!canvas) return;
     let wrap = document.querySelector('.julia-canvas-wrap');
+    const updateSize = () => {
+      const cs = getComputedStyle(canvas);
+      if (!wrap) return;
+      wrap.style.width = cs.width;
+      wrap.style.height = cs.height;
+    };
     if (!wrap) {
       wrap = document.createElement('div');
       wrap.className = 'julia-canvas-wrap';
-      const cs = getComputedStyle(canvas);
-      Object.assign(wrap.style, { position: 'fixed', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', width: cs.width, height: cs.height, pointerEvents: 'none', zIndex: '9' });
+      Object.assign(wrap.style, {
+        position: 'fixed',
+        top: '50%',
+        left: '50%',
+        transform: 'translate(-50%, -50%)',
+        pointerEvents: 'none',
+        zIndex: '9'
+      });
       document.body.appendChild(wrap);
-      const syncSize = () => { const cst = getComputedStyle(canvas); wrap.style.width = cst.width; wrap.style.height = cst.height; };
-      syncSize();
-      const ro = new ResizeObserver(syncSize);
+      updateSize();
+      const ro = new ResizeObserver(updateSize);
       ro.observe(canvas);
       wrap.__resizeObs = ro;
+    } else {
+      updateSize();
     }
-    if (!document.getElementById('juliaChatOverlay')) wrap.appendChild(overlay);
-    Object.assign(overlay.style, { position: 'absolute', top: '10px', left: '25%', maxWidth: '40vw', zIndex: '10', pointerEvents: 'none', fontFamily: 'Play, system-ui, sans-serif', fontSize: '12pt', lineHeight: '1.25', color: 'white', textShadow: '0 1px 2px rgba(0,0,0,.6)', filter: 'drop-shadow(0 2px 3px rgba(0,0,0,.35))' });
+    if (overlay.parentNode !== wrap) wrap.appendChild(overlay);
+    Object.assign(overlay.style, {
+      position: 'absolute',
+      top: '10px',
+      left: '25%',
+      maxWidth: '40vw',
+      zIndex: '10',
+      pointerEvents: 'none',
+      fontFamily: 'Play, system-ui, sans-serif',
+      fontSize: '12pt',
+      lineHeight: '1.25',
+      color: 'white',
+      textShadow: '0 1px 2px rgba(0,0,0,.6)',
+      filter: 'drop-shadow(0 2px 3px rgba(0,0,0,.35))'
+    });
   }
 
   function mountUI() {
@@ -95,151 +168,261 @@
       inputWrap.id = 'juliaChatInput';
       document.body.appendChild(inputWrap);
     }
-    Object.assign(inputWrap.style, { position: 'fixed', bottom: '16px', left: '50%', transform: 'translateX(-50%)', zIndex: '2147483647', display: 'none', gap: '8px', alignItems: 'center', background: 'rgba(0,0,0,.55)', padding: '8px 10px', borderRadius: '8px', backdropFilter: 'blur(4px)', boxShadow: '0 2px 8px rgba(0,0,0,.35)' });
-    Object.assign(hint.style, { color: '#ddd', fontFamily: 'Play, system-ui, sans-serif', fontSize: '11pt', userSelect: 'none' });
-    Object.assign(input.style, { width: '360px', maxWidth: '64vw', outline: 'none', border: '1px solid rgba(255,255,255,.2)', background: 'rgba(0,0,0,.4)', color: 'white', padding: '8px 10px', borderRadius: '6px', fontSize: '12pt', fontFamily: 'Play, system-ui, sans-serif' });
-    Object.assign(sendBtn.style, { border: 'none', padding: '8px 12px', borderRadius: '6px', color: 'white', background: 'hsl(310,80%,50%)', cursor: 'pointer', fontSize: '12pt', fontFamily: 'Play, system-ui, sans-serif' });
-    list.style.whiteSpace = 'pre-wrap';
   }
-  function openChatInput() { mountUI(); inputWrap.style.display = 'flex'; isInputOpen = true; setTimeout(() => { input.focus({ preventScroll: true }); input.select(); }, 0); }
-  function closeChatInput() { inputWrap.style.display = 'none'; isInputOpen = false; }
-  function toggleChatInput() { isInputOpen ? closeChatInput() : openChatInput(); }
+
+  const uiInterval = setInterval(() => {
+    mountUI();
+    if (overlay.parentNode) clearInterval(uiInterval);
+  }, 50);
+
+  let mqttReady = false;
+
+  function openChatInput() {
+    if (!mqttReady) return;
+    mountUI();
+    inputWrap.style.display = 'flex';
+    isInputOpen = true;
+    setTimeout(() => {
+      input.focus({ preventScroll: true });
+      input.select();
+    }, 0);
+  }
+
+  function closeChatInput() {
+    inputWrap.style.display = 'none';
+    isInputOpen = false;
+  }
+
+  function toggleChatInput() {
+    isInputOpen ? closeChatInput() : openChatInput();
+  }
 
   document.addEventListener('keydown', (e) => {
-    const target = e.target, ourInput = target === input;
-    if (e.shiftKey && (e.code === 'KeyC' || (e.key && e.key.toLowerCase() === 'c'))) { e.preventDefault(); e.stopPropagation(); toggleChatInput(); return; }
-    if (ourInput) {
-      if (e.key === 'Enter' || e.code === 'Enter') { e.preventDefault(); e.stopPropagation(); trySendFromInput(); return; }
-      if (e.key === 'Escape' || e.code === 'Escape') { e.preventDefault(); e.stopPropagation(); closeChatInput(); return; }
+    const target = e.target;
+    const ourInput = target === input;
+    if (e.shiftKey && (e.code === 'KeyC' || (e.key && e.key.toLowerCase() === 'c'))) {
+      e.preventDefault();
       e.stopPropagation();
-    } else if (isInputOpen) { e.stopPropagation(); }
+      toggleChatInput();
+      return;
+    }
+    if (ourInput) {
+      if (e.key === 'Enter' || e.code === 'Enter') {
+        e.preventDefault();
+        e.stopPropagation();
+        trySendFromInput();
+        return;
+      }
+      if (e.key === 'Escape' || e.code === 'Escape') {
+        e.preventDefault();
+        e.stopPropagation();
+        closeChatInput();
+        return;
+      }
+      e.stopPropagation();
+    } else if (isInputOpen) {
+      e.stopPropagation();
+    }
   }, true);
 
-  function getSettingsSafe() {
-    try { return window.module && window.module.exports && window.module.exports.settings || null; }
-    catch { return null; }
-  }
-  function getSendSocket() {
-    try {
-      const s = getSettingsSafe(); if (!s) return null;
-      const modeNode = Object.values(s).find(v => v && v.mode); if (!modeNode) return null;
-      const found = Object.values(modeNode).find(v => v && v.socket && typeof v.socket.send === 'function');
-      return found ? found.socket : null;
-    } catch { return null; }
-  }
-  function getNamesMap() {
-    const s = getSettingsSafe(); if (!s) return null;
-    try {
-      const withUserClient = Object.values(s).find(o => o && o.user_client);
-      const names = withUserClient?.names?.data;
-      if (!Array.isArray(names)) return null;
-      const map = new Map();
-      for (const it of names) if (it && typeof it.id === 'number') map.set(it.id >>> 0, { name: it.player_name, hue: it.hue, custom: it.custom || null });
-      return map;
-    } catch { return null; }
-  }
-  function getOwnIdSafe() {
-    const s = getSettingsSafe(); if (!s) return null;
-    try {
-      const withUserClient = Object.values(s).find(o => o && o.user_client);
-      const withStatus = withUserClient && Object.values(withUserClient).find(o => o && o.status && typeof o.status.id === 'number');
-      return withStatus ? withStatus.status.id : null;
-    } catch { return null; }
+  const MQTT_URL = 'wss://srv2.clusterfly.ru:9994';
+  const MQTT_USER_ID = 'user_2ccabc76';
+  const MQTT_USERNAME = 'user_2ccabc76';
+  const MQTT_PASSWORD = 'MDLQdxESxVWxD';
+  const MQTT_MIN_INTERVAL_MS = 1000;
+  let mqttClient = null;
+  let mqttCurrentTopic = null;
+  let currentGameKey = null;
+  let lastMqttSend = 0;
+  let presenceJoined = false;
+
+  function ensureMqttClient() {
+    if (mqttClient) return;
+    const clientId = 'jchat_' + Math.random().toString(16).slice(2);
+    mqttClient = mqtt.connect(MQTT_URL, {
+      clientId: clientId,
+      username: MQTT_USERNAME,
+      password: MQTT_PASSWORD,
+      clean: true,
+      reconnectPeriod: 1000,
+      connectTimeout: 5000
+    });
+    mqttClient.on('error', (err) => {
+      console.error('[MQTT] error', err && err.message, err);
+    });
+    mqttClient.on('connect', () => {
+      mqttReady = true;
+      updateMqttSubscription();
+      trySendJoinPresence();
+    });
+    mqttClient.on('message', (topic, payload) => {
+      let text = '';
+      try { text = payload.toString(); } catch { return; }
+      let data = null;
+      try { data = JSON.parse(text); } catch { return; }
+      if (!data || typeof data.type !== 'string') return;
+      if (data.game && currentGameKey && data.game !== currentGameKey) return;
+      if (data.type === 'chat') {
+        if (typeof data.text !== 'string') return;
+        const senderId = data.id != null ? (data.id >>> 0) : 0;
+        chatParticipants.add(senderId);
+        const info = playerInfo[senderId] || {};
+        const isSelf = ownId != null && senderId === ownId;
+        const who = isSelf ? 'You' : (info.name || data.name || ('ID' + senderId));
+        const hue = isSelf ? 310 : (info.hue != null ? info.hue : data.hue);
+        if (data.text.trim().length > 0) pushOverlayLine(who, data.text, hue, 'chat');
+      } else if (data.type === 'presence') {
+        const senderId = data.id != null ? (data.id >>> 0) : 0;
+        const info = playerInfo[senderId] || {};
+        const isSelf = ownId != null && senderId === ownId;
+        if (data.state === 'join') {
+          chatParticipants.add(senderId);
+          if (!isSelf) {
+            const whoJ = info.name || data.name || ('ID' + senderId);
+            const hueJ = info.hue != null ? info.hue : data.hue;
+            pushOverlayLine(whoJ, 'joined chat', hueJ, 'presence');
+          }
+        } else if (data.state === 'leave') {
+          chatParticipants.delete(senderId);
+          if (!isSelf) {
+            const whoL = info.name || data.name || ('ID' + senderId);
+            const hueL = info.hue != null ? info.hue : data.hue;
+            pushOverlayLine(whoL, 'left chat', hueL, 'presence');
+          }
+        }
+      }
+    });
   }
 
-  function chunkEncodedFive(s) {
-    const out = [];
-    let i = 0;
-    while (i < s.length) {
-      const remain = s.length - i;
-      if (remain <= 4) { out.push('!' + s.slice(i)); i = s.length; }
-      else { out.push('!' + s.slice(i, i + 3) + '!'); i += 3; }
-    }
-    return out;
+  function updateMqttSubscription() {
+    if (!mqttClient || !mqttClient.connected) return;
+    if (!currentGameKey) return;
+    const topic = MQTT_USER_ID + '/julia_chat/' + currentGameKey;
+    if (topic === mqttCurrentTopic) return;
+    if (mqttCurrentTopic) mqttClient.unsubscribe(mqttCurrentTopic);
+    mqttCurrentTopic = topic;
+    mqttClient.subscribe(mqttCurrentTopic);
   }
 
-  function sendChunkedEscaped(text) {
-    const enc = encodeTransport(text);
-    const parts = chunkEncodedFive(enc);
-    let i = 0;
-    (function step() {
-      if (i >= parts.length) return;
-      wsSendSay(parts[i++]);
-      setTimeout(step, 350);
-    })();
+  function publishMqttPayload(obj) {
+    if (!obj) return;
+    ensureMqttClient();
+    if (!mqttClient || !mqttClient.connected) return;
+    if (!currentGameKey) return;
+    if (!mqttCurrentTopic) updateMqttSubscription();
+    if (!mqttCurrentTopic) return;
+    const t = now();
+    if (t - lastMqttSend < MQTT_MIN_INTERVAL_MS) return;
+    lastMqttSend = t;
+    mqttClient.publish(mqttCurrentTopic, JSON.stringify(obj));
   }
 
-  function wsSendSay(packet) {
-    const sock = getSendSocket();
-    if (!sock || sock.readyState !== WebSocket.OPEN) { __sendQueue.push(packet); return false; }
-    try { sock.send(JSON.stringify({ name: 'say', data: packet })); return true; }
-    catch { __sendQueue.push(packet); return false; }
+  function trySendJoinPresence() {
+    if (presenceJoined) return;
+    if (!mqttClient || !mqttClient.connected) return;
+    if (!currentGameKey) return;
+    if (ownId == null) return;
+    const info = playerInfo[ownId] || {};
+    const payload = {
+      type: 'presence',
+      state: 'join',
+      id: ownId,
+      name: info.name || null,
+      hue: info.hue != null ? info.hue : null,
+      game: currentGameKey
+    };
+    publishMqttPayload(payload);
+    chatParticipants.add(ownId);
+    presenceJoined = true;
+  }
+
+  function sendMqttChat(text) {
+    if (!text) return;
+    if (!mqttReady) return;
+    const info = ownId != null ? (playerInfo[ownId] || {}) : {};
+    const payload = {
+      type: 'chat',
+      id: ownId,
+      name: info.name || null,
+      hue: info.hue != null ? info.hue : null,
+      text: String(text),
+      game: currentGameKey
+    };
+    publishMqttPayload(payload);
   }
 
   function trySendFromInput() {
+    if (!mqttReady) return;
     const text = input.value;
     if (!text) return;
-    sendChunkedEscaped(text);
+    sendMqttChat(text);
     input.value = '';
   }
 
-  input.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.code === 'Enter') { e.preventDefault(); trySendFromInput(); } else if (e.key === 'Escape' || e.code === 'Escape') { e.preventDefault(); closeChatInput(); } });
+  input.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.code === 'Enter') {
+      e.preventDefault();
+      trySendFromInput();
+    } else if (e.key === 'Escape' || e.code === 'Escape') {
+      e.preventDefault();
+      closeChatInput();
+    }
+  });
+
   sendBtn.addEventListener('click', trySendFromInput);
 
-  if (typeof window.__juliaSendDrain === 'undefined') {
-    window.__juliaSendDrain = setInterval(() => {
-      const sock = getSendSocket();
-      if (!sock || sock.readyState !== WebSocket.OPEN) return;
-      while (__sendQueue.length) {
-        const p = __sendQueue.shift();
-        try { sock.send(JSON.stringify({ name: 'say', data: p })); } catch { break; }
+  const OrigWS = window.WebSocket;
+  window.WebSocket = function (...args) {
+    const url = args[0];
+    const ws = new OrigWS(...args);
+    if (typeof url === 'string' && url.indexOf('srv2.clusterfly.ru') !== -1) {
+      return ws;
+    }
+    initSocket(ws);
+    wsRef = ws;
+    return ws;
+  };
+  window.WebSocket.prototype = OrigWS.prototype;
+  Object.setPrototypeOf(window.WebSocket, OrigWS);
+
+  function initSocket(ws) {
+    ws.addEventListener('message', (ev) => {
+      if (typeof ev.data !== 'string') return;
+      let msg;
+      try { msg = JSON.parse(ev.data); } catch { return; }
+      if (msg && msg.name === 'welcome' && msg.data) {
+        ensureMqttClient();
+        const d = msg.data;
+        const gName = String(d.name ?? 'unknown');
+        const gId = d.systemid != null ? String(d.systemid) : '0';
+        currentGameKey = gName + ':' + gId;
+        updateMqttSubscription();
+        trySendJoinPresence();
+        setTimeout(anchorOverlayToCanvas, 500);
       }
-    }, 300);
-  }
-
-  (function () {
-    const namesMap = () => getNamesMap();
-    window.JULIA_CHAT_BRIDGE = window.JULIA_CHAT_BRIDGE || {};
-    window.JULIA_CHAT_BRIDGE.show = function (senderId, raw) {
-      try {
-        const str = String(raw);
-        if (!(str.length >= 1 && str[0] === '!')) return;
-        const own = getOwnIdSafe();
-        const map = namesMap();
-        const isFinal = str[str.length - 1] !== '!';
-        const body = isFinal ? str.slice(1) : str.slice(1, -1);
-        const prev = partialBySender.get(senderId) || '';
-        const next = prev + body;
-        if (!isFinal) { partialBySender.set(senderId, next); return; }
-        partialBySender.delete(senderId);
-        const text = decodeTransport(next);
-        const meta = map && map.get(senderId >>> 0);
-        const who = (own != null && senderId === own) ? 'You' : (meta?.name || ('ID' + senderId));
-        const hue = (own != null && senderId === own) ? 310 : (meta?.hue);
-        if (text.length > 0) pushOverlayLine(who, text, hue);
-      } catch { }
-    };
-  })();
-
-  function attachInitToModule() {
-    const s = getSettingsSafe();
-    if (!s) return;
-    try {
-      if (!Object.prototype.hasOwnProperty.call(s, '__juliaInit')) {
-        Object.defineProperty(s, '__juliaInit', {
-          configurable: true, enumerable: false, writable: true,
-          value: function () { try { window.JuliaChatModule?.init?.(); } catch { } }
-        });
+      if (msg?.name === 'entered' && msg.data?.shipid != null) {
+        ownId = msg.data.shipid >>> 0;
+        trySendJoinPresence();
       }
-    } catch { }
+      if (msg?.name === 'player_name' && msg.data) {
+        const d = msg.data;
+        playerInfo[d.id] = { name: d.player_name, hue: d.hue, custom: d.custom || {} };
+      }
+      if (msg?.name === 'shipgone' && msg.data != null) {
+        const goneId = msg.data >>> 0;
+        if (!chatParticipants.has(goneId)) return;
+        const info = playerInfo[goneId] || {};
+        const isSelf = ownId != null && goneId === ownId;
+        if (isSelf) {
+          chatParticipants.delete(goneId);
+          closeChatInput();
+          return;
+        }
+        const who = info.name || ('ID' + goneId);
+        const hue = info.hue != null ? info.hue : null;
+        pushOverlayLine(who, 'left game', hue, 'presence');
+        chatParticipants.delete(goneId);
+      }
+    });
   }
-
-  function init() {
-    mountUI();
-    attachInitToModule();
-  }
-
-  init();
-
-  return { init, push: pushOverlayLine };
-});
+})();
