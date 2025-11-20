@@ -239,7 +239,7 @@
   function ensureMqttClient() {
     if (mqttClient) return;
     const clientId = 'jchat_' + Math.random().toString(16).slice(2);
-    mqttClient = mqtt.connect(MQTT_URL, {
+    mqttClient = globalThis.mqtt.connect(MQTT_URL, {
       clientId: clientId,
       username: MQTT_USERNAME,
       password: MQTT_PASSWORD,
