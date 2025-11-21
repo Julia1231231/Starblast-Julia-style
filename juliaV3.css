@@ -1,18 +1,18 @@
 :root {
     --main-color: hsl(var(--main-hue), 70%, 68%);
     --bg-primary: radial-gradient(circle at top left,
-        hsla(var(--main-hue), 80%, 65%, 0.26) 0%,
-        hsla(var(--main-hue), 40%, 12%, 1) 55%,
-        hsla(var(--main-hue), 35%, 10%, 1) 100%);
+            hsla(var(--main-hue), 80%, 65%, 0.26) 0%,
+            hsla(var(--main-hue), 40%, 12%, 1) 55%,
+            hsla(var(--main-hue), 35%, 10%, 1) 100%);
     --bg-surface: linear-gradient(135deg,
-        hsla(var(--main-hue), 26%, 10%, 0.9) 0%,
-        hsla(var(--main-hue), 28%, 20%, 0.96) 100%);
+            hsla(var(--main-hue), 26%, 10%, 0.9) 0%,
+            hsla(var(--main-hue), 28%, 20%, 0.96) 100%);
     --glass-bg: linear-gradient(120deg,
-        rgba(18, 18, 28, 0.72) 0%,
-        hsla(var(--main-hue), 30%, 26%, 0.88) 100%);
+            rgba(18, 18, 28, 0.72) 0%,
+            hsla(var(--main-hue), 30%, 26%, 0.88) 100%);
     --glass-soft: linear-gradient(135deg,
-        hsla(var(--main-hue), 22%, 14%, 0.75) 0%,
-        hsla(var(--main-hue), 26%, 24%, 0.9) 100%);
+            hsla(var(--main-hue), 22%, 14%, 0.75) 0%,
+            hsla(var(--main-hue), 26%, 24%, 0.9) 100%);
     --accent-strong: hsla(var(--main-hue), 100%, 70%, 1);
     --accent-soft: hsla(var(--main-hue), 90%, 80%, 0.9);
     --accent-border: hsla(var(--main-hue), 70%, 70%, 0.9);
@@ -72,8 +72,8 @@ body {
         0 0 0 1px hsla(var(--main-hue), 100%, 80%, 0.9),
         0 0 12px 2px hsla(var(--main-hue), 90%, 80%, 0.65);
     background: linear-gradient(135deg,
-        hsla(var(--main-hue), 30%, 24%, 0.95) 0%,
-        hsla(var(--main-hue), 40%, 24%, 0.95) 100%);
+            hsla(var(--main-hue), 30%, 24%, 0.95) 0%,
+            hsla(var(--main-hue), 40%, 24%, 0.95) 100%);
 }
 
 #play #game_modes {
@@ -88,7 +88,8 @@ body {
 #player button,
 #respawn_actions button,
 .donate-btn {
-        width: fit-content;
+    padding: 10px 30px;
+    width: fit-content;
     background: radial-gradient(circle at 20% 0%,
             hsla(var(--main-hue), 100%, 75%, 0.9) 0,
             hsla(var(--main-hue), 70%, 45%, 1) 38%,
@@ -318,11 +319,11 @@ a:hover {
     border-radius: 15px;
 }
 
-input:checked + .slider {
+input:checked+.slider {
     background-color: hsla(var(--main-hue), 50%, 10%, 1);
 }
 
-input:checked + .slider:before {
+input:checked+.slider:before {
     background-color: rgb(0, 255, 0);
 }
 
@@ -546,12 +547,12 @@ nav.menu ul li:after {
     width: 100%;
 }
 
-#background > img {
+#background>img {
     height: 100%;
     width: 100%;
 }
 
-#background > img[src=""] {
+#background>img[src=""] {
     display: none;
 }
 
@@ -578,51 +579,51 @@ nav.menu ul li:after {
     max-width: 20%;
 }
 
-#custommenu > a {
+#custommenu>a {
     transition: color 0.3s;
     margin: 10px 0;
     width: 100%;
 }
 
-#custommenu > a:hover {
+#custommenu>a:hover {
     color: hsla(var(--main-hue), 95.72%, 85.05%, 1);
 }
 
-#custommenu > a > span {
+#custommenu>a>span {
     font-size: 0.6em;
     display: inline-block;
 }
 
-#custommenu > a > i {
+#custommenu>a>i {
     font-size: 0.9em;
 }
 
-#custommenu > a > i > img {
+#custommenu>a>i>img {
     height: 40px;
 }
 
-#rankings > span {
+#rankings>span {
     text-transform: lowercase;
 }
 
-#rankings > span::first-letter {
+#rankings>span::first-letter {
     text-transform: uppercase;
 }
 
-#custommenu > .bottom {
+#custommenu>.bottom {
     margin: 10px;
     position: absolute;
     bottom: 0;
 }
 
-#custommenu > .bottom > i {
+#custommenu>.bottom>i {
     transition: color 0.3s;
     cursor: pointer;
     margin: 0 10px;
     color: hsla(var(--main-hue), 50%, 60%, 1);
 }
 
-#custommenu > .bottom > i:hover {
+#custommenu>.bottom>i:hover {
     color: hsla(var(--main-hue), 95.72%, 85.05%, 1);
 }
 
@@ -693,7 +694,7 @@ nav.menu ul li:after {
     bottom: 4px;
 }
 
-input:checked + .slider:before {
+input:checked+.slider:before {
     -webkit-transform: translateX(26px);
     -ms-transform: translateX(26px);
     transform: translateX(26px);
@@ -781,7 +782,7 @@ input:checked + .slider:before {
     justify-content: center;
 }
 
-#JSettings #JButtons > button {
+#JSettings #JButtons>button {
     font-size: 0.5em;
     margin: 0 8px;
     border-radius: 12px;
@@ -798,7 +799,7 @@ input:checked + .slider:before {
     transition: all 0.3s ease, box-shadow 0.2s ease;
 }
 
-#JSettings #JButtons > button:hover {
+#JSettings #JButtons>button:hover {
     background: linear-gradient(135deg,
             hsla(var(--main-hue), 60%, 35%, 1) 0%,
             hsla(var(--main-hue), 50%, 25%, 1) 100%);
@@ -807,7 +808,7 @@ input:checked + .slider:before {
     transform: translateY(-2px);
 }
 
-#JSettings #JButtons > button:active {
+#JSettings #JButtons>button:active {
     box-shadow: 0 2px 4px hsla(var(--main-hue), 70%, 40%, 0.4),
         0 0 6px hsla(var(--main-hue), 70%, 30%, 0.3);
     transform: translateY(0);
@@ -1043,5 +1044,5 @@ input:checked + .slider:before {
 }
 
 #ranks .rankings tbody tr:nth-child(odd) {
-    background:  hsla(var(--main-hue), 50%, 60%, 0.2);
+    background: hsla(var(--main-hue), 50%, 60%, 0.2);
 }
