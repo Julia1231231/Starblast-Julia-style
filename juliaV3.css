@@ -1,32 +1,51 @@
 :root {
-    --main-color: hsl(var(--main-hue), 70%, 70%);
+    --main-color: hsl(var(--main-hue), 70%, 68%);
+    --bg-primary: radial-gradient(circle at top left,
+        hsla(var(--main-hue), 80%, 65%, 0.26) 0%,
+        hsla(var(--main-hue), 40%, 12%, 1) 55%,
+        hsla(var(--main-hue), 35%, 10%, 1) 100%);
+    --bg-surface: linear-gradient(135deg,
+        hsla(var(--main-hue), 26%, 10%, 0.9) 0%,
+        hsla(var(--main-hue), 28%, 20%, 0.96) 100%);
+    --glass-bg: linear-gradient(120deg,
+        rgba(18, 18, 28, 0.72) 0%,
+        hsla(var(--main-hue), 30%, 26%, 0.88) 100%);
+    --glass-soft: linear-gradient(135deg,
+        hsla(var(--main-hue), 22%, 14%, 0.75) 0%,
+        hsla(var(--main-hue), 26%, 24%, 0.9) 100%);
+    --accent-strong: hsla(var(--main-hue), 100%, 70%, 1);
+    --accent-soft: hsla(var(--main-hue), 90%, 80%, 0.9);
+    --accent-border: hsla(var(--main-hue), 70%, 70%, 0.9);
+    --text-main: hsla(var(--main-hue), 90%, 92%, 0.9);
+    --text-soft: hsla(var(--main-hue), 80%, 82%, 0.85);
+    --shadow-strong: 0 0 18px hsla(var(--main-hue), 95%, 80%, 0.9);
+    --shadow-soft: 0 0 10px hsla(var(--main-hue), 80%, 80%, 0.6);
+    --shadow-card: 0 18px 40px hsla(var(--main-hue), 70%, 40%, 0.45);
+    --radius-sm: 6px;
+    --radius-md: 10px;
+    --radius-lg: 15px;
 }
 
 html,
 body {
-    background-color: var(--main-color) !important;
+    background: var(--bg-primary), var(--main-color) !important;
+    background-attachment: fixed;
+    color: var(--text-main);
 }
 
 .inputwrapper {
-    display: inline-block;
-    background: linear-gradient(to top,
-            hsla(var(--main-hue), 70%, 70%, 0.5) 0,
-            hsla(var(--main-hue), 50%, 0%, 1) 20%,
-            hsla(var(--main-hue), 50%, 0%, 1) 60%,
-            hsla(var(--main-hue), 20%, 40%, 0.5) 100%);
-    box-shadow: 0 0 6px hsla(var(--main-hue), 80%, 80%, 1);
-    text-shadow: 0 0 7px hsla(var(--main-hue), 80%, 80%, 1);
-    border-radius: 4px;
-    height: 43px;
-    margin-top: 10px;
-    position: relative;
-    max-width: 100%;
+    background: var(--glass-bg);
+    box-shadow: var(--shadow-soft);
+    border-radius: var(--radius-md);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid hsla(var(--main-hue), 80%, 80%, 0.18);
 }
 
 .inputwrapper img {
-    position: absolute;
+    position: relative;
     left: 0;
-    top: 5px;
+    top: 0;
     cursor: pointer;
 }
 
@@ -36,96 +55,152 @@ body {
 
 .inputwrapper .colorchosen {
     display: inline-block;
-    border-radius: 10px;
+    border-radius: 999px;
+    margin-top: 5px;
     margin-right: 5px;
 }
 
 #colors span {
-    border-radius: 10px;
-}
-
-.inputwrapper input[type="text"] {
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 16px;
-    width: 250px;
-    color: hsla(var(--main-hue), 70%, 90%, 0.9);
-    text-shadow: hsla(var(--main-hue), 80%, 80%, 1);
+    border-radius: 999px;
 }
 
 .inputwrapper input[type="text"]:hover {
-    border-color: #333;
+    border-color: hsla(var(--main-hue), 70%, 75%, 0.85);
+}
+
+.inputwrapper input[type="text"]:focus {
+    outline: none;
+    border-color: hsla(var(--main-hue), 90%, 80%, 1);
+    box-shadow:
+        0 0 0 1px hsla(var(--main-hue), 100%, 80%, 0.9),
+        0 0 12px 2px hsla(var(--main-hue), 90%, 80%, 0.65);
+    background: linear-gradient(135deg,
+        hsla(var(--main-hue), 30%, 24%, 0.95) 0%,
+        hsla(var(--main-hue), 40%, 24%, 0.95) 100%);
 }
 
 #play #game_modes {
-    border-bottom-right-radius: 15px;
-    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: var(--radius-lg);
+    border-bottom-left-radius: var(--radius-lg);
 }
 
 #player button,
 #respawn_actions button,
 .donate-btn {
-    background: radial-gradient(ellipse at center,
-            hsla(var(--main-hue), 50%, 0%, 1) 0,
-            hsla(var(--main-hue), 100%, 70%, 0.5) 150%);
-    box-shadow: 0 0 6px hsla(var(--main-hue), 100%, 80%, 1);
-    text-shadow: 0 0 7px hsla(var(--main-hue), 100%, 80%, 1);
-    color: hsla(var(--main-hue), 100%, 90%, 0.8);
-    border-radius: 15px;
+    padding: 10px 60px;
+    width: fit-content;
+    background: radial-gradient(circle at 20% 0%,
+            hsla(var(--main-hue), 100%, 75%, 0.9) 0,
+            hsla(var(--main-hue), 70%, 45%, 1) 38%,
+            hsla(var(--main-hue), 40%, 20%, 1) 100%);
+    box-shadow:
+        0 0 8px hsla(var(--main-hue), 100%, 80%, 0.85),
+        0 14px 32px hsla(var(--main-hue), 70%, 30%, 0.9);
+    color: hsla(var(--main-hue), 100%, 97%, 0.95);
+    border-radius: var(--radius-lg);
+    border: none;
+    text-shadow: 0 0 8px hsla(var(--main-hue), 100%, 90%, 0.8);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-weight: 600;
+    transition:
+        background 0.22s ease,
+        box-shadow 0.22s ease,
+        transform 0.18s ease,
+        filter 0.18s ease;
+}
+
+#player button:hover,
+#respawn_actions button:hover,
+.donate-btn:hover,
+.ecpbtn:hover {
+    background: radial-gradient(circle at 10% 0%,
+            hsla(var(--main-hue), 100%, 80%, 1) 0,
+            hsla(var(--main-hue), 80%, 60%, 0.95) 40%,
+            hsla(var(--main-hue), 45%, 30%, 1) 100%);
+    box-shadow:
+        0 0 14px hsla(var(--main-hue), 100%, 90%, 1),
+        0 18px 40px hsla(var(--main-hue), 80%, 45%, 0.95);
+    transform: translateY(-2px) scale(1.03);
+    filter: saturate(1.1);
+}
+
+#player button:active,
+#respawn_actions button:active,
+.donate-btn:active,
+.ecpbtn:active {
+    transform: translateY(0) scale(0.98);
+    box-shadow:
+        0 0 8px hsla(var(--main-hue), 90%, 80%, 0.9),
+        0 8px 18px hsla(var(--main-hue), 70%, 35%, 0.9);
 }
 
 .playbtn i {
-    color: hsla(var(--main-hue), 60%, 80%, 0.5);
-    text-shadow: 0 0 7px hsla(var(--main-hue), 100%, 80%, 1);
+    color: hsla(var(--main-hue), 60%, 80%, 0.7);
+    text-shadow: 0 0 9px hsla(var(--main-hue), 100%, 80%, 1);
+    transition: text-shadow 0.25s ease, transform 0.18s ease;
 }
 
 .playbtn i:hover {
-    text-shadow: 0 0 27px hsla(var(--main-hue), 100%, 80%, 1);
+    text-shadow: 0 0 26px hsla(var(--main-hue), 100%, 86%, 1);
+    transform: translateY(-1px);
 }
 
 .changelog-new,
 .extrabutton {
-    background: linear-gradient(-45deg,
-            hsla(var(--main-hue), 50%, 10%, 0.5) 0,
-            hsla(var(--main-hue), 50%, 50%, 0.15) 100%);
-    border-radius: 15px;
-    box-shadow: 0 0 6px hsla(var(--main-hue), 100%, 80%, 1);
+    background: var(--glass-soft);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-card);
+    border: 1px solid hsla(var(--main-hue), 80%, 80%, 0.26);
 }
 
 .changelog-new h2 {
-    border-bottom: solid 5px hsla(var(--main-hue), 60%, 60%, 0.2);
+    border-bottom: solid 4px hsla(var(--main-hue), 60%, 60%, 0.35);
 }
 
 #overlay {
-    box-shadow: 0 0 6px hsla(var(--main-hue), 80%, 80%, 1);
-    text-shadow: 0 0 2px hsla(var(--main-hue), 80%, 80%, 0.3);
-    color: hsla(var(--main-hue), 90%, 90%, 0.8);
+    box-shadow: var(--shadow-soft);
+    color: var(--text-main);
 }
 
 a {
-    color: hsla(var(--main-hue), 50%, 80%, 1);
+    color: hsla(var(--main-hue), 55%, 82%, 1);
+    text-decoration: none;
+    transition: color 0.22s ease, text-shadow 0.22s ease;
 }
 
 a:visited {
-    color: hsla(var(--main-hue), 50%, 60%, 1);
+    color: hsla(var(--main-hue), 50%, 65%, 1);
+}
+
+a:hover {
+    color: hsla(var(--main-hue), 95%, 90%, 1);
+    text-shadow: 0 0 6px hsla(var(--main-hue), 90%, 90%, 0.9);
 }
 
 .community a {
-    color: hsla(var(--main-hue), 90%, 90%, 0.8);
+    color: hsla(var(--main-hue), 90%, 92%, 0.9);
 }
 
 .social i,
 .mobile-social i,
 .mobile-tools i,
 .stats i {
-    background: radial-gradient(ellipse at center,
-            hsla(var(--main-hue), 50%, 0%, 1) 0,
-            hsla(var(--main-hue), 100%, 70%, 0.5) 150%);
-    box-shadow: 0 0 6px hsla(var(--main-hue), 100%, 80%, 1);
-    text-shadow: 0 0 7px hsla(var(--main-hue), 100%, 80%, 1);
-    color: hsla(var(--main-hue), 100%, 90%, 0.8);
-    border-radius: 10px;
+    background: radial-gradient(circle at 30% 0%,
+            hsla(var(--main-hue), 100%, 75%, 0.8) 0,
+            hsla(var(--main-hue), 55%, 40%, 1) 40%,
+            hsla(var(--main-hue), 40%, 12%, 1) 100%);
+    box-shadow:
+        0 0 8px hsla(var(--main-hue), 100%, 80%, 1),
+        0 10px 22px hsla(var(--main-hue), 70%, 40%, 0.8);
+    text-shadow: 0 0 8px hsla(var(--main-hue), 100%, 80%, 1);
+    color: hsla(var(--main-hue), 100%, 96%, 0.9);
+    border-radius: 12px;
+    transition:
+        box-shadow 0.2s ease,
+        transform 0.16s ease,
+        background 0.2s ease,
+        color 0.2s ease;
 }
 
 .social i:hover,
@@ -133,63 +208,82 @@ a:visited {
 .mobile-tools i:hover,
 .stats i:hover {
     border: 0 solid hsla(var(--main-hue), 90%, 70%, 1);
-    background: radial-gradient(ellipse at center,
-            hsla(var(--main-hue), 50%, 0%, 1) 0,
-            hsla(var(--main-hue), 70%, 70%, 0.5) 100%);
-    box-shadow: 0 0 6px hsla(var(--main-hue), 100%, 80%, 1);
-    text-shadow: 0 0 7px hsla(var(--main-hue), 100%, 80%, 1);
-    color: hsla(var(--main-hue), 100%, 90%, 0.8);
+    background: radial-gradient(circle at 25% 0%,
+            hsla(var(--main-hue), 100%, 82%, 1) 0,
+            hsla(var(--main-hue), 72%, 55%, 0.95) 35%,
+            hsla(var(--main-hue), 38%, 18%, 1) 100%);
+    box-shadow:
+        0 0 10px hsla(var(--main-hue), 100%, 90%, 1),
+        0 12px 26px hsla(var(--main-hue), 75%, 45%, 0.9);
+    color: hsla(var(--main-hue), 100%, 98%, 1);
+    transform: translateY(-1px);
 }
 
 .sbg-facebook:hover .sbg-diamond,
 .sbg-twitter:hover .sbg-diamond {
-    color: hsla(var(--main-hue), 90%, 70%, 1);
+    color: hsla(var(--main-hue), 92%, 72%, 1);
 }
 
 .followtools a.big {
-    text-shadow: 0 0 7px hsla(var(--main-hue), 100%, 80%, 1);
+    text-shadow: 0 0 8px hsla(var(--main-hue), 100%, 86%, 1);
 }
 
 .followtools a,
 .followtools a:visited {
-    background: radial-gradient(ellipse at center,
-            hsla(var(--main-hue), 50%, 0%, 1) 0,
-            hsla(var(--main-hue), 100%, 80%, 0.5) 150%);
-    box-shadow: 0 0 6px hsla(var(--main-hue), 100%, 80%, 1);
-    color: hsla(var(--main-hue), 100%, 90%, 0.9);
-    border-radius: 15px;
+    background: radial-gradient(circle at 20% 0%,
+            hsla(var(--main-hue), 100%, 80%, 0.85) 0,
+            hsla(var(--main-hue), 65%, 48%, 1) 38%,
+            hsla(var(--main-hue), 40%, 16%, 1) 100%);
+    box-shadow:
+        0 0 7px hsla(var(--main-hue), 100%, 80%, 1),
+        0 12px 26px hsla(var(--main-hue), 70%, 40%, 0.85);
+    color: hsla(var(--main-hue), 100%, 96%, 0.95);
+    border-radius: var(--radius-lg);
+    text-decoration: none;
+    transition:
+        background 0.2s ease,
+        box-shadow 0.2s ease,
+        transform 0.16s ease;
 }
 
 .followtools a:hover {
-    background: hsla(var(--main-hue), 50%, 50%, 0.8);
+    background: linear-gradient(135deg,
+            hsla(var(--main-hue), 60%, 58%, 1) 0%,
+            hsla(var(--main-hue), 45%, 28%, 1) 100%);
+    box-shadow:
+        0 0 11px hsla(var(--main-hue), 100%, 88%, 1),
+        0 14px 32px hsla(var(--main-hue), 75%, 45%, 0.95);
+    transform: translateY(-1px);
 }
 
 .modal {
     width: 900px !important;
-    box-shadow: 0 0 6px hsla(var(--main-hue), 100%, 80%, 1);
-    text-shadow: 0 0 6px hsla(var(--main-hue), 100%, 60%, 0.75);
-    background: linear-gradient(135deg,
-            hsla(var(--main-hue), 30%, 10%, 1) 0,
-            hsla(var(--main-hue), 30%, 30%, 1) 150%);
+    box-shadow: var(--shadow-card);
+    background: var(--bg-surface);
+    border-radius: 18px;
+    border: 1px solid hsla(var(--main-hue), 80%, 80%, 0.35);
 }
 
 .modal .modalbody .range {
+    border-radius: var(--radius-sm);
     width: 16%;
     padding: 0 150px 0 10px;
-    background: hsla(var(--main-hue), 60%, 15%, 1);
-    border: 1px solid hsla(var(--main-hue), 60%, 10%, 1);
+    background: hsla(var(--main-hue), 60%, 14%, 1);
+    border: 1px solid hsl(var(--main-hue), 80%, 60%, 1);
 }
 
 .modal .modalbody select,
 .modal .modalbody input[type="text"],
 .modal .modalbody input.number {
     background: hsla(var(--main-hue), 60%, 15%, 1);
-    border: 1px solid hsla(var(--main-hue), 60%, 10%, 1);
+    border: 1px solid hsla(var(--main-hue), 80%, 60%, 1);
+    color: var(--text-main);
+    border-radius: var(--radius-sm);
 }
 
 .modal .header {
-    background: hsla(var(--main-hue), 70%, 70%, 0.1);
-    border-bottom: 5px solid hsla(var(--main-hue), 50%, 70%, 0.5);
+    background: hsla(var(--main-hue), 70%, 70%, 0.12);
+    border-bottom: 5px solid hsla(var(--main-hue), 50%, 70%, 0.55);
 }
 
 .modal .modecp {
@@ -202,57 +296,20 @@ a:visited {
 
 .stats input,
 .ecpinput {
-    background: linear-gradient(to top,
-            hsla(var(--main-hue), 70%, 70%, 0.5) 0,
-            hsla(var(--main-hue), 50%, 0%, 1) 20%,
-            hsla(var(--main-hue), 50%, 0%, 1) 60%,
-            hsla(var(--main-hue), 20%, 40%, 0.5) 100%);
+    background: linear-gradient(135deg,
+            hsla(var(--main-hue), 26%, 22%, 0.9) 0,
+            hsla(var(--main-hue), 24%, 16%, 0.95) 100%);
     box-shadow: 0 0 6px hsla(var(--main-hue), 80%, 80%, 1);
-    color: hsla(var(--main-hue), 90%, 90%, 0.8);
-    text-shadow: 0 0 7px hsla(var(--main-hue), 80%, 80%, 1);
+    color: hsla(var(--main-hue), 90%, 92%, 0.92);
     border-radius: 10px;
-}
-
-#player button:hover,
-#respawn_actions button:hover,
-.donate-btn:hover,
-.ecpbtn:hover {
-    background: radial-gradient(ellipse at center,
-            hsla(var(--main-hue), 50%, 0%, 1) 0,
-            hsla(var(--main-hue), 100%, 70%, 0.5) 100%);
-    box-shadow: 0 0 8px hsla(var(--main-hue), 100%, 90%, 1);
-}
-
-.frozenbg,
-.frozenbg:visited {
-    background: radial-gradient(ellipse at center,
-            hsla(var(--main-hue), 50%, 0%, 1) 20%,
-            hsla(var(--main-hue), 50%, 60%, 0.5) 150%);
-    box-shadow: 0 0 6px hsla(var(--main-hue), 100%, 80%, 1);
-    text-shadow: 0 0 7px hsla(var(--main-hue), 100%, 80%, 1);
-    color: hsla(var(--main-hue), 100%, 90%, 0.8);
-    border-radius: 15px;
-}
-
-.modal .modalbody .gmodes span.selected {
-    box-shadow: 0 0 6px hsla(var(--main-hue), 100%, 80%, 1);
-}
-
-.modal .modalbody .gmodes span {
-    border: 2px solid hsla(var(--main-hue), 60%, 10%, 1);
-}
-
-#ranks .rankings th.orating {
-    border: 1px dashed hsla(var(--main-hue), 50%, 50%, 1);
-}
-
-#ranks .rankings td {
-    border-color: hsla(var(--main-hue), 50%, 50%, 1) !important;
+    border: 1px solid hsla(var(--main-hue), 40%, 50%, 0.5);
 }
 
 .slider {
     background-color: hsla(var(--main-hue), 50%, 10%);
     border-radius: 15px;
+    position: relative;
+    overflow: hidden;
 }
 
 .slider:before {
@@ -261,11 +318,11 @@ a:visited {
     border-radius: 15px;
 }
 
-input:checked+.slider {
+input:checked + .slider {
     background-color: hsla(var(--main-hue), 50%, 10%, 1);
 }
 
-input:checked+.slider:before {
+input:checked + .slider:before {
     background-color: rgb(0, 255, 0);
 }
 
@@ -276,19 +333,26 @@ input:checked+.slider:before {
 .followtools a.gold,
 .followtools a.gold:visited,
 #donate_mobile {
-    text-shadow: 0 0 7px hsla(var(--main-hue), 100%, 80%, 1);
-    background: radial-gradient(ellipse at center,
-            hsla(var(--main-hue), 50%, 0%, 1) 0,
-            hsla(var(--main-hue), 100%, 80%, 0.5) 150%);
-    box-shadow: 0 0 6px hsla(var(--main-hue), 100%, 80%, 1);
-    color: hsla(var(--main-hue), 100%, 90%, 0.9);
+    text-shadow: 0 0 8px hsla(var(--main-hue), 100%, 84%, 1);
+    background: radial-gradient(circle at 18% 0%,
+            hsla(var(--main-hue), 100%, 88%, 1) 0,
+            hsla(var(--main-hue), 80%, 70%, 0.9) 36%,
+            hsla(var(--main-hue), 38%, 18%, 1) 100%);
+    box-shadow:
+        0 0 8px hsla(var(--main-hue), 100%, 80%, 1),
+        0 14px 34px hsla(var(--main-hue), 70%, 45%, 0.95);
+    color: hsla(var(--main-hue), 100%, 97%, 0.95);
 }
 
 .stats {
     border-radius: 10px;
-    border: 2px solid hsla(var(--main-hue), 50%, 70%, 1);
-    box-shadow: 0 0 15px hsla(var(--main-hue), 50%, 70%, 1);
-    background: hsla(var(--main-hue), 50%, 10%, 0.5);
+    border: 2px solid hsla(var(--main-hue), 50%, 72%, 1);
+    box-shadow:
+        0 0 14px hsla(var(--main-hue), 50%, 70%, 1),
+        0 18px 36px hsla(var(--main-hue), 60%, 35%, 0.9);
+    background: hsla(var(--main-hue), 50%, 10%, 0.72);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
 }
 
 .statinfo {
@@ -296,26 +360,28 @@ input:checked+.slider:before {
 }
 
 #goinfo {
-    color: hsla(var(--main-hue), 50%, 70%, 1);
+    color: hsla(var(--main-hue), 52%, 72%, 1);
 }
 
 .gameloaderwrapper {
     border-radius: 10px;
     border: 2px solid hsla(var(--main-hue), 100%, 70%, 0.8);
-    box-shadow: 0 0 10px hsla(var(--main-hue), 100%, 80%, 1);
+    box-shadow:
+        0 0 10px hsla(var(--main-hue), 100%, 80%, 1),
+        0 16px 34px hsla(var(--main-hue), 70%, 40%, 0.9);
+    background: var(--glass-bg);
 }
 
 .loaderprogress {
     border-radius: 10px;
-    background: hsla(var(--main-hue), 90%, 70%, 1);
     background: linear-gradient(to right,
-            hsla(var(--main-hue), 30%, 30%, 0.7) 0,
-            hsla(var(--main-hue), 90%, 80%, 0.8) 100%);
+            hsla(var(--main-hue), 30%, 30%, 0.8) 0,
+            hsla(var(--main-hue), 90%, 80%, 0.92) 100%);
 }
 
 .textprogress {
-    text-shadow: 0 0 10px hsla(var(--main-hue), 100%, 80%, 1);
-    color: hsla(var(--main-hue), 100%, 90%, 0.9);
+    text-shadow: 0 0 12px hsla(var(--main-hue), 100%, 80%, 1);
+    color: hsla(var(--main-hue), 100%, 96%, 0.95);
 }
 
 input[type="range"] {
@@ -336,8 +402,10 @@ input[type="range"]::-webkit-slider-thumb {
     border-radius: 50%;
     background: hsla(var(--main-hue), 70%, 70%, 1);
     cursor: pointer;
-    transition: background 0.3s ease-in-out;
-    box-shadow: 0 0 6px hsla(var(--main-hue), 50%, 70%, 1);
+    transition: background 0.3s ease-in-out, box-shadow 0.2s ease;
+    box-shadow:
+        0 0 6px hsla(var(--main-hue), 50%, 70%, 1),
+        0 0 0 3px hsla(var(--main-hue), 40%, 30%, 0.6);
 }
 
 input[type="range"]::-webkit-slider-thumb:hover {
@@ -348,7 +416,9 @@ input[type="range"]::-webkit-slider-runnable-track {
     width: 100%;
     height: 8px;
     cursor: pointer;
-    background: #d3d3d3 !important;
+    background: linear-gradient(90deg,
+            hsla(var(--main-hue), 12%, 26%, 0.8),
+            hsla(var(--main-hue), 22%, 18%, 0.9));
     border: none;
     border-radius: 5px;
 }
@@ -364,8 +434,10 @@ input[type="range"]::-moz-range-thumb {
     border-radius: 50%;
     background: hsla(var(--main-hue), 70%, 70%, 1);
     cursor: pointer;
-    transition: background 0.3s ease-in-out;
-    box-shadow: 0 0 6px hsla(var(--main-hue), 50%, 70%, 1);
+    transition: background 0.3s ease-in-out, box-shadow 0.2s ease;
+    box-shadow:
+        0 0 6px hsla(var(--main-hue), 50%, 70%, 1),
+        0 0 0 3px hsla(var(--main-hue), 40%, 30%, 0.6);
 }
 
 input[type="range"]::-moz-range-thumb:hover {
@@ -376,88 +448,9 @@ input[type="range"]::-moz-range-track {
     width: 100%;
     height: 8px;
     cursor: pointer;
-    background: #d3d3d3;
-    border-radius: 5px;
-    border: none;
-}
-
-.modal .modalbody select,
-.modal .modalbody input[type="text"],
-.modal .modalbody input.number {
-    width: 291px;
-}
-
-.title {
-    overflow: hidden;
-    white-space: nowrap;
-}
-
-.title .author {
-    display: block;
-    white-space: normal;
-}
-
-input[type="range"] {
-    -webkit-appearance: none;
-    width: 100%;
-    height: 8px;
-    background: transparent;
-    outline: none;
-    margin: 10px 0;
-}
-
-input[type="range"]::-webkit-slider-thumb {
-    border: none;
-    -webkit-appearance: none;
-    appearance: none;
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    background: hsla(var(--main-hue), 70%, 70%, 1);
-    cursor: pointer;
-    transition: background 0.3s ease-in-out;
-    box-shadow: 0 0 6px hsla(var(--main-hue), 50%, 70%, 1);
-}
-
-input[type="range"]::-webkit-slider-thumb:hover {
-    background: hsla(var(--main-hue), 80%, 60%, 1);
-}
-
-input[type="range"]::-webkit-slider-runnable-track {
-    width: 100%;
-    height: 8px;
-    cursor: pointer;
-    background: #d3d3d3 !important;
-    border: none;
-    border-radius: 5px;
-}
-
-input[type="range"]:focus {
-    outline: none;
-}
-
-/* Добавление стилей для Firefox */
-
-input[type="range"]::-moz-range-thumb {
-    width: 20px;
-    height: 20px;
-    border: none;
-    border-radius: 50%;
-    background: hsla(var(--main-hue), 70%, 70%, 1);
-    cursor: pointer;
-    transition: background 0.3s ease-in-out;
-    box-shadow: 0 0 6px hsla(var(--main-hue), 50%, 70%, 1);
-}
-
-input[type="range"]::-moz-range-thumb:hover {
-    background: hsla(var(--main-hue), 80%, 60%, 1);
-}
-
-input[type="range"]::-moz-range-track {
-    width: 100%;
-    height: 8px;
-    cursor: pointer;
-    background: #d3d3d3;
+    background: linear-gradient(90deg,
+            hsla(var(--main-hue), 12%, 26%, 0.8),
+            hsla(var(--main-hue), 22%, 18%, 0.9));
     border-radius: 5px;
     border: none;
 }
@@ -553,12 +546,12 @@ nav.menu ul li:after {
     width: 100%;
 }
 
-#background>img {
+#background > img {
     height: 100%;
     width: 100%;
 }
 
-#background>img[src=""] {
+#background > img[src=""] {
     display: none;
 }
 
@@ -571,8 +564,6 @@ nav.menu ul li:after {
     border-radius: 0 5px 5px 0;
     position: absolute;
     z-index: 5;
-    background: inherit;
-    overflow: hidden;
     background: hsla(var(--main-hue), 70%, 80%, 0.2);
     box-shadow: 0 8px 32px 0 hsla(var(--main-hue), 70%, 80%, 0.35);
     backdrop-filter: blur(12px);
@@ -580,57 +571,58 @@ nav.menu ul li:after {
     transition: max-width 0.5s ease;
     flex-direction: column;
     align-items: center;
+    overflow: hidden;
 }
 
 #custommenu.show {
     max-width: 20%;
 }
 
-#custommenu>a {
+#custommenu > a {
     transition: color 0.3s;
     margin: 10px 0;
     width: 100%;
 }
 
-#custommenu>a:hover {
+#custommenu > a:hover {
     color: hsla(var(--main-hue), 95.72%, 85.05%, 1);
 }
 
-#custommenu>a>span {
+#custommenu > a > span {
     font-size: 0.6em;
     display: inline-block;
 }
 
-#custommenu>a>i {
+#custommenu > a > i {
     font-size: 0.9em;
 }
 
-#custommenu>a>i>img {
+#custommenu > a > i > img {
     height: 40px;
 }
 
-#rankings>span {
+#rankings > span {
     text-transform: lowercase;
 }
 
-#rankings>span::first-letter {
+#rankings > span::first-letter {
     text-transform: uppercase;
 }
 
-#custommenu>.bottom {
+#custommenu > .bottom {
     margin: 10px;
     position: absolute;
     bottom: 0;
 }
 
-#custommenu>.bottom>i {
+#custommenu > .bottom > i {
     transition: color 0.3s;
     cursor: pointer;
     margin: 0 10px;
     color: hsla(var(--main-hue), 50%, 60%, 1);
 }
 
-#custommenu>.bottom>i:hover {
+#custommenu > .bottom > i:hover {
     color: hsla(var(--main-hue), 95.72%, 85.05%, 1);
 }
 
@@ -665,18 +657,18 @@ nav.menu ul li:after {
     vertical-align: middle;
 }
 
-#JSettings .switch {
+.switch {
     position: relative;
     display: inline-block;
     width: 60px;
     height: 34px;
 }
 
-#JSettings .switch input {
+.switch input {
     display: none;
 }
 
-#JSettings .slider {
+.slider {
     background-color: hsla(var(--main-hue), 50%, 10%, 1);
     border-radius: 15px;
     position: absolute;
@@ -689,7 +681,7 @@ nav.menu ul li:after {
     transition: 0.4s;
 }
 
-#JSettings .slider:before {
+.slider:before {
     transition: 0.5s;
     background-color: rgb(255, 0, 0);
     border-radius: 15px;
@@ -701,7 +693,7 @@ nav.menu ul li:after {
     bottom: 4px;
 }
 
-#JSettings input:checked+.slider:before {
+input:checked + .slider:before {
     -webkit-transform: translateX(26px);
     -ms-transform: translateX(26px);
     transform: translateX(26px);
@@ -789,7 +781,7 @@ nav.menu ul li:after {
     justify-content: center;
 }
 
-#JSettings #JButtons>button {
+#JSettings #JButtons > button {
     font-size: 0.5em;
     margin: 0 8px;
     border-radius: 12px;
@@ -806,7 +798,7 @@ nav.menu ul li:after {
     transition: all 0.3s ease, box-shadow 0.2s ease;
 }
 
-#JSettings #JButtons>button:hover {
+#JSettings #JButtons > button:hover {
     background: linear-gradient(135deg,
             hsla(var(--main-hue), 60%, 35%, 1) 0%,
             hsla(var(--main-hue), 50%, 25%, 1) 100%);
@@ -815,7 +807,7 @@ nav.menu ul li:after {
     transform: translateY(-2px);
 }
 
-#JSettings #JButtons>button:active {
+#JSettings #JButtons > button:active {
     box-shadow: 0 2px 4px hsla(var(--main-hue), 70%, 40%, 0.4),
         0 0 6px hsla(var(--main-hue), 70%, 30%, 0.3);
     transform: translateY(0);
@@ -828,11 +820,6 @@ nav.menu ul li:after {
     border-bottom: 1px solid hsla(var(--main-hue), 50%, 70%, 0.5);
     background: hsla(var(--main-hue), 100%, 73.53%, 0.08);
 }
-
-
-
-
-
 
 #logo {
     position: relative;
@@ -919,7 +906,7 @@ nav.menu ul li:after {
 
     90% {
         text-shadow:
-            -4px 0 15px hsl(calc(var(--main-hue) ), 100%, 80%),
+            -4px 0 15px hsl(calc(var(--main-hue)), 100%, 80%),
             4px 0 15px hsl(calc(var(--main-hue) + 5), 100%, 80%),
             0 0 25px hsl(var(--main-hue), 100%, 90%);
         transform: translateX(1px);
@@ -932,4 +919,138 @@ nav.menu ul li:after {
             0 0 20px hsl(var(--main-hue), 100%, 80%);
         transform: translateX(0) translateY(0);
     }
+}
+
+.customtable {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 16px;
+}
+
+.customtable td {
+    vertical-align: middle;
+    padding: 12px 16px;
+}
+
+.customtable .ecpverifiedlogo,
+.customtable .shippreview {
+    text-align: center;
+}
+
+.customtable [data-type] {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 6px;
+    font-size: 0.9em;
+    color: var(--text-main);
+}
+
+.customtable [data-type] .title.frozenbg {
+    padding: 6px 14px;
+    border-radius: 999px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+}
+
+.customtable [data-type] i.fa {
+    color: var(--accent-soft);
+    text-shadow: 0 0 6px hsla(var(--main-hue), 100%, 80%, 0.8);
+}
+
+.ecpverifiedlogo, .shippreview {
+    border-radius: var(--radius-lg);
+}
+
+.frozenbg {
+    background: linear-gradient(135deg, hsla(var(--main-hue), 26%, 22%, 0.9) 0, hsla(var(--main-hue), 24%, 16%, 0.95) 100%);
+    box-shadow: 0 0 6px hsla(var(--main-hue), 80%, 80%, 1);
+    color: hsla(var(--main-hue), 90%, 92%, 0.92);
+    border: 1px solid hsla(var(--main-hue), 40%, 50%, 0.5);
+}
+
+.gmodes {
+    display: inline-flex;
+    gap: 8px;
+    padding: 6px;
+    border-radius: 999px;
+    background: hsla(var(--main-hue), 30%, 8%, 0.9);
+    box-shadow: 0 0 10px hsla(var(--main-hue), 60%, 40%, 0.4);
+}
+
+.gmodes span {
+    padding: 6px 14px;
+    border-radius: 999px;
+    cursor: pointer;
+    font-size: 0.85em;
+    color: var(--text-soft);
+    background: transparent;
+    border: 1px solid hsla(var(--main-hue), 40%, 40%, 0.6);
+    transition:
+        background 0.2s,
+        color 0.2s,
+        box-shadow 0.2s,
+        transform 0.16s,
+        border-color 0.2s;
+}
+
+.gmodes span:hover {
+    border-color: hsla(var(--main-hue), 70%, 70%, 1);
+    transform: translateY(-1px);
+}
+
+.gmodes span.selected {
+    background: radial-gradient(circle at 20% 0%,
+            hsla(var(--main-hue), 100%, 75%, 0.9) 0,
+            hsla(var(--main-hue), 70%, 50%, 1) 40%,
+            hsla(var(--main-hue), 40%, 18%, 1) 100%);
+    color: hsla(var(--main-hue), 100%, 96%, 0.96);
+    box-shadow: 0 0 10px hsla(var(--main-hue), 90%, 80%, 0.9);
+    border-color: transparent;
+}
+
+.regions {
+    display: inline-flex;
+    gap: 10px;
+    padding: 6px 10px;
+    border-radius: 999px;
+    background: hsla(var(--main-hue), 30%, 8%, 0.7);
+}
+
+.regions .region {
+    padding: 6px 14px;
+    border-radius: 999px;
+    cursor: pointer;
+    font-size: 0.85em;
+    border: 1px solid hsla(var(--main-hue), 40%, 40%, 0.6);
+    color: var(--text-soft);
+    background: hsla(var(--main-hue), 40%, 12%, 0.7);
+    transition:
+        background 0.2s,
+        color 0.2s,
+        box-shadow 0.2s,
+        border-color 0.2s,
+        transform 0.16s;
+}
+
+.regions .region:hover {
+    border-color: hsla(var(--main-hue), 70%, 70%, 1);
+    box-shadow: 0 0 10px hsla(var(--main-hue), 90%, 80%, 0.7);
+}
+
+.regions .region.active {
+    background: radial-gradient(circle at 20% 0%,
+            hsla(var(--main-hue), 100%, 80%, 0.95) 0,
+            hsla(var(--main-hue), 75%, 55%, 0.95) 40%,
+            hsla(var(--main-hue), 40%, 20%, 1) 100%);
+    color: hsla(var(--main-hue), 100%, 98%, 1);
+    border-color: transparent;
+    box-shadow: 0 0 12px hsla(var(--main-hue), 95%, 85%, 1);
+}
+
+.rankings,
+.rankings th,
+.rankings td {
+    border-color: hsla(var(--main-hue), 50%, 60%, 0.85);
 }
